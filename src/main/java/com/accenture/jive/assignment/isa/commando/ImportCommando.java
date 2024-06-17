@@ -43,7 +43,13 @@ public class ImportCommando implements Commando{
                 String industry = fields[3];
                 int industryId = readIndustry(industry);
 
-                // TODO: insert stock with indsutry_id if not yet exists
+                String sql = "INSERT IGNORE INTO stock (stock_name, stock_industry_id) VALUES(?, ?)";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, name);
+                preparedStatement.setInt(2, industryId);
+                preparedStatement.execute();
+
+
                 // TODO: insert stockmarket with price & date if not yet exists
 
                 for (String field : fields) {
