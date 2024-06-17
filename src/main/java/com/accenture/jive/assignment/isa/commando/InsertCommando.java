@@ -2,10 +2,7 @@ package com.accenture.jive.assignment.isa.commando;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -47,12 +44,20 @@ public class InsertCommando implements Commando{
                 String industry = fields[3];
 
                 String sqlIndustry = "INSERT IGNORE INTO industry (industry_name) VALUES(?)";
-                PreparedStatement preparedStatement = connection.prepareStatement(sqlIndustry);
-                preparedStatement.setString(1, industry);
-                preparedStatement.execute();
+                PreparedStatement preparedStatementIndustry = connection.prepareStatement(sqlIndustry);
+                preparedStatementIndustry.setString(1, industry);
+                preparedStatementIndustry.execute();
 
+                String sqlIndustryId = "SELECT industry_id FROM industry WHERE industry_name = ?";
+                PreparedStatement preparedStatementIndustryId = connection.prepareStatement(sqlIndustryId);
+                preparedStatementIndustryId.setString(1, industry);
+                ResultSet resultSet = preparedStatementIndustryId.executeQuery();
+                if (resultSet.next()) {
+                    int industryId = resultSet.getInt("industry_id");
+                    System.out.println(industryId);
+                }
 
-                // TODO: get id of industry
+                // TODO: set unknown industry for n/a
                 // TODO: insert stock with indsutry_id if not yet exists
                 // TODO: insert stockmarket with price & date if not yet exists
 
