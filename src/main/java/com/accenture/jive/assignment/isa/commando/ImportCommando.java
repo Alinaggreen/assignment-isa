@@ -4,14 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class InsertCommando implements Commando{
+public class ImportCommando implements Commando{
 
     private final Connection connection;
 
-    public InsertCommando(Connection connection) {
+    public ImportCommando(Connection connection) {
         this.connection = connection;
     }
 
@@ -86,8 +85,8 @@ public class InsertCommando implements Commando{
     }
 
     public Date readDate(String[] fields) {
-        String insertDate = fields[2];
-        String[] dayMonthYear = insertDate.split("\\.");
+        String importDate = fields[2];
+        String[] dayMonthYear = importDate.split("\\.");
         String day = dayMonthYear[0];
         String month = dayMonthYear[1];
         String year = dayMonthYear[2];
@@ -100,6 +99,6 @@ public class InsertCommando implements Commando{
 
     @Override
     public boolean shouldExecute(String line) {
-        return "insert".equalsIgnoreCase(line);
+        return "import".equalsIgnoreCase(line);
     }
 }

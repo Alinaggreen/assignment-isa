@@ -18,7 +18,7 @@ public class CommandoFactory {
     public List<Commando> createCommando() {
 
         List<Commando> commandos = new ArrayList<>();
-        Commando insertCommando = new InsertCommando(connection);
+        Commando insertCommando = new ImportCommando(connection);
         Commando exitCommando = new ExitCommando();
 
         commandos.add(insertCommando);
