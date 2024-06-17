@@ -29,32 +29,25 @@ public class ImportCommando implements Commando{
                 String line = scanner.nextLine();
                 String[] fields = line.split(";");
 
-                String name = fields[0];
                 String price = fields[1].replace(",", ".").substring(2);
                 float priceParsed = Float.parseFloat(price);
 
                 Date date = readDate(fields);
 
-                /*String sql = "INSERT INTO stockmarket VALUES (1, 1, ?)";
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setDate(1, date);
-                System.out.println(preparedStatement.executeUpdate());*/
-
                 String industry = fields[3];
                 int industryId = readIndustry(industry);
 
-                String sql = "INSERT IGNORE INTO stock (stock_name, stock_industry_id) VALUES(?, ?)";
+                String name = fields[0];
+                int stockId = readStock(name, industryId);
+
+                String sql = "INSERT INTO stockmarket VALUES (?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setString(1, name);
-                preparedStatement.setInt(2, industryId);
-                preparedStatement.execute();
+                preparedStatement.setInt(1, stockId);
+                preparedStatement.setFloat(2, priceParsed);
+                preparedStatement.setDate(3, date);
+                System.out.println(preparedStatement.executeUpdate());
 
 
-                // TODO: insert stockmarket with price & date if not yet exists
-
-                for (String field : fields) {
-                    System.out.println(field + " ");
-                }
             }
             scanner.close();
         } catch (FileNotFoundException e) {
@@ -65,6 +58,25 @@ public class ImportCommando implements Commando{
         }
 
         return true;
+    }
+
+    public int readStock(String name, int industryId) throws SQLException {
+        String sql = "INSERT IGNORE INTO stock (stock_name, stock_industry_id) VALUES(?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, name);
+        preparedStatement.setInt(2, industryId);
+        preparedStatement.execute();
+
+        String sqlId = "SELECT stock_id FROM stock WHERE stock_name = ?";
+        PreparedStatement preparedStatementId = connection.prepareStatement(sqlId);
+        preparedStatementId.setString(1, name);
+        ResultSet resultSet = preparedStatementId.executeQuery();
+
+        if (resultSet.next()) {
+            return resultSet.getInt("stock_id");
+        } else {
+            return 0;
+        }
     }
 
     public int readIndustry(String industry) throws SQLException {
@@ -82,9 +94,7 @@ public class ImportCommando implements Commando{
         ResultSet resultSet = preparedStatementId.executeQuery();
 
         if (resultSet.next()) {
-            int industryId = resultSet.getInt("industry_id");
-            System.out.println(industryId);
-            return industryId;
+            return resultSet.getInt("industry_id");
         } else {
             return 0;
         }
