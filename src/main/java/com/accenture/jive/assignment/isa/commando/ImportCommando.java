@@ -1,5 +1,6 @@
 package com.accenture.jive.assignment.isa.commando;
 
+import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,10 +12,12 @@ public class ImportCommando implements Commando{
 
     private final Connection connection;
     private final StockService stockService;
+    private final IndustryService industryService;
 
-    public ImportCommando(Connection connection, StockService stockService) {
+    public ImportCommando(Connection connection, StockService stockService, IndustryService industryService) {
         this.connection = connection;
         this.stockService = stockService;
+        this.industryService = industryService;
     }
 
     @Override
@@ -32,17 +35,28 @@ public class ImportCommando implements Commando{
                 String[] fields = line.split(";");
 
                 String price = fields[1].replace(",", ".").substring(2);
+                float priceParsed = Float.parseFloat(price);
+
+                Date date = readDate(fields[2]);
 
                 String name = fields[0];
-                stockService.addStock(name, readIndustry(fields[3]));
+                String industry = fields[3];
+                if ("n/a".equals(industry)) {
+                    industry = "Unknown";
+                }
+                industryService.addIndustry(industry);
+                int industryId = industryService.searchIndustryId(industry);
+                stockService.addStock(name, industryId);
                 int stockId = stockService.searchStockId(name);
 
                 String sql = "INSERT INTO stockmarket VALUES (?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, stockId);
-                preparedStatement.setFloat(2, Float.parseFloat(price));
-                preparedStatement.setDate(3, readDate(fields));
+                preparedStatement.setFloat(2, priceParsed);
+                preparedStatement.setDate(3, date);
+                preparedStatement.executeUpdate();
             }
+
             System.out.println("You successfully imported the data to the database!");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -54,29 +68,7 @@ public class ImportCommando implements Commando{
         return true;
     }
 
-    public int readIndustry(String industry) throws SQLException {
-        if ("n/a".equals(industry)) {
-            industry = "Unknown";
-        }
-        String sql = "INSERT IGNORE INTO industry (industry_name) VALUES(?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, industry);
-        preparedStatement.execute();
-
-        String sqlId = "SELECT industry_id FROM industry WHERE industry_name = ?";
-        PreparedStatement preparedStatementId = connection.prepareStatement(sqlId);
-        preparedStatementId.setString(1, industry);
-        ResultSet resultSet = preparedStatementId.executeQuery();
-
-        if (resultSet.next()) {
-            return resultSet.getInt("industry_id");
-        } else {
-            return 0;
-        }
-    }
-
-    public Date readDate(String[] fields) {
-        String importDate = fields[2];
+    public Date readDate(String importDate) {
         String[] dayMonthYear = importDate.split("\\.");
         String day = dayMonthYear[0];
         String month = dayMonthYear[1];

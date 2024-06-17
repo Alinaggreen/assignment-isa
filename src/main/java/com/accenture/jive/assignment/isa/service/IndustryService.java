@@ -5,30 +5,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class StockService {
+public class IndustryService {
 
     private final Connection connection;
 
-    public StockService(Connection connection) {
+    public IndustryService(Connection connection) {
         this.connection = connection;
     }
 
-    public void addStock(String name, int industryId) throws SQLException {
-        String sql = "INSERT IGNORE INTO stock (stock_name, stock_industry_id) VALUES(?, ?)";
+    public void addIndustry (String industry) throws SQLException {
+        String sql = "INSERT IGNORE INTO industry (industry_name) VALUES(?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, name);
-        preparedStatement.setInt(2, industryId);
+        preparedStatement.setString(1, industry);
         preparedStatement.execute();
     }
 
-    public int searchStockId(String name) throws SQLException {
-        String sqlId = "SELECT stock_id FROM stock WHERE stock_name = ?";
+    public int searchIndustryId (String industry) throws SQLException {
+        String sqlId = "SELECT industry_id FROM industry WHERE industry_name = ?";
         PreparedStatement preparedStatementId = connection.prepareStatement(sqlId);
-        preparedStatementId.setString(1, name);
+        preparedStatementId.setString(1, industry);
         ResultSet resultSet = preparedStatementId.executeQuery();
 
         if (resultSet.next()) {
-            return resultSet.getInt("stock_id");
+            return resultSet.getInt("industry_id");
         } else {
             return 0;
         }

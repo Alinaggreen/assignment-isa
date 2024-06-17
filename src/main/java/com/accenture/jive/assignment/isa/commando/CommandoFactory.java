@@ -1,5 +1,6 @@
 package com.accenture.jive.assignment.isa.commando;
 
+import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
 
 import java.sql.Connection;
@@ -12,17 +13,19 @@ public class CommandoFactory {
     private final Scanner scanner;
     private final Connection connection;
     private final StockService stockService;
+    private final IndustryService industryService;
 
-    public CommandoFactory (Scanner scanner, Connection connection, StockService stockService) {
+    public CommandoFactory (Scanner scanner, Connection connection, StockService stockService, IndustryService industryService) {
         this.scanner = scanner;
         this.connection = connection;
         this.stockService = stockService;
+        this.industryService = industryService;
     }
 
     public List<Commando> createCommando() {
 
         List<Commando> commandos = new ArrayList<>();
-        Commando importCommando = new ImportCommando(connection, stockService);
+        Commando importCommando = new ImportCommando(connection, stockService, industryService);
         Commando deleteCommando = new DeleteCommando(scanner, connection);
         Commando exitCommando = new ExitCommando();
 

@@ -3,6 +3,7 @@ package com.accenture.jive.assignment.isa;
 import com.accenture.jive.assignment.isa.commando.Commando;
 import com.accenture.jive.assignment.isa.commando.CommandoException;
 import com.accenture.jive.assignment.isa.commando.CommandoFactory;
+import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
 
 import java.sql.Connection;
@@ -14,7 +15,8 @@ public class App {
     public void run(Connection connection) {
         Scanner scanner = new Scanner(System.in);
         StockService stockService = new StockService(connection);
-        CommandoFactory commandoFactory = new CommandoFactory(scanner, connection, stockService);
+        IndustryService industryService = new IndustryService(connection);
+        CommandoFactory commandoFactory = new CommandoFactory(scanner, connection, stockService, industryService);
         List<Commando> commandos = commandoFactory.createCommando();
 
         System.out.println("Hello there!");
@@ -23,7 +25,6 @@ public class App {
         while (shouldRun) {
             System.out.println("What do you want to do?");
             String userCommando = scanner.nextLine();
-            System.out.println(userCommando);
 
             for (Commando commando : commandos) {
                 if (commando.shouldExecute(userCommando)) {
