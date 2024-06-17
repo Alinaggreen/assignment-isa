@@ -37,21 +37,21 @@ public class InsertCommando implements Commando{
                 String price = fields[1].replace(",", ".").substring(2);
                 float priceParsed = Float.parseFloat(price);
 
-                // TODO: Datatype -> date
-
                 Date date = readDate(fields);
 
-                System.out.println(date);
-
-                String sql = "INSERT INTO stockmarket VALUES (1, 1, ?)";
+                /*String sql = "INSERT INTO stockmarket VALUES (1, 1, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setDate(1, date);
-                System.out.println(preparedStatement.executeUpdate());
-
+                System.out.println(preparedStatement.executeUpdate());*/
 
                 String industry = fields[3];
 
-                // TODO: insert industry if not yet exist
+                String sqlIndustry = "INSERT IGNORE INTO industry (industry_name) VALUES(?)";
+                PreparedStatement preparedStatement = connection.prepareStatement(sqlIndustry);
+                preparedStatement.setString(1, industry);
+                preparedStatement.execute();
+
+
                 // TODO: get id of industry
                 // TODO: insert stock with indsutry_id if not yet exists
                 // TODO: insert stockmarket with price & date if not yet exists
