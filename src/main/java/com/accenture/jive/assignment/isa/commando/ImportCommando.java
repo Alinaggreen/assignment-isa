@@ -18,7 +18,7 @@ public class ImportCommando implements Commando{
     public boolean execute() throws CommandoException {
 
         // TODO: change path back to STOCK_DATA.csv
-        String filePath = "C://dev1//isa//STOCK_DATA - Copy.csv";
+        String filePath = "C://dev1//isa//STOCK_DATA.csv";
 
         try {
             Scanner scanner = new Scanner(new File(filePath));
@@ -46,8 +46,6 @@ public class ImportCommando implements Commando{
                 preparedStatement.setFloat(2, priceParsed);
                 preparedStatement.setDate(3, date);
                 System.out.println(preparedStatement.executeUpdate());
-
-
             }
             scanner.close();
         } catch (FileNotFoundException e) {
