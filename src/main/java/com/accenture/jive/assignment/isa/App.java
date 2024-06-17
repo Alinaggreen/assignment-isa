@@ -1,5 +1,7 @@
 package com.accenture.jive.assignment.isa;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -8,8 +10,11 @@ import java.util.Scanner;
  */
 public class App {
 
-    public void run() {
+    public void run() throws SQLException {
         Scanner scanner = new Scanner(System.in);
+        Connector connector = new Connector();
+        Connection connection = connector.getConnection();
+
         System.out.println("Hello there!");
 
         boolean shouldRun = true;
@@ -30,6 +35,11 @@ public class App {
     }
 
     public static void main(String[] args) {
-        new App().run();
+        try {
+            new App().run();
+        } catch (SQLException cause) {
+            System.out.println("system stopped because of an exception.");
+            cause.printStackTrace();
+        }
     }
 }
