@@ -36,19 +36,16 @@ public class InsertCommando implements Commando{
                 String name = fields[0];
                 String price = fields[1].replace(",", ".").substring(2);
                 float priceParsed = Float.parseFloat(price);
-                // TODO: Datatype -> date
-                // int dateInt = Integer.parseInt(fields[2]);
-                // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-mm-yyyy");
-                // LocalDate date = LocalDate.parse(fields[2], formatter);
 
-                LocalDate localdate = LocalDate.of(1900, 2, 2);
-                Date date = Date.valueOf(localdate);
+                // TODO: Datatype -> date
+
+                Date date = readDate(fields);
 
                 System.out.println(date);
 
                 String sql = "INSERT INTO stockmarket VALUES (1, 1, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setDate(1, Date.valueOf("1900-02-02"));
+                preparedStatement.setDate(1, date);
                 System.out.println(preparedStatement.executeUpdate());
 
 
@@ -72,6 +69,20 @@ public class InsertCommando implements Commando{
         }
 
         return true;
+    }
+
+    private static Date readDate(String[] fields) {
+        String insertDate = fields[2];
+        String[] dayMonthYear = insertDate.split("\\.");
+        String day = dayMonthYear[0];
+        String month = dayMonthYear[1];
+        String year = dayMonthYear[2];
+        int dayParsed = Integer.parseInt(day);
+        int monthParsed = Integer.parseInt(month);
+        int yearParsed = Integer.parseInt(year);
+        LocalDate localdate = LocalDate.of(yearParsed, monthParsed, dayParsed);
+        Date date = Date.valueOf(localdate);
+        return date;
     }
 
     @Override
