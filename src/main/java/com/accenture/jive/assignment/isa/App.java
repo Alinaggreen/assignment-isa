@@ -1,7 +1,10 @@
 package com.accenture.jive.assignment.isa;
 
+import com.accenture.jive.assignment.isa.commando.Commando;
+import com.accenture.jive.assignment.isa.commando.CommandoException;
+import com.accenture.jive.assignment.isa.commando.CommandoFactory;
 import java.sql.Connection;
-import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -10,10 +13,10 @@ import java.util.Scanner;
  */
 public class App {
 
-    public void run() throws SQLException {
+    public void run(Connection connection) {
         Scanner scanner = new Scanner(System.in);
-        Connector connector = new Connector();
-        Connection connection = connector.getConnection();
+        CommandoFactory commandoFactory = new CommandoFactory(scanner, connection);
+        List<Commando> commandos = commandoFactory.createCommando();
 
         System.out.println("Hello there!");
 
@@ -22,24 +25,25 @@ public class App {
             System.out.println("What do you want to do?");
             String userCommando = scanner.nextLine();
             System.out.println(userCommando);
-            if ("exit".equalsIgnoreCase(userCommando)) {
-                shouldRun = false;
-            } else if ("add".equalsIgnoreCase(userCommando)) {
 
-            } else if ("remove".equalsIgnoreCase(userCommando)) {
-
-            } else if ("show".equalsIgnoreCase(userCommando)) {
-
+            for (Commando commando : commandos) {
+                if (commando.shouldExecute(userCommando)) {
+                    try {
+                        shouldRun = commando.execute();
+                    } catch (CommandoException cause) {
+                        System.out.println("System stopped because of an Exception");
+                    }
+                }
             }
         }
     }
 
     public static void main(String[] args) {
-        try {
-            new App().run();
-        } catch (SQLException cause) {
-            System.out.println("system stopped because of an exception.");
-            cause.printStackTrace();
+        Connector connector = new Connector();
+        try (Connection connection = connector.getConnection();) {
+            new App().run(connection);
+        } catch (Exception cause) {
+            System.out.println("System stopped because of an Exception");
         }
     }
 }
