@@ -42,22 +42,8 @@ public class InsertCommando implements Commando{
                 System.out.println(preparedStatement.executeUpdate());*/
 
                 String industry = fields[3];
+                int industryId = readIndustry(industry);
 
-                String sqlIndustry = "INSERT IGNORE INTO industry (industry_name) VALUES(?)";
-                PreparedStatement preparedStatementIndustry = connection.prepareStatement(sqlIndustry);
-                preparedStatementIndustry.setString(1, industry);
-                preparedStatementIndustry.execute();
-
-                String sqlIndustryId = "SELECT industry_id FROM industry WHERE industry_name = ?";
-                PreparedStatement preparedStatementIndustryId = connection.prepareStatement(sqlIndustryId);
-                preparedStatementIndustryId.setString(1, industry);
-                ResultSet resultSet = preparedStatementIndustryId.executeQuery();
-                if (resultSet.next()) {
-                    int industryId = resultSet.getInt("industry_id");
-                    System.out.println(industryId);
-                }
-
-                // TODO: set unknown industry for n/a
                 // TODO: insert stock with indsutry_id if not yet exists
                 // TODO: insert stockmarket with price & date if not yet exists
 
@@ -76,7 +62,30 @@ public class InsertCommando implements Commando{
         return true;
     }
 
-    private static Date readDate(String[] fields) {
+    public int readIndustry(String industry) throws SQLException {
+        if ("n/a".equals(industry)) {
+            industry = "Unknown";
+        }
+        String sql = "INSERT IGNORE INTO industry (industry_name) VALUES(?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, industry);
+        preparedStatement.execute();
+
+        String sqlId = "SELECT industry_id FROM industry WHERE industry_name = ?";
+        PreparedStatement preparedStatementId = connection.prepareStatement(sqlId);
+        preparedStatementId.setString(1, industry);
+        ResultSet resultSet = preparedStatementId.executeQuery();
+
+        if (resultSet.next()) {
+            int industryId = resultSet.getInt("industry_id");
+            System.out.println(industryId);
+            return industryId;
+        } else {
+            return 0;
+        }
+    }
+
+    public Date readDate(String[] fields) {
         String insertDate = fields[2];
         String[] dayMonthYear = insertDate.split("\\.");
         String day = dayMonthYear[0];
@@ -86,8 +95,7 @@ public class InsertCommando implements Commando{
         int monthParsed = Integer.parseInt(month);
         int yearParsed = Integer.parseInt(year);
         LocalDate localdate = LocalDate.of(yearParsed, monthParsed, dayParsed);
-        Date date = Date.valueOf(localdate);
-        return date;
+        return Date.valueOf(localdate);
     }
 
     @Override
