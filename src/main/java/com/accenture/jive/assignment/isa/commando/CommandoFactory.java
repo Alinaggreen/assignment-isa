@@ -18,10 +18,12 @@ public class CommandoFactory {
     public List<Commando> createCommando() {
 
         List<Commando> commandos = new ArrayList<>();
-        Commando insertCommando = new ImportCommando(connection);
+        Commando importCommando = new ImportCommando(connection);
+        Commando deleteCommando = new DeleteCommando(scanner, connection);
         Commando exitCommando = new ExitCommando();
 
-        commandos.add(insertCommando);
+        commandos.add(importCommando);
+        commandos.add(deleteCommando);
         commandos.add(exitCommando);
 
         return commandos;
