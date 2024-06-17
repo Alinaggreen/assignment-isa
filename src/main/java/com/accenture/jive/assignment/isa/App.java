@@ -3,19 +3,18 @@ package com.accenture.jive.assignment.isa;
 import com.accenture.jive.assignment.isa.commando.Commando;
 import com.accenture.jive.assignment.isa.commando.CommandoException;
 import com.accenture.jive.assignment.isa.commando.CommandoFactory;
+import com.accenture.jive.assignment.isa.service.StockService;
+
 import java.sql.Connection;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Hello world!
- *
- */
 public class App {
 
     public void run(Connection connection) {
         Scanner scanner = new Scanner(System.in);
-        CommandoFactory commandoFactory = new CommandoFactory(scanner, connection);
+        StockService stockService = new StockService(connection);
+        CommandoFactory commandoFactory = new CommandoFactory(scanner, connection, stockService);
         List<Commando> commandos = commandoFactory.createCommando();
 
         System.out.println("Hello there!");

@@ -1,5 +1,6 @@
 package com.accenture.jive.assignment.isa.commando;
 
+import com.accenture.jive.assignment.isa.service.StockService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.*;
@@ -9,9 +10,11 @@ import java.util.Scanner;
 public class ImportCommando implements Commando{
 
     private final Connection connection;
+    private final StockService stockService;
 
-    public ImportCommando(Connection connection) {
+    public ImportCommando(Connection connection, StockService stockService) {
         this.connection = connection;
+        this.stockService = stockService;
     }
 
     @Override
@@ -20,8 +23,7 @@ public class ImportCommando implements Commando{
         // TODO: change path back to STOCK_DATA.csv
         String filePath = "C://dev1//isa//STOCK_DATA.csv";
 
-        try {
-            Scanner scanner = new Scanner(new File(filePath));
+        try (Scanner scanner = new Scanner(new File(filePath))) {
             scanner.useDelimiter(";");
 
             scanner.nextLine();
@@ -30,24 +32,18 @@ public class ImportCommando implements Commando{
                 String[] fields = line.split(";");
 
                 String price = fields[1].replace(",", ".").substring(2);
-                float priceParsed = Float.parseFloat(price);
-
-                Date date = readDate(fields);
-
-                String industry = fields[3];
-                int industryId = readIndustry(industry);
 
                 String name = fields[0];
-                int stockId = readStock(name, industryId);
+                stockService.addStock(name, readIndustry(fields[3]));
+                int stockId = stockService.searchStockId(name);
 
                 String sql = "INSERT INTO stockmarket VALUES (?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, stockId);
-                preparedStatement.setFloat(2, priceParsed);
-                preparedStatement.setDate(3, date);
-                System.out.println(preparedStatement.executeUpdate());
+                preparedStatement.setFloat(2, Float.parseFloat(price));
+                preparedStatement.setDate(3, readDate(fields));
             }
-            scanner.close();
+            System.out.println("You successfully imported the data to the database!");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {
@@ -56,25 +52,6 @@ public class ImportCommando implements Commando{
         }
 
         return true;
-    }
-
-    public int readStock(String name, int industryId) throws SQLException {
-        String sql = "INSERT IGNORE INTO stock (stock_name, stock_industry_id) VALUES(?, ?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, name);
-        preparedStatement.setInt(2, industryId);
-        preparedStatement.execute();
-
-        String sqlId = "SELECT stock_id FROM stock WHERE stock_name = ?";
-        PreparedStatement preparedStatementId = connection.prepareStatement(sqlId);
-        preparedStatementId.setString(1, name);
-        ResultSet resultSet = preparedStatementId.executeQuery();
-
-        if (resultSet.next()) {
-            return resultSet.getInt("stock_id");
-        } else {
-            return 0;
-        }
     }
 
     public int readIndustry(String industry) throws SQLException {
