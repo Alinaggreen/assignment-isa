@@ -4,17 +4,18 @@ import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-public class MaxCommando implements Commando {
+public class MinCommando implements Commando {
 
     private final Scanner scanner;
     private final StockService stockService;
     private final StockmarketService stockmarketService;
 
-    public MaxCommando(Scanner scanner, StockService stockService, StockmarketService stockmarketService) {
+    public MinCommando(Scanner scanner, StockService stockService, StockmarketService stockmarketService) {
         this.scanner = scanner;
         this.stockService = stockService;
         this.stockmarketService = stockmarketService;
@@ -22,7 +23,7 @@ public class MaxCommando implements Commando {
 
     @Override
     public boolean execute() throws CommandoException {
-        System.out.println("Please enter the company id you want to see the highest price of.");
+        System.out.println("Please enter the company id you want to see the lowest price of.");
 
         System.out.println("Do you know the company id you want to see?");
         String searchId = scanner.nextLine();
@@ -48,9 +49,9 @@ public class MaxCommando implements Commando {
 
         // TODO: Also output latest date on which the price was reached?
         try {
-            Stockmarket stockmarket = stockmarketService.showMax(stockId);
+            Stockmarket stockmarket = stockmarketService.showMin(stockId);
             if (stockmarket.getStockId() != null) {
-                System.out.println("The highest price was " + stockmarket.getMarketPrice() + "€.");
+                System.out.println("The lowest price was " + stockmarket.getMarketPrice() + "€.");
             } else {
                 System.out.println("There are currently no stock market entries for this company.");
             }
@@ -64,6 +65,7 @@ public class MaxCommando implements Commando {
 
     @Override
     public boolean shouldExecute(String line) {
-        return "max".equalsIgnoreCase(line);
+        return "min".equalsIgnoreCase(line);
     }
+
 }

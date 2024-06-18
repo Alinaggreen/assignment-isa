@@ -62,4 +62,19 @@ public class StockmarketService {
 
         return stockmarket;
     }
+
+    public Stockmarket showMin (int stockId) throws SQLException {
+        String sql = "SELECT MIN(market_price) AS min FROM stockmarket WHERE stock_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, stockId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        Stockmarket stockmarket = new Stockmarket();
+        if (resultSet.next()) {
+            stockmarket.setStockId(stockId);
+            stockmarket.setMarketPrice(resultSet.getFloat("min"));
+        }
+
+        return stockmarket;
+    }
 }
