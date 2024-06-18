@@ -13,6 +13,12 @@ public class IndustryService {
         this.connection = connection;
     }
 
+    public void deleteIndustry() throws SQLException {
+        String sql = "DELETE FROM industry";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.execute();
+    }
+
     public void addIndustry (String industry) throws SQLException {
         String sql = "INSERT IGNORE INTO industry (industry_name) VALUES(?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);

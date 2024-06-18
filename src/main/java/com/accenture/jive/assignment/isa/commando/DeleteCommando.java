@@ -1,18 +1,23 @@
 package com.accenture.jive.assignment.isa.commando;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import com.accenture.jive.assignment.isa.service.IndustryService;
+import com.accenture.jive.assignment.isa.service.StockService;
+import com.accenture.jive.assignment.isa.service.StockmarketService;
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class DeleteCommando implements Commando {
 
     private final Scanner scanner;
-    private final Connection connection;
+    private final StockService stockService;
+    private final IndustryService industryService;
+    private final StockmarketService stockmarketService;
 
-    public DeleteCommando(Scanner scanner, Connection connection) {
+    public DeleteCommando(Scanner scanner, StockService stockService, IndustryService industryService, StockmarketService stockmarketService) {
         this.scanner = scanner;
-        this.connection = connection;
+        this.stockService = stockService;
+        this.industryService = industryService;
+        this.stockmarketService = stockmarketService;
     }
 
     @Override
@@ -22,16 +27,9 @@ public class DeleteCommando implements Commando {
         if ("yes".equalsIgnoreCase(userCommando)) {
             try {
                 // TODO: Muss hier jeder DELETE einzeln ausgeführt werden?
-                String sqlStockmarket = "DELETE FROM stockmarket";
-                String sqlStock = "DELETE FROM stock";
-                String sqlIndustry = "DELETE FROM industry";
-                PreparedStatement preparedStatement = connection.prepareStatement(sqlStockmarket);
-                preparedStatement.execute();
-                preparedStatement = connection.prepareStatement(sqlStock);
-                preparedStatement.execute();
-                preparedStatement = connection.prepareStatement(sqlIndustry);
-                preparedStatement.execute();
-
+                stockmarketService.deleteStockmarket();
+                stockService.deleteStock();
+                industryService.deleteIndustry();
                 System.out.println("You successfully deleted everything from the database!");
             } catch (SQLException e) {
                 System.out.println("SQLException");

@@ -29,7 +29,7 @@ public class CommandoFactory {
 
         List<Commando> commandos = new ArrayList<>();
         Commando importCommando = new ImportCommando(connection, stockService, industryService);
-        Commando deleteCommando = new DeleteCommando(scanner, connection);
+        Commando deleteCommando = new DeleteCommando(scanner, stockService, industryService, stockmarketService);
         Commando exitCommando = new ExitCommando();
 
         commandos.add(importCommando);

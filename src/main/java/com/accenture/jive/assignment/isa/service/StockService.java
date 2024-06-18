@@ -13,6 +13,12 @@ public class StockService {
         this.connection = connection;
     }
 
+    public void deleteStock() throws SQLException {
+        String sql = "DELETE FROM stock";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.execute();
+    }
+
     public void addStock(String name, int industryId) throws SQLException {
         String sql = "INSERT IGNORE INTO stock (stock_name, stock_industry_id) VALUES(?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
