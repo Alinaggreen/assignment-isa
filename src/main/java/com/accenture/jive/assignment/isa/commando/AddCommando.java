@@ -35,9 +35,13 @@ public class AddCommando implements Commando {
             String userCommando = scanner.nextLine();
             try {
                 List<Stock> stocks = stockService.searchStockIdPlaceholder(userCommando);
-                System.out.println("The following companies start with " + userCommando + ":");
-                for (Stock stock : stocks) {
-                    System.out.println("ID: " + stock.getId() + " - " + stock.getName());
+                if (stocks.isEmpty()) {
+                    System.out.println("There is currently no company starting with " + userCommando + " in the database.");
+                } else {
+                    System.out.println("The following companies start with " + userCommando + ":");
+                    for (Stock stock : stocks) {
+                        System.out.println("ID: " + stock.getId() + " - " + stock.getName());
+                    }
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
