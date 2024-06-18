@@ -4,17 +4,18 @@ import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-public class ShowCommando implements Commando {
+public class MaxCommando implements Commando {
 
     private final Scanner scanner;
     private final StockService stockService;
     private final StockmarketService stockmarketService;
 
-    public ShowCommando(Scanner scanner, StockService stockService, StockmarketService stockmarketService) {
+    public MaxCommando(Scanner scanner, StockService stockService, StockmarketService stockmarketService) {
         this.scanner = scanner;
         this.stockService = stockService;
         this.stockmarketService = stockmarketService;
@@ -22,7 +23,7 @@ public class ShowCommando implements Commando {
 
     @Override
     public boolean execute() throws CommandoException {
-        System.out.println("Please enter the company id you want to see the last ten prices of.");
+        System.out.println("Please enter the company id you want to see the highest price of.");
 
         System.out.println("Do you know the company id you want to see?");
         String searchId = scanner.nextLine();
@@ -47,19 +48,22 @@ public class ShowCommando implements Commando {
         int stockId = Integer.parseInt(id);
 
         try {
-            List<Stockmarket> stockmarkets = stockmarketService.showStockmarket(stockId);
-            System.out.println("These are the last ten prices for your desired company:");
-            for (Stockmarket stockmarket : stockmarkets) {
-                System.out.println(stockmarket.getMarketPrice() + " € on " + stockmarket.getMarketDate());
+            Stockmarket stockmarket = stockmarketService.showMax(stockId);
+            if (stockmarket.getStockId() != null) {
+                System.out.println("The highest price was " + stockmarket.getMarketPrice() + "€.");
+            } else {
+                System.out.println("There are currently no stock market entries for this company.");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("SQLException");
+            e.printStackTrace();
         }
+
         return true;
     }
 
     @Override
     public boolean shouldExecute(String line) {
-        return "show".equalsIgnoreCase(line);
+        return "max".equalsIgnoreCase(line);
     }
 }

@@ -47,4 +47,19 @@ public class StockmarketService {
 
         return stockmarkets;
     }
+
+    public Stockmarket showMax (int stockId) throws SQLException {
+        String sql = "SELECT MAX(market_price) AS max FROM stockmarket WHERE stock_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, stockId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        Stockmarket stockmarket = new Stockmarket();
+        if (resultSet.next()) {
+            stockmarket.setStockId(stockId);
+            stockmarket.setMarketPrice(resultSet.getFloat("max"));
+        }
+
+        return stockmarket;
+    }
 }

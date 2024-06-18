@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class Stockmarket {
 
-    private int stockId;
+    private Integer stockId;
     private float marketPrice;
     private Date marketDate;
 
-    public int getStockId() {
+    public Integer getStockId() {
         return stockId;
     }
 
