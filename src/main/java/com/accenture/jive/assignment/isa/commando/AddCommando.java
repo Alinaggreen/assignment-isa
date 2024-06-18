@@ -44,6 +44,7 @@ public class AddCommando implements Commando {
             }
         }
 
+        // TODO: Company can only be searched for once, then Id must be entered.
         System.out.println("Please enter the company id:");
         String id = scanner.nextLine();
         int stockId = Integer.parseInt(id);

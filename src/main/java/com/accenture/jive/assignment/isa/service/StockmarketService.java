@@ -1,9 +1,10 @@
 package com.accenture.jive.assignment.isa.service;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import com.accenture.jive.assignment.isa.persistence.Stockmarket;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StockmarketService {
 
@@ -28,4 +29,22 @@ public class StockmarketService {
         return preparedStatement.executeUpdate();
     }
 
+    public List<Stockmarket> showStockmarket (int stockId) throws SQLException {
+        String sql = "SELECT * FROM stockmarket WHERE stock_id = ? ORDER BY market_date DESC LIMIT 10";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, stockId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        List<Stockmarket> stockmarkets = new ArrayList<>();
+        while(resultSet.next()) {
+            Stockmarket stockmarket = new Stockmarket();
+            stockmarket.setStockId(stockId);
+            stockmarket.setMarketPrice(resultSet.getFloat("market_price"));
+            stockmarket.setMarketDate(resultSet.getDate("market_date"));
+
+            stockmarkets.add(stockmarket);
+        }
+
+        return stockmarkets;
+    }
 }

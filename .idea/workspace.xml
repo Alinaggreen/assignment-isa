@@ -7,8 +7,7 @@
     <list default="true" id="40569f04-4246-4fbd-aa21-ea60fcf98f94" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/AddCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/AddCommando.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/CommandoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/CommandoFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/service/StockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/service/StockService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/service/StockmarketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/service/StockmarketService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +38,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.App.executor": "Debug",
+    "Application.App.executor": "Run",
     "Application.AppTest.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
