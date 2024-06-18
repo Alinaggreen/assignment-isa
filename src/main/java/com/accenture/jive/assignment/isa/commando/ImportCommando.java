@@ -1,12 +1,12 @@
 package com.accenture.jive.assignment.isa.commando;
 
+import com.accenture.jive.assignment.isa.service.DateService;
 import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ImportCommando implements Commando{
@@ -14,11 +14,13 @@ public class ImportCommando implements Commando{
     private final StockService stockService;
     private final IndustryService industryService;
     private final StockmarketService stockmarketService;
+    private final DateService dateService;
 
-    public ImportCommando(StockService stockService, IndustryService industryService, StockmarketService stockmarketService) {
+    public ImportCommando(StockService stockService, IndustryService industryService, StockmarketService stockmarketService, DateService dateService) {
         this.stockService = stockService;
         this.industryService = industryService;
         this.stockmarketService = stockmarketService;
+        this.dateService = dateService;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class ImportCommando implements Commando{
                 String price = fields[1].replace(",", ".").substring(2);
                 float priceParsed = Float.parseFloat(price);
 
-                Date date = readDate(fields[2]);
+                Date date = dateService.readDate(fields[2]);
 
                 String name = fields[0];
                 String industry = fields[3];
@@ -61,18 +63,6 @@ public class ImportCommando implements Commando{
         }
 
         return true;
-    }
-
-    public Date readDate(String importDate) {
-        String[] dayMonthYear = importDate.split("\\.");
-        String day = dayMonthYear[0];
-        String month = dayMonthYear[1];
-        String year = dayMonthYear[2];
-        int dayParsed = Integer.parseInt(day);
-        int monthParsed = Integer.parseInt(month);
-        int yearParsed = Integer.parseInt(year);
-        LocalDate localdate = LocalDate.of(yearParsed, monthParsed, dayParsed);
-        return Date.valueOf(localdate);
     }
 
     @Override

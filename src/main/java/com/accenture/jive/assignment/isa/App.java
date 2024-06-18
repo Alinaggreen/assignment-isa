@@ -3,6 +3,7 @@ package com.accenture.jive.assignment.isa;
 import com.accenture.jive.assignment.isa.commando.Commando;
 import com.accenture.jive.assignment.isa.commando.CommandoException;
 import com.accenture.jive.assignment.isa.commando.CommandoFactory;
+import com.accenture.jive.assignment.isa.service.DateService;
 import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
@@ -18,7 +19,8 @@ public class App {
         StockService stockService = new StockService(connection);
         IndustryService industryService = new IndustryService(connection);
         StockmarketService stockmarketService = new StockmarketService(connection);
-        CommandoFactory commandoFactory = new CommandoFactory(scanner, connection, stockService, industryService, stockmarketService);
+        DateService dateService = new DateService();
+        CommandoFactory commandoFactory = new CommandoFactory(scanner, stockService, industryService, stockmarketService, dateService);
         List<Commando> commandos = commandoFactory.createCommando();
 
         System.out.println("Hello there!");
