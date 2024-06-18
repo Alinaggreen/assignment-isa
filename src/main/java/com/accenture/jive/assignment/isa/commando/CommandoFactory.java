@@ -2,6 +2,7 @@ package com.accenture.jive.assignment.isa.commando;
 
 import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
+import com.accenture.jive.assignment.isa.service.StockmarketService;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -14,12 +15,14 @@ public class CommandoFactory {
     private final Connection connection;
     private final StockService stockService;
     private final IndustryService industryService;
+    private final StockmarketService stockmarketService;
 
-    public CommandoFactory (Scanner scanner, Connection connection, StockService stockService, IndustryService industryService) {
+    public CommandoFactory (Scanner scanner, Connection connection, StockService stockService, IndustryService industryService, StockmarketService stockmarketService) {
         this.scanner = scanner;
         this.connection = connection;
         this.stockService = stockService;
         this.industryService = industryService;
+        this.stockmarketService = stockmarketService;
     }
 
     public List<Commando> createCommando() {

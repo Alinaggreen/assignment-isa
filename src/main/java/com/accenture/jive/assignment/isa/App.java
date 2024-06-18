@@ -5,6 +5,7 @@ import com.accenture.jive.assignment.isa.commando.CommandoException;
 import com.accenture.jive.assignment.isa.commando.CommandoFactory;
 import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
+import com.accenture.jive.assignment.isa.service.StockmarketService;
 
 import java.sql.Connection;
 import java.util.List;
@@ -16,7 +17,8 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         StockService stockService = new StockService(connection);
         IndustryService industryService = new IndustryService(connection);
-        CommandoFactory commandoFactory = new CommandoFactory(scanner, connection, stockService, industryService);
+        StockmarketService stockmarketService = new StockmarketService(connection);
+        CommandoFactory commandoFactory = new CommandoFactory(scanner, connection, stockService, industryService, stockmarketService);
         List<Commando> commandos = commandoFactory.createCommando();
 
         System.out.println("Hello there!");
