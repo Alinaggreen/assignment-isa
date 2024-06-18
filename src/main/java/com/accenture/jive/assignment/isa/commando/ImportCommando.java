@@ -36,7 +36,7 @@ public class ImportCommando implements Commando{
                 String line = scanner.nextLine();
                 String[] fields = line.split(";");
 
-                String price = fields[1].replace(",", ".").substring(2);
+                String price = fields[1].replace(",", ".").substring(1);
                 float priceParsed = Float.parseFloat(price);
 
                 Date date = dateService.readDate(fields[2]);

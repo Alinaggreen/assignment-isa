@@ -12,7 +12,7 @@ public class DateService {
         String year = dayMonthYear[2];
         int dayParsed = Integer.parseInt(day);
         int monthParsed = Integer.parseInt(month);
-        int yearParsed = Integer.parseInt(year);
+        int yearParsed = Integer.parseInt(year)+2000;
         LocalDate localdate = LocalDate.of(yearParsed, monthParsed, dayParsed);
         return Date.valueOf(localdate);
     }
