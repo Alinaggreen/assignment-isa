@@ -48,8 +48,6 @@ public class StockService {
     }
 
     public List<Stock> searchStockIdPlaceholder(String userCommando) throws SQLException {
-
-
         String sql = "SELECT * FROM stock WHERE stock_name LIKE ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         // TODO: Warum ist es so kein Sicherheitsrisiko?
@@ -66,26 +64,5 @@ public class StockService {
         }
 
         return stocks;
-
-        /*if (!resultSet.next()) {
-            System.out.println("There is currently no company starting with " + userCommando + " in the database.");
-            System.out.println("Do you want to search for another company id?");
-            userCommando = scanner.nextLine();
-            if ("yes".equalsIgnoreCase(userCommando)) {
-                searchStockIdPlaceholder();
-            }
-        } else {
-            System.out.println("The following companies start with " + userCommando + ":");
-            while (resultSet.next()) {
-                int stockId = resultSet.getInt("stock_id");
-                String stockName = resultSet.getString("stock_name");
-                System.out.println("ID: " + stockId + " - " + stockName);
-            }
-            System.out.println("Did you find the desired company id?");
-            userCommando = scanner.nextLine();
-            if ("no".equalsIgnoreCase(userCommando)) {
-                searchStockIdPlaceholder();
-            }
-        }*/
     }
 }
