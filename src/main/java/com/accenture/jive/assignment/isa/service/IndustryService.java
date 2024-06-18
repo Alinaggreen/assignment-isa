@@ -1,9 +1,13 @@
 package com.accenture.jive.assignment.isa.service;
 
+import com.accenture.jive.assignment.isa.persistence.Industry;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IndustryService {
 
@@ -37,5 +41,24 @@ public class IndustryService {
         } else {
             return 0;
         }
+    }
+
+    public List<Industry> listIndustry () throws SQLException {
+        String sql = "SELECT industry_id, industry_name, COUNT(stock_name) as stock_count " +
+                "FROM industry JOIN stock ON industry_id = stock_industry_id " +
+                "GROUP BY industry_name ORDER BY industry_id";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        List<Industry> industries = new ArrayList<>();
+        while (resultSet.next()) {
+            Industry industry = new Industry();
+            industry.setId(resultSet.getInt("industry_id"));
+            industry.setName(resultSet.getString("industry_name"));
+            industry.setStockCount(resultSet.getInt("stock_count"));
+            industries.add(industry);
+        }
+
+        return industries;
     }
 }
