@@ -50,7 +50,6 @@ public class StockService {
     public List<Stock> searchStockIdPlaceholder(String userCommando) throws SQLException {
         String sql = "SELECT * FROM stock WHERE stock_name LIKE ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        // TODO: Warum ist es so kein Sicherheitsrisiko?
         preparedStatement.setString(1, userCommando + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -62,7 +61,27 @@ public class StockService {
 
             stocks.add(stock);
         }
-
         return stocks;
+    }
+
+    public String showStockIndustry (int stockId) throws SQLException {
+        String sql = "SELECT * FROM stock JOIN industry ON stock.stock_industry_id = industry.industry_id WHERE stock_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, stockId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            return resultSet.getString("industry_name");
+        } else {
+            return null;
+        }
+    }
+
+    public int updateStock (int stockId, int industryId) throws SQLException {
+        String sql = "UPDATE stock SET stock_industry_id = ? WHERE stock_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, industryId);
+        preparedStatement.setInt(2, stockId);
+        return preparedStatement.executeUpdate();
     }
 }
