@@ -26,7 +26,6 @@ public class DeleteCommando implements Commando {
         String userCommando = scanner.nextLine();
         if ("yes".equalsIgnoreCase(userCommando)) {
             try {
-                // TODO: Muss hier jeder DELETE einzeln ausgeführt werden?
                 stockmarketService.deleteStockmarket();
                 stockService.deleteStock();
                 industryService.deleteIndustry();

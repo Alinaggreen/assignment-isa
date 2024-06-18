@@ -2,7 +2,6 @@ package com.accenture.jive.assignment.isa.commando;
 
 import com.accenture.jive.assignment.isa.persistence.Industry;
 import com.accenture.jive.assignment.isa.service.IndustryService;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,7 +12,6 @@ public class ListCommando implements Commando {
     public ListCommando(IndustryService industryService) {
         this.industryService = industryService;
     }
-
 
     @Override
     public boolean execute() throws CommandoException {
