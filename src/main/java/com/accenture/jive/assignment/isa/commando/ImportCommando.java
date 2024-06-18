@@ -2,6 +2,7 @@ package com.accenture.jive.assignment.isa.commando;
 
 import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
+import com.accenture.jive.assignment.isa.service.StockmarketService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.*;
@@ -10,20 +11,19 @@ import java.util.Scanner;
 
 public class ImportCommando implements Commando{
 
-    private final Connection connection;
     private final StockService stockService;
     private final IndustryService industryService;
+    private final StockmarketService stockmarketService;
 
-    public ImportCommando(Connection connection, StockService stockService, IndustryService industryService) {
-        this.connection = connection;
+    public ImportCommando(StockService stockService, IndustryService industryService, StockmarketService stockmarketService) {
         this.stockService = stockService;
         this.industryService = industryService;
+        this.stockmarketService = stockmarketService;
     }
 
     @Override
     public boolean execute() throws CommandoException {
 
-        // TODO: change path back to STOCK_DATA.csv
         String filePath = "C://dev1//isa//STOCK_DATA.csv";
 
         try (Scanner scanner = new Scanner(new File(filePath))) {
@@ -49,12 +49,7 @@ public class ImportCommando implements Commando{
                 stockService.addStock(name, industryId);
                 int stockId = stockService.searchStockId(name);
 
-                String sql = "INSERT INTO stockmarket VALUES (?, ?, ?)";
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setInt(1, stockId);
-                preparedStatement.setFloat(2, priceParsed);
-                preparedStatement.setDate(3, date);
-                preparedStatement.executeUpdate();
+                stockmarketService.addStockmarket(stockId, priceParsed, date);
             }
 
             System.out.println("You successfully imported the data to the database!");

@@ -3,7 +3,6 @@ package com.accenture.jive.assignment.isa.commando;
 import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
-
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class CommandoFactory {
     public List<Commando> createCommando() {
 
         List<Commando> commandos = new ArrayList<>();
-        Commando importCommando = new ImportCommando(connection, stockService, industryService);
+        Commando importCommando = new ImportCommando(stockService, industryService, stockmarketService);
         Commando deleteCommando = new DeleteCommando(scanner, stockService, industryService, stockmarketService);
         Commando exitCommando = new ExitCommando();
 
