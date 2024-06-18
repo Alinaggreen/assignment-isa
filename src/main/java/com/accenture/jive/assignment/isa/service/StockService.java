@@ -1,15 +1,22 @@
 package com.accenture.jive.assignment.isa.service;
 
+import com.accenture.jive.assignment.isa.persistence.Stock;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class StockService {
 
+    private final Scanner scanner;
     private final Connection connection;
 
-    public StockService(Connection connection) {
+    public StockService(Scanner scanner, Connection connection) {
+        this.scanner = scanner;
         this.connection = connection;
     }
 
@@ -40,18 +47,45 @@ public class StockService {
         }
     }
 
-    public void searchStockIdPlaceholder(String userCommand) throws SQLException {
+    public List<Stock> searchStockIdPlaceholder(String userCommando) throws SQLException {
+
+
         String sql = "SELECT * FROM stock WHERE stock_name LIKE ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, userCommand + "%");
+        // TODO: Warum ist es so kein Sicherheitsrisiko?
+        preparedStatement.setString(1, userCommando + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        System.out.println("The following companies start with " + userCommand + ":");
-
+        List<Stock> stocks = new ArrayList<>();
         while (resultSet.next()) {
-            int stockId = resultSet.getInt("stock_id");
-            String stockName = resultSet.getString("stock_name");
-            System.out.println("ID: " + stockId + " - " + stockName);
+            Stock stock = new Stock();
+            stock.setId(resultSet.getInt("stock_id"));
+            stock.setName(resultSet.getString("stock_name"));
+
+            stocks.add(stock);
         }
+
+        return stocks;
+
+        /*if (!resultSet.next()) {
+            System.out.println("There is currently no company starting with " + userCommando + " in the database.");
+            System.out.println("Do you want to search for another company id?");
+            userCommando = scanner.nextLine();
+            if ("yes".equalsIgnoreCase(userCommando)) {
+                searchStockIdPlaceholder();
+            }
+        } else {
+            System.out.println("The following companies start with " + userCommando + ":");
+            while (resultSet.next()) {
+                int stockId = resultSet.getInt("stock_id");
+                String stockName = resultSet.getString("stock_name");
+                System.out.println("ID: " + stockId + " - " + stockName);
+            }
+            System.out.println("Did you find the desired company id?");
+            userCommando = scanner.nextLine();
+            if ("no".equalsIgnoreCase(userCommando)) {
+                searchStockIdPlaceholder();
+            }
+        }*/
     }
 }

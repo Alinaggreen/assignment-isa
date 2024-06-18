@@ -16,7 +16,7 @@ public class App {
 
     public void run(Connection connection) {
         Scanner scanner = new Scanner(System.in);
-        StockService stockService = new StockService(connection);
+        StockService stockService = new StockService(scanner, connection);
         IndustryService industryService = new IndustryService(connection);
         StockmarketService stockmarketService = new StockmarketService(connection);
         DateService dateService = new DateService();
@@ -44,7 +44,7 @@ public class App {
 
     public static void main(String[] args) {
         Connector connector = new Connector();
-        try (Connection connection = connector.getConnection();) {
+        try (Connection connection = connector.getConnection()) {
             new App().run(connection);
         } catch (Exception cause) {
             System.out.println("System stopped because of an Exception");
