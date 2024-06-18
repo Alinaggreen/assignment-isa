@@ -39,4 +39,19 @@ public class StockService {
             return 0;
         }
     }
+
+    public void searchStockIdPlaceholder(String userCommand) throws SQLException {
+        String sql = "SELECT * FROM stock WHERE stock_name LIKE ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, userCommand + "%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        System.out.println("The following companies start with " + userCommand + ":");
+
+        while (resultSet.next()) {
+            int stockId = resultSet.getInt("stock_id");
+            String stockName = resultSet.getString("stock_name");
+            System.out.println("ID: " + stockId + " - " + stockName);
+        }
+    }
 }
