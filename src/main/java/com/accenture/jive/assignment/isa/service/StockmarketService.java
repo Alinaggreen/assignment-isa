@@ -77,4 +77,26 @@ public class StockmarketService {
 
         return stockmarket;
     }
+
+    public List<Stockmarket> exportStockmarket () throws SQLException {
+        String sql = "SELECT stock_name, market_price, market_date, industry_name FROM stockmarket \n" +
+                "JOIN (SELECT stock_id, stock_name, industry_name FROM stock \n" +
+                "JOIN industry ON stock_industry_id = industry_id) AS stockindustry\n" +
+                "ON stockmarket.stock_id = stockindustry.stock_id;";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        List<Stockmarket> stockmarkets = new ArrayList<>();
+        while (resultSet.next()) {
+            Stockmarket stockmarket = new Stockmarket();
+            stockmarket.setStockName(resultSet.getString("stock_name"));
+            stockmarket.setMarketPrice(resultSet.getFloat("market_price"));
+            stockmarket.setMarketDate(resultSet.getDate("market_date"));
+            stockmarket.setIndustryName(resultSet.getString("industry_name"));
+
+            stockmarkets.add(stockmarket);
+        }
+        return stockmarkets;
+    }
+
 }

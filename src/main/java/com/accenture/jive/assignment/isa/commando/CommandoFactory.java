@@ -39,6 +39,7 @@ public class CommandoFactory {
         Commando gapCommando = new GapCommando(scanner, stockService, stockmarketService);
         Commando updateCommando = new UpdateCommando(scanner, stockService, industryService);
         Commando listCommando = new ListCommando(industryService);
+        Commando exportCommando = new ExportCommando(stockmarketService);
         Commando exitCommando = new ExitCommando();
 
         commandos.add(importCommando);
@@ -51,6 +52,7 @@ public class CommandoFactory {
         commandos.add(gapCommando);
         commandos.add(updateCommando);
         commandos.add(listCommando);
+        commandos.add(exportCommando);
         commandos.add(exitCommando);
 
         return commandos;
