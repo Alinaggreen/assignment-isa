@@ -32,11 +32,13 @@ public class CommandoFactory {
         Commando importCommando = new ImportCommando(stockService, industryService, stockmarketService, dateService);
         Commando deleteCommando = new DeleteCommando(scanner, stockService, industryService, stockmarketService);
         Commando searchCommando = new SearchCommando(scanner, stockService);
+        Commando addCommando = new AddCommando(scanner, dateService, stockmarketService);
         Commando exitCommando = new ExitCommando();
 
         commandos.add(importCommando);
         commandos.add(deleteCommando);
         commandos.add(searchCommando);
+        commandos.add(addCommando);
         commandos.add(exitCommando);
 
         return commandos;

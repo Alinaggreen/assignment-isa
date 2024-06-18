@@ -19,13 +19,13 @@ public class StockmarketService {
         preparedStatement.execute();
     }
 
-    public void addStockmarket(int stockId, float priceParsed, Date date) throws SQLException {
+    public int addStockmarket(int stockId, float priceParsed, Date date) throws SQLException {
         String sql = "INSERT INTO stockmarket VALUES (?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, stockId);
         preparedStatement.setFloat(2, priceParsed);
         preparedStatement.setDate(3, date);
-        preparedStatement.executeUpdate();
+        return preparedStatement.executeUpdate();
     }
 
 }
