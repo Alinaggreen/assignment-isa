@@ -4,6 +4,8 @@ import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.service.DateService;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
+
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
@@ -54,7 +56,7 @@ public class AddCommando implements Commando {
         int stockId = Integer.parseInt(id);
         System.out.println("Please enter the price in Euro:");
         String price = scanner.nextLine();
-        float priceParsed = Float.parseFloat(price);
+        BigDecimal priceParsed = new BigDecimal(price);
         System.out.println("Please enter the date in dd.mm.yyyy Format:");
         String date = scanner.nextLine();
         Date dateFormatted = dateService.readDate(date);

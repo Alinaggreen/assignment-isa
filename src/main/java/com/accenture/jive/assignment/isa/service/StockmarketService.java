@@ -2,6 +2,7 @@ package com.accenture.jive.assignment.isa.service;
 
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +21,11 @@ public class StockmarketService {
         preparedStatement.execute();
     }
 
-    public int addStockmarket(int stockId, float priceParsed, Date date) throws SQLException {
+    public int addStockmarket(int stockId, BigDecimal priceParsed, Date date) throws SQLException {
         String sql = "INSERT INTO stockmarket VALUES (?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, stockId);
-        preparedStatement.setFloat(2, priceParsed);
+        preparedStatement.setBigDecimal(2, priceParsed);
         preparedStatement.setDate(3, date);
         return preparedStatement.executeUpdate();
     }
@@ -39,7 +40,7 @@ public class StockmarketService {
         while(resultSet.next()) {
             Stockmarket stockmarket = new Stockmarket();
             stockmarket.setStockId(stockId);
-            stockmarket.setMarketPrice(resultSet.getFloat("market_price"));
+            stockmarket.setMarketPrice(resultSet.getBigDecimal("market_price"));
             stockmarket.setMarketDate(resultSet.getDate("market_date"));
 
             stockmarkets.add(stockmarket);
@@ -57,7 +58,7 @@ public class StockmarketService {
         Stockmarket stockmarket = new Stockmarket();
         if (resultSet.next()) {
             stockmarket.setStockId(stockId);
-            stockmarket.setMarketPrice(resultSet.getFloat("max"));
+            stockmarket.setMarketPrice(resultSet.getBigDecimal("max"));
         }
 
         return stockmarket;
@@ -72,7 +73,7 @@ public class StockmarketService {
         Stockmarket stockmarket = new Stockmarket();
         if (resultSet.next()) {
             stockmarket.setStockId(stockId);
-            stockmarket.setMarketPrice(resultSet.getFloat("min"));
+            stockmarket.setMarketPrice(resultSet.getBigDecimal("min"));
         }
 
         return stockmarket;
@@ -90,7 +91,7 @@ public class StockmarketService {
         while (resultSet.next()) {
             Stockmarket stockmarket = new Stockmarket();
             stockmarket.setStockName(resultSet.getString("stock_name"));
-            stockmarket.setMarketPrice(resultSet.getFloat("market_price"));
+            stockmarket.setMarketPrice(resultSet.getBigDecimal("market_price"));
             stockmarket.setMarketDate(resultSet.getDate("market_date"));
             stockmarket.setIndustryName(resultSet.getString("industry_name"));
 

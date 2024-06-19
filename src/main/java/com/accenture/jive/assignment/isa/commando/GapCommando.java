@@ -5,6 +5,7 @@ import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -54,12 +55,12 @@ public class GapCommando implements Commando {
 
         try {
             Stockmarket stockmarketMax = stockmarketService.showMax(stockId);
-            float priceMax = stockmarketMax.getMarketPrice();
+            BigDecimal priceMax = stockmarketMax.getMarketPrice();
             Stockmarket stockmarketMin = stockmarketService.showMin(stockId);
-            float priceMin = stockmarketMin.getMarketPrice();
+            BigDecimal priceMin = stockmarketMin.getMarketPrice();
 
             // TODO: max == min -> only 1 entry
-            float gap = priceMax - priceMin;
+            BigDecimal gap = priceMax.subtract(priceMin);
             System.out.println("The highest price was " + priceMax + "€ - the lowest price was " + priceMin + "€.");
             System.out.println("The difference between highest and lowest price there is " + gap + "€.");
         } catch (SQLException e) {

@@ -6,6 +6,7 @@ import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -37,7 +38,7 @@ public class ImportCommando implements Commando{
                 String[] fields = line.split(";");
 
                 String price = fields[1].replace(",", ".").substring(1);
-                float priceParsed = Float.parseFloat(price);
+                BigDecimal priceParsed = new BigDecimal(price);
 
                 Date date = dateService.readDate(fields[2]);
 
