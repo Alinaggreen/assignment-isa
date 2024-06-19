@@ -2,13 +2,14 @@ package com.accenture.jive.assignment.isa.persistence;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Stockmarket {
 
     private Integer stockId;
     private String stockName;
     private BigDecimal marketPrice;
-    private Date marketDate;
+    private LocalDate marketDate;
     private String industryName;
 
     public Integer getStockId() {
@@ -27,11 +28,11 @@ public class Stockmarket {
         this.marketPrice = marketPrice;
     }
 
-    public Date getMarketDate() {
+    public LocalDate getMarketDate() {
         return marketDate;
     }
 
-    public void setMarketDate(Date marketDate) {
+    public void setMarketDate(LocalDate marketDate) {
         this.marketDate = marketDate;
     }
 

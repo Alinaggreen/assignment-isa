@@ -1,7 +1,9 @@
 package com.accenture.jive.assignment.isa.commando;
 
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
+import com.accenture.jive.assignment.isa.service.DateService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
+import com.opencsv.CSVWriter;
 import com.opencsv.CSVWriterBuilder;
 import com.opencsv.ICSVWriter;
 import java.io.FileWriter;
@@ -13,9 +15,11 @@ import java.util.List;
 public class ExportCommando implements Commando {
 
     private final StockmarketService stockmarketService;
+    private final DateService dateService;
 
-    public ExportCommando(StockmarketService stockmarketService) {
+    public ExportCommando(StockmarketService stockmarketService, DateService dateService) {
         this.stockmarketService = stockmarketService;
+        this.dateService = dateService;
     }
 
     @Override
@@ -29,16 +33,18 @@ public class ExportCommando implements Commando {
             List<Stockmarket> stockmarkets = stockmarketService.exportStockmarket();
 
             for (Stockmarket stockmarket : stockmarkets) {
-                String[] record = {stockmarket.getStockName(), String.valueOf(stockmarket.getMarketPrice()),
-                        String.valueOf(stockmarket.getMarketDate()), stockmarket.getIndustryName()};
+                String price = "€" + stockmarket.getMarketPrice();
+                String[] record = {stockmarket.getStockName(), price,
+                        dateService.exportDate(stockmarket.getMarketDate()), stockmarket.getIndustryName()};
 
                 csvData.add(record);
             }
 
-            try (ICSVWriter writer = new CSVWriterBuilder(new FileWriter("C://dev1//isa//test.csv"))
-                    .withSeparator(';')
-                    .build()) {
+            try (CSVWriter writer = new CSVWriter(new FileWriter("C://dev1//isa//test.csv"), ';',
+                    CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                    CSVWriter.RFC4180_LINE_END)) {
                 writer.writeAll(csvData);
+
             } catch (IOException e) {
                 System.out.println("Exception");
                 e.printStackTrace();

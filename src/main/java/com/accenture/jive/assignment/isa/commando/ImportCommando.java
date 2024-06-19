@@ -29,7 +29,8 @@ public class ImportCommando implements Commando{
     @Override
     public boolean execute() throws CommandoException {
 
-        String filePath = "C://dev1//isa//STOCK_DATA.csv";
+        //String filePath = "C://dev1//isa//STOCK_DATA.csv";
+        String filePath = "C://dev1//isa//test.csv";
 
         try (Scanner scanner = new Scanner(new File(filePath))) {
             scanner.useDelimiter(";");
@@ -42,7 +43,7 @@ public class ImportCommando implements Commando{
                 String price = fields[1].replace(",", ".").substring(1);
                 BigDecimal priceParsed = new BigDecimal(price);
 
-                Date date = dateService.readDate(fields[2]);
+                LocalDate date = dateService.readDate(fields[2]);
 
                 String name = fields[0];
                 String industry = fields[3];

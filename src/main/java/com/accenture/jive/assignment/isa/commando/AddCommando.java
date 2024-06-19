@@ -8,6 +8,7 @@ import com.accenture.jive.assignment.isa.service.StockmarketService;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -59,7 +60,7 @@ public class AddCommando implements Commando {
         BigDecimal priceParsed = new BigDecimal(price);
         System.out.println("Please enter the date in dd.mm.yyyy Format:");
         String date = scanner.nextLine();
-        Date dateFormatted = dateService.readDate(date);
+        LocalDate dateFormatted = dateService.readDate(date);
 
         try {
             int addedRows = stockmarketService.addStockmarket(stockId, priceParsed, dateFormatted);

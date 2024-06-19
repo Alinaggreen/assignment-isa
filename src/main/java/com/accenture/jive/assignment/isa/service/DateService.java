@@ -1,15 +1,20 @@
 package com.accenture.jive.assignment.isa.service;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class DateService {
 
-    public Date readDate(String importDate) {
+    public LocalDate readDate(String importDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy");
-        LocalDate localdate = LocalDate.parse(importDate, formatter);
 
-        return Date.valueOf(localdate);
+        return LocalDate.parse(importDate, formatter);
+    }
+
+    public String exportDate (LocalDate exportDate) {
+
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-yy");
+
+        return DateTimeFormatter.ofPattern("dd.MM.yy").format(exportDate);
     }
 }

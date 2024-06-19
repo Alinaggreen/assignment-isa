@@ -4,6 +4,7 @@ import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +22,12 @@ public class StockmarketService {
         preparedStatement.execute();
     }
 
-    public int addStockmarket(int stockId, BigDecimal priceParsed, Date date) throws SQLException {
+    public int addStockmarket(int stockId, BigDecimal priceParsed, LocalDate date) throws SQLException {
         String sql = "INSERT INTO stockmarket VALUES (?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, stockId);
         preparedStatement.setBigDecimal(2, priceParsed);
-        preparedStatement.setDate(3, date);
+        preparedStatement.setDate(3, Date.valueOf(date));
         return preparedStatement.executeUpdate();
     }
 
@@ -41,7 +42,7 @@ public class StockmarketService {
             Stockmarket stockmarket = new Stockmarket();
             stockmarket.setStockId(stockId);
             stockmarket.setMarketPrice(resultSet.getBigDecimal("market_price"));
-            stockmarket.setMarketDate(resultSet.getDate("market_date"));
+            stockmarket.setMarketDate(resultSet.getDate("market_date").toLocalDate());
 
             stockmarkets.add(stockmarket);
         }
@@ -92,12 +93,11 @@ public class StockmarketService {
             Stockmarket stockmarket = new Stockmarket();
             stockmarket.setStockName(resultSet.getString("stock_name"));
             stockmarket.setMarketPrice(resultSet.getBigDecimal("market_price"));
-            stockmarket.setMarketDate(resultSet.getDate("market_date"));
+            stockmarket.setMarketDate(resultSet.getDate("market_date").toLocalDate());
             stockmarket.setIndustryName(resultSet.getString("industry_name"));
 
             stockmarkets.add(stockmarket);
         }
         return stockmarkets;
     }
-
 }
