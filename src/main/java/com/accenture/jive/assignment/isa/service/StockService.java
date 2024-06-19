@@ -1,22 +1,17 @@
 package com.accenture.jive.assignment.isa.service;
 
 import com.accenture.jive.assignment.isa.persistence.Stock;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class StockService {
-
-    private final Scanner scanner;
     private final Connection connection;
 
-    public StockService(Scanner scanner, Connection connection) {
-        this.scanner = scanner;
+    public StockService(Connection connection) {
         this.connection = connection;
     }
 
