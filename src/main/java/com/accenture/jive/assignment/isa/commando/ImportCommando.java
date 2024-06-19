@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ImportCommando implements Commando{
