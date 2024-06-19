@@ -5,16 +5,11 @@ import java.time.format.DateTimeFormatter;
 
 public class DateService {
 
-    public LocalDate readDate(String importDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy");
-
-        return LocalDate.parse(importDate, formatter);
+    public LocalDate importDate(String importDate) {
+        return LocalDate.parse(importDate, DateTimeFormatter.ofPattern("dd.MM.yy"));
     }
 
     public String exportDate (LocalDate exportDate) {
-
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-yy");
-
         return DateTimeFormatter.ofPattern("dd.MM.yy").format(exportDate);
     }
 }

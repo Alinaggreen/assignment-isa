@@ -4,8 +4,6 @@ import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 import com.accenture.jive.assignment.isa.service.DateService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
 import com.opencsv.CSVWriter;
-import com.opencsv.CSVWriterBuilder;
-import com.opencsv.ICSVWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -33,17 +31,20 @@ public class ExportCommando implements Commando {
             List<Stockmarket> stockmarkets = stockmarketService.exportStockmarket();
 
             for (Stockmarket stockmarket : stockmarkets) {
-                String price = "€" + stockmarket.getMarketPrice();
-                String[] record = {stockmarket.getStockName(), price,
+                String[] record = {stockmarket.getStockName(), "€" + stockmarket.getMarketPrice(),
                         dateService.exportDate(stockmarket.getMarketDate()), stockmarket.getIndustryName()};
 
                 csvData.add(record);
             }
 
-            try (CSVWriter writer = new CSVWriter(new FileWriter("C://dev1//isa//test.csv"), ';',
-                    CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+            try (CSVWriter writer = new CSVWriter(new FileWriter("C://dev1//isa//STOCK_DATA_export.csv"),
+                    ';',
+                    CSVWriter.NO_QUOTE_CHARACTER,
+                    CSVWriter.DEFAULT_ESCAPE_CHARACTER,
                     CSVWriter.RFC4180_LINE_END)) {
+
                 writer.writeAll(csvData);
+                System.out.println("You successfully exported the database!");
 
             } catch (IOException e) {
                 System.out.println("Exception");

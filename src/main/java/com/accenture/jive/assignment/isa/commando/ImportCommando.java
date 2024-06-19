@@ -43,7 +43,7 @@ public class ImportCommando implements Commando{
                 String price = fields[1].replace(",", ".").substring(1);
                 BigDecimal priceParsed = new BigDecimal(price);
 
-                LocalDate date = dateService.readDate(fields[2]);
+                LocalDate date = dateService.importDate(fields[2]);
 
                 String name = fields[0];
                 String industry = fields[3];

@@ -1,7 +1,6 @@
 package com.accenture.jive.assignment.isa.persistence;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Stockmarket {
