@@ -7,7 +7,6 @@ import com.accenture.jive.assignment.isa.service.DateService;
 import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
-
 import java.sql.Connection;
 import java.util.List;
 import java.util.Scanner;
