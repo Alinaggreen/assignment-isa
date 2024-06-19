@@ -17,13 +17,15 @@ public class CommandoFactory {
     private final IndustryService industryService;
     private final StockmarketService stockmarketService;
     private final DateService dateService;
+    private final UserInteraction userInteraction;
 
-    public CommandoFactory (Scanner scanner, StockService stockService, IndustryService industryService, StockmarketService stockmarketService, DateService dateService) {
+    public CommandoFactory (Scanner scanner, StockService stockService, IndustryService industryService, StockmarketService stockmarketService, DateService dateService, UserInteraction userInteraction) {
         this.scanner = scanner;
         this.stockService = stockService;
         this.industryService = industryService;
         this.stockmarketService = stockmarketService;
         this.dateService = dateService;
+        this.userInteraction = userInteraction;
     }
 
     public List<Commando> createCommando() {
@@ -31,8 +33,8 @@ public class CommandoFactory {
         List<Commando> commandos = new ArrayList<>();
         Commando importCommando = new ImportCommando(stockService, industryService, stockmarketService, dateService);
         Commando deleteCommando = new DeleteCommando(scanner, stockService, industryService, stockmarketService);
-        Commando searchCommando = new SearchCommando(scanner, stockService);
-        Commando addCommando = new AddCommando(scanner, dateService, stockService, stockmarketService);
+        Commando searchCommando = new SearchCommando(stockService, userInteraction);
+        Commando addCommando = new AddCommando(scanner, dateService, stockService, stockmarketService, userInteraction);
         Commando showCommando = new ShowCommando(scanner, stockService, stockmarketService);
         Commando maxCommando = new MaxCommando(scanner, stockService, stockmarketService);
         Commando minCommando = new MinCommando(scanner, stockService, stockmarketService);
