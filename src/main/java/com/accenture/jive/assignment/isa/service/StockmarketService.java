@@ -54,7 +54,7 @@ public class StockmarketService {
 
     //TODO: Exception
     public Stockmarket showMax (int stockId) throws SQLException {
-        String sql = "SELECT MAX(market_price) AS max FROM stockmarket WHERE stock_id = ?";
+        String sql = "SELECT market_price, market_date FROM stockmarket WHERE stock_id = ? ORDER BY market_price DESC";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, stockId);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -62,7 +62,8 @@ public class StockmarketService {
         Stockmarket stockmarket = new Stockmarket();
         if (resultSet.next()) {
             stockmarket.setStockId(stockId);
-            stockmarket.setMarketPrice(resultSet.getBigDecimal("max"));
+            stockmarket.setMarketPrice(resultSet.getBigDecimal("market_price"));
+            stockmarket.setMarketDate(resultSet.getDate("market_date").toLocalDate());;
         }
 
         return stockmarket;
@@ -70,7 +71,7 @@ public class StockmarketService {
 
     //TODO: Exception
     public Stockmarket showMin (int stockId) throws SQLException {
-        String sql = "SELECT MIN(market_price) AS min FROM stockmarket WHERE stock_id = ?";
+        String sql = "SELECT market_price, market_date FROM stockmarket WHERE stock_id = ? ORDER BY market_price ASC";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, stockId);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -78,7 +79,8 @@ public class StockmarketService {
         Stockmarket stockmarket = new Stockmarket();
         if (resultSet.next()) {
             stockmarket.setStockId(stockId);
-            stockmarket.setMarketPrice(resultSet.getBigDecimal("min"));
+            stockmarket.setMarketPrice(resultSet.getBigDecimal("market_price"));
+            stockmarket.setMarketDate(resultSet.getDate("market_date").toLocalDate());;
         }
 
         return stockmarket;

@@ -43,13 +43,12 @@ public class MaxCommando implements Commando {
             }
         }
 
-        // TODO: Also output latest date on which the price was reached?
+        // TODO: Also output latest date on which the price was reached
         try {
             int stockId = userInteraction.readCompanyId();
             Stockmarket stockmarket = stockmarketService.showMax(stockId);
             if (stockmarket.getStockId() != null) {
-                BigDecimal maxPrice = stockmarket.getMarketPrice();
-                userInteraction.maxPrice(maxPrice);
+                userInteraction.maxPrice(stockmarket);
             } else {
                 userInteraction.noEntries();
             }

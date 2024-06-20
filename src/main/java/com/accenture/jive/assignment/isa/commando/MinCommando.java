@@ -46,8 +46,7 @@ public class MinCommando implements Commando {
             int stockId = userInteraction.readCompanyId();
             Stockmarket stockmarket = stockmarketService.showMin(stockId);
             if (stockmarket.getStockId() != null) {
-                BigDecimal minPrice = stockmarket.getMarketPrice();
-                userInteraction.minPrice(minPrice);
+                userInteraction.minPrice(stockmarket);
             } else {
                 userInteraction.noEntries();
             }

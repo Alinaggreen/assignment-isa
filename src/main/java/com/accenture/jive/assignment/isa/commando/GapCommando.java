@@ -44,15 +44,13 @@ public class GapCommando implements Commando {
         try {
             int stockId = userInteraction.readCompanyId();
             Stockmarket stockmarketMax = stockmarketService.showMax(stockId);
-            BigDecimal maxPrice = stockmarketMax.getMarketPrice();
             Stockmarket stockmarketMin = stockmarketService.showMin(stockId);
-            BigDecimal minPrice = stockmarketMin.getMarketPrice();
 
             // TODO: max == min -> only 1 entry
             // TODO : case no entry
-            BigDecimal gapPrice = maxPrice.subtract(minPrice);
-            userInteraction.maxPrice(maxPrice);
-            userInteraction.minPrice(minPrice);
+            BigDecimal gapPrice = stockmarketMax.getMarketPrice().subtract(stockmarketMin.getMarketPrice());
+            userInteraction.maxPrice(stockmarketMax);
+            userInteraction.minPrice(stockmarketMin);
             userInteraction.gapPrice(gapPrice);
         } catch (SQLException e) {
             throw new RuntimeException(e);

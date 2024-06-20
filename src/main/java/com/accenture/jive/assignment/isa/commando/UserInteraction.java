@@ -144,12 +144,14 @@ public class UserInteraction {
         }
     }
 
-    public void maxPrice (BigDecimal maxPrice) {
-        System.out.println("The highest price was " + maxPrice + "€.");
+    //TODO: Date Format in dd.mm.yyyy
+    public void maxPrice (Stockmarket stockmarket) {
+        System.out.println("The highest price was " + stockmarket.getMarketPrice() + "€ on " + stockmarket.getMarketDate() + ".");
     }
 
-    public void minPrice (BigDecimal minPrice) {
-        System.out.println("The lowest price was " + minPrice + "€.");
+    //TODO: Date Format in dd.mm.yyyy
+    public void minPrice (Stockmarket stockmarket) {
+        System.out.println("The lowest price was " + stockmarket.getMarketPrice() + "€ on " + stockmarket.getMarketDate() + ".");
     }
 
     public void gapPrice (BigDecimal gapPrice) {
