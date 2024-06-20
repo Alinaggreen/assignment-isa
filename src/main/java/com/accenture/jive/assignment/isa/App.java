@@ -20,7 +20,7 @@ public class App {
         IndustryService industryService = new IndustryService(connection);
         StockmarketService stockmarketService = new StockmarketService(connection);
         DateService dateService = new DateService();
-        UserInteraction userInteraction = new UserInteraction(scanner);
+        UserInteraction userInteraction = new UserInteraction(scanner, dateService);
         CommandoFactory commandoFactory = new CommandoFactory(scanner, stockService, industryService, stockmarketService, dateService, userInteraction);
         List<Commando> commandos = commandoFactory.createCommando();
 
@@ -49,6 +49,7 @@ public class App {
             new App().run(connection);
         } catch (Exception cause) {
             System.out.println("System stopped because of an Exception");
+            cause.printStackTrace();
         }
     }
 }
