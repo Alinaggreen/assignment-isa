@@ -79,6 +79,10 @@ public class UserInteraction {
         System.out.println("The highest price was " + maxPrice + "€.");
     }
 
+    public void minPrice (BigDecimal minPrice) {
+        System.out.println("The lowest price was " + minPrice + "€.");
+    }
+
     public void noEntries () {
         System.out.println("There are currently no stock market entries for this company.");
     }
