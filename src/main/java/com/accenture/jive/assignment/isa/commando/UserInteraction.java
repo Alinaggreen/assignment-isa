@@ -57,18 +57,29 @@ public class UserInteraction {
         return scanner.nextLine();
     }
 
-    //TODO: Exception
+    //TODO: Exception Stock with id not yet in database
     public int readCompanyId () {
         System.out.println("Please enter the company id:");
-        String id = scanner.nextLine();
-        return Integer.parseInt(id);
+        String inputId = scanner.nextLine();
+        try {
+            return Integer.parseInt(inputId);
+        } catch (NumberFormatException cause) {
+            System.out.println("Please enter a number!");
+            readCompanyId();
+        }
+        return 0;
     }
 
-    //TODO: Exception
     public BigDecimal readPrice () {
         System.out.println("Please enter the price in Euro:");
-        String price = scanner.nextLine();
-        return new BigDecimal(price);
+        String inputPrice = scanner.nextLine();
+        try {
+            return new BigDecimal(inputPrice);
+        } catch (NumberFormatException cause) {
+            System.out.println("Please enter a number!");
+            readPrice();
+        }
+        return null;
     }
 
     //TODO: Tell user, that year only has 2 digits, not 4.
