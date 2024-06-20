@@ -34,20 +34,13 @@ public class UserInteraction {
         System.out.println("export - exports all data to a csv file");
     }
 
-    public void successImport () {
-        System.out.println("You successfully imported the data to the database!");
+    public void successfulCommando () {
+        System.out.println("The requested commando was successfully executed.");
     }
 
-    public void successUpdate (int addedRows) {
-        System.out.println("You successfully updated " + addedRows + " entry.");
-    }
-
-    public void successExport () {
-        System.out.println("You successfully exported the database!");
-    }
-
-    public void successDelete () {
-        System.out.println("You successfully deleted everything from the database!");
+    public void failedCommandoSQL () {
+        System.out.println("The requested commando could not be executed due to issues with the database. " +
+                "Please try again.");
     }
 
     public void missingStock () {
@@ -183,10 +176,6 @@ public class UserInteraction {
 
     public void noEntries () {
         System.out.println("There are currently no stock market entries for this company.");
-    }
-
-    public void failedCommando () {
-        System.out.println("The requested command could not be executed. Please try again.");
     }
 
     public void goodbye() {

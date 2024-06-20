@@ -46,15 +46,13 @@ public class ExportCommando implements Commando {
                     CSVWriter.RFC4180_LINE_END)) {
 
                 writer.writeAll(csvData);
-                userInteraction.successExport();
-
+                userInteraction.successfulCommando();
             } catch (IOException e) {
-                System.out.println("Exception");
+                //TODO: print caught exception
                 e.printStackTrace();
             }
-
         } catch (SQLException e) {
-            System.out.println("SQLException");
+            userInteraction.failedCommandoSQL();
             e.printStackTrace();
         }
         return true;

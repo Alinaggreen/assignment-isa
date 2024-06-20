@@ -38,7 +38,7 @@ public class ShowCommando implements Commando {
                     shouldRun = userInteraction.foundCompany();
                 } while(shouldRun);
             } catch (SQLException e) {
-                System.out.println("SQLException");
+                userInteraction.failedCommandoSQL();
                 e.printStackTrace();
             }
         }
@@ -54,6 +54,7 @@ public class ShowCommando implements Commando {
                 execute();
             }
         } catch (SQLException e) {
+            userInteraction.failedCommandoSQL();
             throw new RuntimeException(e);
         }
         return true;

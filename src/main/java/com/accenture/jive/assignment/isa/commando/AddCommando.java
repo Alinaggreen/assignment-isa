@@ -35,7 +35,7 @@ public class AddCommando implements Commando {
                     shouldRun = userInteraction.foundCompany();
                 } while(shouldRun);
             } catch (SQLException e) {
-                System.out.println("SQLException");
+                userInteraction.failedCommandoSQL();
                 e.printStackTrace();
             }
         }
@@ -48,14 +48,13 @@ public class AddCommando implements Commando {
                 BigDecimal priceParsed = userInteraction.readPrice();
                 LocalDate dateFormatted = userInteraction.readDate();
                 int addedRows = stockmarketService.addStockmarket(stockId, priceParsed, dateFormatted);
-                userInteraction.successUpdate(addedRows);
+                userInteraction.successfulCommando();
             } else {
                 userInteraction.missingStock();
                 execute();
             }
-
         } catch (SQLException e) {
-            System.out.println("SQLException");
+            userInteraction.failedCommandoSQL();
             e.printStackTrace();
         }
         return true;

@@ -33,7 +33,7 @@ public class UpdateCommando implements Commando {
                     shouldRun = userInteraction.foundCompany();
                 } while(shouldRun);
             } catch (SQLException e) {
-                System.out.println("SQLException");
+                userInteraction.failedCommandoSQL();
                 e.printStackTrace();
             }
         }
@@ -50,13 +50,13 @@ public class UpdateCommando implements Commando {
                 industry = userInteraction.readIndustry();
                 int industryId = industryService.searchIndustryId(industry);
                 int updatedRows = stockService.updateStock(stockId, industryId);
-                userInteraction.successUpdate(updatedRows);
+                userInteraction.successfulCommando();
             } else {
                 userInteraction.missingStock();
                 execute();
             }
         } catch (SQLException e) {
-            System.out.println("SQLException");
+            userInteraction.failedCommandoSQL();
             e.printStackTrace();
         }
 

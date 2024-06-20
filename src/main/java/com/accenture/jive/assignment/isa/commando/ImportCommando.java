@@ -56,11 +56,12 @@ public class ImportCommando implements Commando{
 
                 stockmarketService.addStockmarket(stockId, priceParsed, date);
             }
-            userInteraction.successImport();
+            userInteraction.successfulCommando();
         } catch (FileNotFoundException e) {
+            //TODO: print exception caught
             throw new RuntimeException(e);
         } catch (SQLException e) {
-            System.out.println("SQLException");
+            userInteraction.failedCommandoSQL();
             e.printStackTrace();
         }
         return true;

@@ -6,7 +6,6 @@ import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 //TODO: Exception
@@ -36,7 +35,7 @@ public class GapCommando implements Commando {
                     shouldRun = userInteraction.foundCompany();
                 } while(shouldRun);
             } catch (SQLException e) {
-                System.out.println("SQLException");
+                userInteraction.failedCommandoSQL();
                 e.printStackTrace();
             }
         }
@@ -61,6 +60,7 @@ public class GapCommando implements Commando {
             }
 
         } catch (SQLException e) {
+            userInteraction.failedCommandoSQL();
             throw new RuntimeException(e);
         }
 

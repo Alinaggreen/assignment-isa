@@ -27,7 +27,7 @@ public class SearchCommando implements Commando {
                 shouldRun = userInteraction.foundCompany();
             } while(shouldRun);
         } catch (SQLException e) {
-            System.out.println("SQLException");
+            userInteraction.failedCommandoSQL();
             e.printStackTrace();
         }
         return true;

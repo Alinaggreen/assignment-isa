@@ -37,7 +37,7 @@ public class MaxCommando implements Commando {
                     shouldRun = userInteraction.foundCompany();
                 } while(shouldRun);
             } catch (SQLException e) {
-                System.out.println("SQLException");
+                userInteraction.failedCommandoSQL();
                 e.printStackTrace();
             }
         }
@@ -56,10 +56,8 @@ public class MaxCommando implements Commando {
                 userInteraction.missingStock();
                 execute();
             }
-
-
         } catch (SQLException e) {
-            System.out.println("SQLException");
+            userInteraction.failedCommandoSQL();
             e.printStackTrace();
         }
 

@@ -28,9 +28,9 @@ public class DeleteCommando implements Commando {
                 stockmarketService.deleteStockmarket();
                 stockService.deleteStock();
                 industryService.deleteIndustry();
-                userInteraction.successDelete();
+                userInteraction.successfulCommando();
             } catch (SQLException e) {
-                System.out.println("SQLException");
+                userInteraction.failedCommandoSQL();
                 e.printStackTrace();
             }
         }
