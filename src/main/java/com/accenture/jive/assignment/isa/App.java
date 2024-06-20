@@ -20,7 +20,7 @@ public class App {
         IndustryService industryService = new IndustryService(connection);
         StockmarketService stockmarketService = new StockmarketService(connection);
         DateService dateService = new DateService();
-        UserInteraction userInteraction = new UserInteraction(scanner, dateService);
+        UserInteraction userInteraction = new UserInteraction(scanner, dateService, industryService);
         CommandoFactory commandoFactory = new CommandoFactory(scanner, stockService, industryService, stockmarketService, dateService, userInteraction);
         List<Commando> commandos = commandoFactory.createCommando();
 

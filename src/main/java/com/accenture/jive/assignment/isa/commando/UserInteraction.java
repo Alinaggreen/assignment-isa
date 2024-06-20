@@ -4,7 +4,10 @@ import com.accenture.jive.assignment.isa.persistence.Industry;
 import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 import com.accenture.jive.assignment.isa.service.DateService;
+import com.accenture.jive.assignment.isa.service.IndustryService;
+
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -13,10 +16,12 @@ public class UserInteraction {
 
     private final Scanner scanner;
     private final DateService dateService;
+    private final IndustryService industryService;
 
-    public UserInteraction(Scanner scanner, DateService dateService) {
+    public UserInteraction(Scanner scanner, DateService dateService, IndustryService industryService) {
         this.scanner = scanner;
         this.dateService = dateService;
+        this.industryService = industryService;
     }
 
     public void startCommando () {
@@ -24,15 +29,17 @@ public class UserInteraction {
     }
 
     public void successUpdate (int addedRows) {
-        System.out.println("You successfully updated " + addedRows + " entries.");
+        System.out.println("You successfully updated " + addedRows + " entry.");
     }
 
+    //TODO: return String
     public int readCompanyId () {
         System.out.println("Please enter the company id:");
         String id = scanner.nextLine();
         return Integer.parseInt(id);
     }
 
+    //TODO: return String
     public BigDecimal readPrice () {
         System.out.println("Please enter the price in Euro:");
         String price = scanner.nextLine();
@@ -40,10 +47,18 @@ public class UserInteraction {
     }
 
     //TODO: Tell user, that year only has 2 digits, not 4.
+    //TODO: return String
     public LocalDate readDate () {
         System.out.println("Please enter the date in dd.mm.yy Format:");
         String date = scanner.nextLine();
         return dateService.importDate(date);
+    }
+
+    //TODO: return String
+    public int readIndustry () throws SQLException {
+        System.out.println("Which industry should the company be assigned to instead?");
+        String industry = scanner.nextLine();
+        return industryService.searchIndustryId(industry);
     }
 
     public String knowCompany () {
@@ -73,6 +88,10 @@ public class UserInteraction {
             System.out.println("ID: " + industry.getId() + " - " + industry.getName()
                     + " - currently " + industry.getStockCount() + " stocks assigned");
         }
+    }
+
+    public void showIndustry (String industry) {
+        System.out.println("The company is currently assigned to the following industry: " + industry);
     }
 
     public void printPrice (List<Stockmarket> stockmarkets) {
