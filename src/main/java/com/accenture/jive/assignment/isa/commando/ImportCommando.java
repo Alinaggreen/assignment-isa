@@ -18,24 +18,22 @@ public class ImportCommando implements Commando{
     private final IndustryService industryService;
     private final StockmarketService stockmarketService;
     private final DateService dateService;
+    private final UserInteraction userInteraction;
 
-    public ImportCommando(StockService stockService, IndustryService industryService, StockmarketService stockmarketService, DateService dateService) {
+    public ImportCommando(StockService stockService, IndustryService industryService, StockmarketService stockmarketService, DateService dateService, UserInteraction userInteraction) {
         this.stockService = stockService;
         this.industryService = industryService;
         this.stockmarketService = stockmarketService;
         this.dateService = dateService;
+        this.userInteraction = userInteraction;
     }
 
     @Override
     public boolean execute() throws CommandoException {
-
-        //TODO: User types in fileName
-        //String filePath = "C://dev1//isa//STOCK_DATA.csv";
-        String filePath = "C://dev1//isa//test.csv";
+        String filePath = userInteraction.readImport();
 
         try (Scanner scanner = new Scanner(new File(filePath))) {
             scanner.useDelimiter(";");
-
             scanner.nextLine();
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -58,15 +56,13 @@ public class ImportCommando implements Commando{
 
                 stockmarketService.addStockmarket(stockId, priceParsed, date);
             }
-
-            System.out.println("You successfully imported the data to the database!");
+            userInteraction.successImport();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {
             System.out.println("SQLException");
             e.printStackTrace();
         }
-
         return true;
     }
 

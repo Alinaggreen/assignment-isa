@@ -31,7 +31,7 @@ public class CommandoFactory {
     public List<Commando> createCommando() {
 
         List<Commando> commandos = new ArrayList<>();
-        Commando importCommando = new ImportCommando(stockService, industryService, stockmarketService, dateService);
+        Commando importCommando = new ImportCommando(stockService, industryService, stockmarketService, dateService, userInteraction);
         Commando deleteCommando = new DeleteCommando(stockService, industryService, stockmarketService, userInteraction);
         Commando searchCommando = new SearchCommando(stockService, userInteraction);
         Commando addCommando = new AddCommando(stockService, stockmarketService, userInteraction);

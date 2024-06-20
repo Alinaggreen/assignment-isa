@@ -27,12 +27,22 @@ public class UserInteraction {
         System.out.println("Please enter the relevant data:");
     }
 
+    public void successImport () {
+        System.out.println("You successfully imported the data to the database!");
+    }
+
     public void successUpdate (int addedRows) {
         System.out.println("You successfully updated " + addedRows + " entry.");
     }
 
     public void successDelete () {
         System.out.println("You successfully deleted everything from the database!");
+    }
+
+    public String readImport () {
+        System.out.println("Please enter the file path of the csv file you want to import " +
+                "(for example C://dev1//isa//STOCK_DATA.csv):");
+        return scanner.nextLine();
     }
 
     //TODO: return String
