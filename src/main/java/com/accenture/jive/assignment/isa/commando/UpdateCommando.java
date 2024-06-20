@@ -3,7 +3,10 @@ package com.accenture.jive.assignment.isa.commando;
 import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
+
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 //TODO: Exception
@@ -21,7 +24,6 @@ public class UpdateCommando implements Commando {
 
     @Override
     public boolean execute() throws CommandoException {
-        userInteraction.startCommando();
         String searchId = userInteraction.knowCompany();
 
         if ("no".equalsIgnoreCase(searchId)) {
@@ -41,14 +43,21 @@ public class UpdateCommando implements Commando {
 
         try {
             int stockId = userInteraction.readCompanyId();
-            String industry = stockService.showStockIndustry(stockId);
-            userInteraction.showIndustry(industry);
 
-            //TODO: user must know industry name
-            industry = userInteraction.readIndustry();
-            int industryId = industryService.searchIndustryId(industry);
-            int updatedRows = stockService.updateStock(stockId, industryId);
-            userInteraction.successUpdate(updatedRows);
+            boolean existStock = stockService.existStock(stockId);
+            if (existStock) {
+                String industry = stockService.showStockIndustry(stockId);
+                userInteraction.showIndustry(industry);
+
+                //TODO: user must know industry name
+                industry = userInteraction.readIndustry();
+                int industryId = industryService.searchIndustryId(industry);
+                int updatedRows = stockService.updateStock(stockId, industryId);
+                userInteraction.successUpdate(updatedRows);
+            } else {
+                userInteraction.missingStock();
+                execute();
+            }
         } catch (SQLException e) {
             System.out.println("SQLException");
             e.printStackTrace();

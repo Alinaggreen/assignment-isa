@@ -19,14 +19,6 @@ public class UserInteraction {
         this.scanner = scanner;
     }
 
-    public void startCommando () {
-        System.out.println("Please enter the relevant data:");
-    }
-
-    public void succes() {
-        System.out.println("You successfully " + "the database!");
-    }
-
     public void successImport () {
         System.out.println("You successfully imported the data to the database!");
     }
@@ -41,6 +33,10 @@ public class UserInteraction {
 
     public void successDelete () {
         System.out.println("You successfully deleted everything from the database!");
+    }
+
+    public void missingStock () {
+        System.out.println("There is no stock with this Id in the database. Please try again.");
     }
 
     public String readImportName () {

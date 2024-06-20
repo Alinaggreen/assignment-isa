@@ -4,7 +4,10 @@ import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
+
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 //TODO: Exception
@@ -22,7 +25,6 @@ public class MaxCommando implements Commando {
 
     @Override
     public boolean execute() throws CommandoException {
-        userInteraction.startCommando();
         String searchId = userInteraction.knowCompany();
 
         if ("no".equalsIgnoreCase(searchId)) {
@@ -42,12 +44,20 @@ public class MaxCommando implements Commando {
 
         try {
             int stockId = userInteraction.readCompanyId();
-            Stockmarket stockmarket = stockmarketService.showMax(stockId);
-            if (stockmarket.getStockId() != null) {
-                userInteraction.maxPrice(stockmarket);
+            boolean existStock = stockService.existStock(stockId);
+            if (existStock) {
+                Stockmarket stockmarket = stockmarketService.showMax(stockId);
+                if (stockmarket.getStockId() != null) {
+                    userInteraction.maxPrice(stockmarket);
+                } else {
+                    userInteraction.noEntries();
+                }
             } else {
-                userInteraction.noEntries();
+                userInteraction.missingStock();
+                execute();
             }
+
+
         } catch (SQLException e) {
             System.out.println("SQLException");
             e.printStackTrace();

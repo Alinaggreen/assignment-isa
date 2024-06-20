@@ -4,7 +4,10 @@ import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
+
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,7 +26,6 @@ public class ShowCommando implements Commando {
 
     @Override
     public boolean execute() throws CommandoException {
-        userInteraction.startCommando();
         String searchId = userInteraction.knowCompany();
 
         if ("no".equalsIgnoreCase(searchId)) {
@@ -43,8 +45,14 @@ public class ShowCommando implements Commando {
 
         try {
             int stockId = userInteraction.readCompanyId();
-            List<Stockmarket> stockmarkets = stockmarketService.showStockmarket(stockId);
-            userInteraction.printPrice(stockmarkets);
+            boolean existStock = stockService.existStock(stockId);
+            if (existStock) {
+                List<Stockmarket> stockmarkets = stockmarketService.showStockmarket(stockId);
+                userInteraction.printPrice(stockmarkets);
+            } else {
+                userInteraction.missingStock();
+                execute();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

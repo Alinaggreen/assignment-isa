@@ -31,12 +31,25 @@ public class StockService {
         preparedStatement.execute();
     }
 
+    public boolean existStock (int stockId) throws SQLException {
+        String sql = "SELECT * FROM stock WHERE stock_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, stockId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //TODO: Exception
     public int searchStockId(String name) throws SQLException {
         String sqlId = "SELECT stock_id FROM stock WHERE stock_name = ?";
-        PreparedStatement preparedStatementId = connection.prepareStatement(sqlId);
-        preparedStatementId.setString(1, name);
-        ResultSet resultSet = preparedStatementId.executeQuery();
+        PreparedStatement preparedStatement = connection.prepareStatement(sqlId);
+        preparedStatement.setString(1, name);
+        ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
             return resultSet.getInt("stock_id");

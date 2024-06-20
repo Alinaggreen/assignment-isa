@@ -23,7 +23,6 @@ public class AddCommando implements Commando {
     //TODO: Exception
     @Override
     public boolean execute() throws CommandoException {
-        userInteraction.startCommando();
         String searchId = userInteraction.knowCompany();
 
         if ("no".equalsIgnoreCase(searchId)) {
@@ -44,10 +43,17 @@ public class AddCommando implements Commando {
         //TODO: Exception Stock with id not yet in database
         try {
             int stockId = userInteraction.readCompanyId();
-            BigDecimal priceParsed = userInteraction.readPrice();
-            LocalDate dateFormatted = userInteraction.readDate();
-            int addedRows = stockmarketService.addStockmarket(stockId, priceParsed, dateFormatted);
-            userInteraction.successUpdate(addedRows);
+            boolean existStock = stockService.existStock(stockId);
+            if (existStock) {
+                BigDecimal priceParsed = userInteraction.readPrice();
+                LocalDate dateFormatted = userInteraction.readDate();
+                int addedRows = stockmarketService.addStockmarket(stockId, priceParsed, dateFormatted);
+                userInteraction.successUpdate(addedRows);
+            } else {
+                userInteraction.missingStock();
+                execute();
+            }
+
         } catch (SQLException e) {
             System.out.println("SQLException");
             e.printStackTrace();

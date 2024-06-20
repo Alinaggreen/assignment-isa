@@ -6,6 +6,7 @@ import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 //TODO: Exception
@@ -23,7 +24,6 @@ public class GapCommando implements Commando {
 
     @Override
     public boolean execute() throws CommandoException {
-        userInteraction.startCommando();
         String searchId = userInteraction.knowCompany();
 
         if ("no".equalsIgnoreCase(searchId)) {
@@ -43,15 +43,23 @@ public class GapCommando implements Commando {
 
         try {
             int stockId = userInteraction.readCompanyId();
-            Stockmarket stockmarketMax = stockmarketService.showMax(stockId);
-            Stockmarket stockmarketMin = stockmarketService.showMin(stockId);
 
-            // TODO: max == min -> only 1 entry
-            // TODO : case no entry
-            BigDecimal gapPrice = stockmarketMax.getMarketPrice().subtract(stockmarketMin.getMarketPrice());
-            userInteraction.maxPrice(stockmarketMax);
-            userInteraction.minPrice(stockmarketMin);
-            userInteraction.gapPrice(gapPrice);
+            boolean existStock = stockService.existStock(stockId);
+            if (existStock) {
+                Stockmarket stockmarketMax = stockmarketService.showMax(stockId);
+                Stockmarket stockmarketMin = stockmarketService.showMin(stockId);
+
+                // TODO: max == min -> only 1 entry
+                // TODO : case no entry
+                BigDecimal gapPrice = stockmarketMax.getMarketPrice().subtract(stockmarketMin.getMarketPrice());
+                userInteraction.maxPrice(stockmarketMax);
+                userInteraction.minPrice(stockmarketMin);
+                userInteraction.gapPrice(gapPrice);
+            } else {
+                userInteraction.missingStock();
+                execute();
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
