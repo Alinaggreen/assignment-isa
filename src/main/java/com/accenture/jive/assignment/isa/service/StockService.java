@@ -91,11 +91,11 @@ public class StockService {
     }
 
     //TODO: Exception
-    public int updateStock (int stockId, int industryId) throws SQLException {
+    public void updateStock (int stockId, int industryId) throws SQLException {
         String sql = "UPDATE stock SET stock_industry_id = ? WHERE stock_id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, industryId);
         preparedStatement.setInt(2, stockId);
-        return preparedStatement.executeUpdate();
+        preparedStatement.execute();
     }
 }

@@ -40,7 +40,6 @@ public class UpdateCommando implements Commando {
 
         try {
             int stockId = userInteraction.readCompanyId();
-
             boolean existStock = stockService.existStock(stockId);
             if (existStock) {
                 String industry = stockService.showStockIndustry(stockId);
@@ -49,7 +48,7 @@ public class UpdateCommando implements Commando {
                 //TODO: user must know industry name
                 industry = userInteraction.readIndustry();
                 int industryId = industryService.searchIndustryId(industry);
-                int updatedRows = stockService.updateStock(stockId, industryId);
+                stockService.updateStock(stockId, industryId);
                 userInteraction.successfulCommando();
             } else {
                 userInteraction.missingStock();

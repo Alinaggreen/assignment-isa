@@ -47,7 +47,7 @@ public class AddCommando implements Commando {
             if (existStock) {
                 BigDecimal priceParsed = userInteraction.readPrice();
                 LocalDate dateFormatted = userInteraction.readDate();
-                int addedRows = stockmarketService.addStockmarket(stockId, priceParsed, dateFormatted);
+                stockmarketService.addStockmarket(stockId, priceParsed, dateFormatted);
                 userInteraction.successfulCommando();
             } else {
                 userInteraction.missingStock();

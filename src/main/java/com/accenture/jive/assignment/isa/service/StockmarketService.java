@@ -23,13 +23,13 @@ public class StockmarketService {
     }
 
     //TODO: Exception
-    public int addStockmarket(int stockId, BigDecimal priceParsed, LocalDate date) throws SQLException {
+    public void addStockmarket(int stockId, BigDecimal priceParsed, LocalDate date) throws SQLException {
         String sql = "INSERT INTO stockmarket VALUES (?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, stockId);
         preparedStatement.setBigDecimal(2, priceParsed);
         preparedStatement.setDate(3, Date.valueOf(date));
-        return preparedStatement.executeUpdate();
+        preparedStatement.execute();
     }
 
     //TODO: Exception
