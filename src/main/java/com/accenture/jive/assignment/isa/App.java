@@ -21,7 +21,7 @@ public class App {
         StockmarketService stockmarketService = new StockmarketService(connection);
         DateService dateService = new DateService();
         UserInteraction userInteraction = new UserInteraction(scanner, dateService, industryService);
-        CommandoFactory commandoFactory = new CommandoFactory(scanner, stockService, industryService, stockmarketService, dateService, userInteraction);
+        CommandoFactory commandoFactory = new CommandoFactory(stockService, industryService, stockmarketService, dateService, userInteraction);
         List<Commando> commandos = commandoFactory.createCommando();
 
         System.out.println("Hello there!");

@@ -12,15 +12,13 @@ import java.util.Scanner;
 
 public class CommandoFactory {
 
-    private final Scanner scanner;
     private final StockService stockService;
     private final IndustryService industryService;
     private final StockmarketService stockmarketService;
     private final DateService dateService;
     private final UserInteraction userInteraction;
 
-    public CommandoFactory (Scanner scanner, StockService stockService, IndustryService industryService, StockmarketService stockmarketService, DateService dateService, UserInteraction userInteraction) {
-        this.scanner = scanner;
+    public CommandoFactory (StockService stockService, IndustryService industryService, StockmarketService stockmarketService, DateService dateService, UserInteraction userInteraction) {
         this.stockService = stockService;
         this.industryService = industryService;
         this.stockmarketService = stockmarketService;
