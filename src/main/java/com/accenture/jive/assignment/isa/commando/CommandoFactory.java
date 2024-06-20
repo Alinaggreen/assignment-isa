@@ -32,14 +32,14 @@ public class CommandoFactory {
 
         List<Commando> commandos = new ArrayList<>();
         Commando importCommando = new ImportCommando(stockService, industryService, stockmarketService, dateService);
-        Commando deleteCommando = new DeleteCommando(scanner, stockService, industryService, stockmarketService);
+        Commando deleteCommando = new DeleteCommando(stockService, industryService, stockmarketService, userInteraction);
         Commando searchCommando = new SearchCommando(stockService, userInteraction);
         Commando addCommando = new AddCommando(stockService, stockmarketService, userInteraction);
         Commando showCommando = new ShowCommando(stockService, stockmarketService, userInteraction);
         Commando maxCommando = new MaxCommando(stockService, stockmarketService, userInteraction);
         Commando minCommando = new MinCommando(stockService, stockmarketService, userInteraction);
         Commando gapCommando = new GapCommando(stockService, stockmarketService, userInteraction);
-        Commando updateCommando = new UpdateCommando(scanner, stockService, industryService, userInteraction);
+        Commando updateCommando = new UpdateCommando(stockService, industryService, userInteraction);
         Commando listCommando = new ListCommando(industryService, userInteraction);
         Commando exportCommando = new ExportCommando(stockmarketService, dateService);
         Commando exitCommando = new ExitCommando(userInteraction);

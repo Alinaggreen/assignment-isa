@@ -5,7 +5,6 @@ import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 import com.accenture.jive.assignment.isa.service.DateService;
 import com.accenture.jive.assignment.isa.service.IndustryService;
-
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -30,6 +29,10 @@ public class UserInteraction {
 
     public void successUpdate (int addedRows) {
         System.out.println("You successfully updated " + addedRows + " entry.");
+    }
+
+    public void successDelete () {
+        System.out.println("You successfully deleted everything from the database!");
     }
 
     //TODO: return String
@@ -63,6 +66,11 @@ public class UserInteraction {
 
     public String knowCompany () {
         System.out.println("Do you know the id of the company?");
+        return scanner.nextLine();
+    }
+
+    public String shouldDelete() {
+        System.out.println("Are you sure you want to delete everything from the database?");
         return scanner.nextLine();
     }
 

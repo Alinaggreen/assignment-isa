@@ -4,32 +4,30 @@ import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class DeleteCommando implements Commando {
 
-    private final Scanner scanner;
     private final StockService stockService;
     private final IndustryService industryService;
     private final StockmarketService stockmarketService;
+    private final UserInteraction userInteraction;
 
-    public DeleteCommando(Scanner scanner, StockService stockService, IndustryService industryService, StockmarketService stockmarketService) {
-        this.scanner = scanner;
+    public DeleteCommando(StockService stockService, IndustryService industryService, StockmarketService stockmarketService, UserInteraction userInteraction) {
         this.stockService = stockService;
         this.industryService = industryService;
         this.stockmarketService = stockmarketService;
+        this.userInteraction = userInteraction;
     }
 
     @Override
     public boolean execute() {
-        System.out.println("Are you sure you want to delete everything from the database?");
-        String userCommando = scanner.nextLine();
+        String userCommando = userInteraction.shouldDelete();
         if ("yes".equalsIgnoreCase(userCommando)) {
             try {
                 stockmarketService.deleteStockmarket();
                 stockService.deleteStock();
                 industryService.deleteIndustry();
-                System.out.println("You successfully deleted everything from the database!");
+                userInteraction.successDelete();
             } catch (SQLException e) {
                 System.out.println("SQLException");
                 e.printStackTrace();
