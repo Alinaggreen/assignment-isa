@@ -39,6 +39,8 @@ public class ExportCommando implements Commando {
             }
 
             String filePath = userInteraction.readExportName();
+
+            //TODO: Exception FileNotFoundException
             try (CSVWriter writer = new CSVWriter(new FileWriter(filePath),
                     ';',
                     CSVWriter.NO_QUOTE_CHARACTER,

@@ -8,6 +8,7 @@ import com.accenture.jive.assignment.isa.service.IndustryService;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -43,21 +44,18 @@ public class UserInteraction {
         System.out.println("You successfully deleted everything from the database!");
     }
 
-    //TODO: Exception
     public String readImportName () {
         System.out.println("Please enter the file path of the csv file you want to import " +
                 "(for example C://dev1//isa//STOCK_DATA.csv):");
         return scanner.nextLine();
     }
 
-    //TODO: Exception
     public String readExportName () {
         System.out.println("Please enter the file path where you would like to save the created csv file " +
                 "(for example C://dev1//isa//STOCK_DATA_export.csv):");
         return scanner.nextLine();
     }
 
-    //TODO: Exception Stock with id not yet in database
     public int readCompanyId () {
         System.out.println("Please enter the company id:");
         String inputId = scanner.nextLine();
@@ -83,18 +81,21 @@ public class UserInteraction {
     }
 
     //TODO: Tell user, that year only has 2 digits, not 4.
-    //TODO: Exception
     public LocalDate readDate () {
         System.out.println("Please enter the date in dd.mm.yy Format:");
         String date = scanner.nextLine();
-        return dateService.importDate(date);
+        try {
+            return dateService.importDate(date);
+        } catch (DateTimeParseException cause) {
+            System.out.println("Please enter a date!");
+            readDate();
+        }
+        return null;
     }
 
-    //TODO: Exception
-    public int readIndustry () throws SQLException {
+    public String readIndustry () throws SQLException {
         System.out.println("Which industry should the company be assigned to instead?");
-        String industry = scanner.nextLine();
-        return industryService.searchIndustryId(industry);
+        return scanner.nextLine();
     }
 
     public String knowCompany () {
@@ -112,7 +113,6 @@ public class UserInteraction {
         return scanner.nextLine();
     }
 
-    //TODO: Exception
     public void printCompany (List<Stock> stocks, String userCommando) {
         if (stocks.isEmpty()) {
             System.out.println("There is currently no company starting with " + userCommando + " in the database.");
@@ -124,12 +124,15 @@ public class UserInteraction {
         }
     }
 
-    //TODO: Exception
     public void printIndustry (List<Industry> industries) {
-        System.out.println("These are all the industries with the number of stocks assigned:");
-        for (Industry industry : industries) {
-            System.out.println("ID: " + industry.getId() + " - " + industry.getName()
-                    + " - currently " + industry.getStockCount() + " stocks assigned");
+        if (industries.isEmpty()) {
+            System.out.println("There are currently no industries in the database.");
+        } else {
+            System.out.println("These are all the industries with the number of stocks assigned:");
+            for (Industry industry : industries) {
+                System.out.println("ID: " + industry.getId() + " - " + industry.getName()
+                        + " - currently " + industry.getStockCount() + " stocks assigned");
+            }
         }
     }
 
@@ -137,32 +140,31 @@ public class UserInteraction {
         System.out.println("The company is currently assigned to the following industry: " + industry);
     }
 
-    //TODO: Exception
     public void printPrice (List<Stockmarket> stockmarkets) {
-        System.out.println("These are the last ten prices for your desired company:");
-        for (Stockmarket stockmarket : stockmarkets) {
-            System.out.println(stockmarket.getMarketPrice() + " € on " + stockmarket.getMarketDate());
+        if (stockmarkets.isEmpty()) {
+            System.out.println("There are currently no stockmarket entries for your desired stock.");
+        } else {
+            System.out.println("These are the last ten prices for your desired company:");
+            for (Stockmarket stockmarket : stockmarkets) {
+                System.out.println(stockmarket.getMarketPrice() + " € on " + stockmarket.getMarketDate());
+            }
         }
     }
 
     public boolean foundCompany () {
         System.out.println("Did you find the desired company id?");
         String foundCompany = scanner.nextLine();
-        if ("yes".equalsIgnoreCase(foundCompany)) {
-            return false;
-        } else {
-            return true;
-        }
+        return !"yes".equalsIgnoreCase(foundCompany);
     }
 
-    //TODO: Date Format in dd.mm.yyyy
     public void maxPrice (Stockmarket stockmarket) {
-        System.out.println("The highest price was " + stockmarket.getMarketPrice() + "€ on " + stockmarket.getMarketDate() + ".");
+        System.out.println("The highest price was " + stockmarket.getMarketPrice() + "€ on "
+                + stockmarket.getMarketDate() + ".");
     }
 
-    //TODO: Date Format in dd.mm.yyyy
     public void minPrice (Stockmarket stockmarket) {
-        System.out.println("The lowest price was " + stockmarket.getMarketPrice() + "€ on " + stockmarket.getMarketDate() + ".");
+        System.out.println("The lowest price was " + stockmarket.getMarketPrice() + "€ on "
+                + stockmarket.getMarketDate() + ".");
     }
 
     public void gapPrice (BigDecimal gapPrice) {
@@ -171,6 +173,10 @@ public class UserInteraction {
 
     public void noEntries () {
         System.out.println("There are currently no stock market entries for this company.");
+    }
+
+    public void failedCommando () {
+        System.out.println("The requested command could not be executed. Please try again.");
     }
 
     public void goodbye() {

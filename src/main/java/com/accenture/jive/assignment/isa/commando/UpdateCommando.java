@@ -1,6 +1,7 @@
 package com.accenture.jive.assignment.isa.commando;
 
 import com.accenture.jive.assignment.isa.persistence.Stock;
+import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
 import java.sql.SQLException;
 import java.util.List;
@@ -9,10 +10,12 @@ import java.util.List;
 public class UpdateCommando implements Commando {
 
     private final StockService stockService;
+    private final IndustryService industryService;
     private final UserInteraction userInteraction;
 
-    public UpdateCommando(StockService stockService, UserInteraction userInteraction) {
+    public UpdateCommando(StockService stockService, IndustryService industryService, UserInteraction userInteraction) {
         this.stockService = stockService;
+        this.industryService = industryService;
         this.userInteraction = userInteraction;
     }
 
@@ -42,11 +45,13 @@ public class UpdateCommando implements Commando {
             userInteraction.showIndustry(industry);
 
             //TODO: user must know industry name
-            int industryId = userInteraction.readIndustry();
+            industry = userInteraction.readIndustry();
+            int industryId = industryService.searchIndustryId(industry);
             int updatedRows = stockService.updateStock(stockId, industryId);
             userInteraction.successUpdate(updatedRows);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("SQLException");
+            //e.printStackTrace();
         }
 
         return true;

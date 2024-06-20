@@ -41,6 +41,7 @@ public class AddCommando implements Commando {
             }
         }
 
+        //TODO: Exception Stock with id not yet in database
         try {
             int stockId = userInteraction.readCompanyId();
             BigDecimal priceParsed = userInteraction.readPrice();
@@ -48,7 +49,8 @@ public class AddCommando implements Commando {
             int addedRows = stockmarketService.addStockmarket(stockId, priceParsed, dateFormatted);
             userInteraction.successUpdate(addedRows);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("SQLException");
+            e.printStackTrace();
         }
         return true;
     }

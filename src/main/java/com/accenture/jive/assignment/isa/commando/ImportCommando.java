@@ -33,6 +33,7 @@ public class ImportCommando implements Commando{
     public boolean execute() throws CommandoException {
         String filePath = userInteraction.readImportName();
 
+        //TODO: Exception FileNotFoundException
         try (Scanner scanner = new Scanner(new File(filePath))) {
             scanner.useDelimiter(";");
             scanner.nextLine();

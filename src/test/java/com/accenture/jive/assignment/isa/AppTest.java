@@ -18,7 +18,7 @@ public class AppTest
     public static void main (String[] args) {
 
         String s = "abc";
-        BigDecimal price = new BigDecimal(s);
+        LocalDate d = LocalDate.parse(s, DateTimeFormatter.ofPattern("dd.MM.yy"));
 
 
 }
