@@ -1,9 +1,8 @@
 package com.accenture.jive.assignment.isa.commando;
 
-//TODO: Exception
 public interface Commando {
 
-    boolean execute() throws CommandoException;;
+    boolean execute() throws CommandoException;
 
     boolean shouldExecute(String line);
 

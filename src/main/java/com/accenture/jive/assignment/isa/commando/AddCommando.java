@@ -30,7 +30,7 @@ public class AddCommando implements Commando {
                 do {
                     String userCommando = userInteraction.readSearchCompany();
                     List<Stock> stocks = stockService.searchStockIdPlaceholder(userCommando);
-                    userInteraction.printCompany(stocks, userCommando);
+                    userInteraction.printCompanyPlaceholder(stocks, userCommando);
                     shouldRun = userInteraction.foundCompany();
                 } while(shouldRun);
             } catch (SQLException e) {

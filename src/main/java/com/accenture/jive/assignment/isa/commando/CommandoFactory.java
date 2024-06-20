@@ -3,11 +3,9 @@ package com.accenture.jive.assignment.isa.commando;
 import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
-
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: Exception
 public class CommandoFactory {
 
     private final StockService stockService;

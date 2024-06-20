@@ -7,7 +7,6 @@ import java.util.Properties;
 
 public class Connector {
 
-    //TODO: Exception
     public Connection getConnection() throws SQLException {
         Connection conn = null;
         Properties connectionProps = new Properties();

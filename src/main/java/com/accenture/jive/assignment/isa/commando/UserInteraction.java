@@ -135,8 +135,7 @@ public class UserInteraction {
         return scanner.nextLine();
     }
 
-    //TODO: rename printCompanyPlaceholder
-    public void printCompany (List<Stock> stocks, String userCommando) {
+    public void printCompanyPlaceholder (List<Stock> stocks, String userCommando) {
         if (stocks.isEmpty()) {
             System.out.println("There is currently no company starting with " + userCommando + " in the database.");
         } else {
@@ -185,7 +184,6 @@ public class UserInteraction {
         }
     }
 
-    //TODO: Boolean okay oder String ausgeben?
     public boolean foundCompany () {
         System.out.println("Did you find the desired company id?");
         String foundCompany = scanner.nextLine();
