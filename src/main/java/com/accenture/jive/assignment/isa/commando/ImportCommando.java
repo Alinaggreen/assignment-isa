@@ -31,7 +31,6 @@ public class ImportCommando implements Commando{
     public boolean execute() throws CommandoException {
         String filePath = userInteraction.readImportName();
 
-        //TODO: Exception FileNotFoundException
         try (Scanner scanner = new Scanner(new File(filePath))) {
             scanner.useDelimiter(";");
             scanner.nextLine();
@@ -58,8 +57,7 @@ public class ImportCommando implements Commando{
             }
             userInteraction.successfulCommando();
         } catch (FileNotFoundException e) {
-            //TODO: print exception caught
-            throw new RuntimeException(e);
+            userInteraction.failedCommandoFile();
         } catch (SQLException e) {
             userInteraction.failedCommandoSQL();
             e.printStackTrace();

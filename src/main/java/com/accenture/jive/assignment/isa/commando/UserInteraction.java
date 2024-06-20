@@ -43,19 +43,29 @@ public class UserInteraction {
                 "Please try again.");
     }
 
+    public void failedCommandoIO () {
+        System.out.println("The requested commando could not be executed due to issues with the output operation. " +
+                "Please try again.");
+    }
+
+    public void failedCommandoFile () {
+        System.out.println("The requested commando could not be executed because the file could not be found. " +
+                "Please try again.");
+    }
+
     public void missingStock () {
         System.out.println("There is no stock with this Id in the database. Please try again.");
     }
 
     public String readImportName () {
         System.out.println("Please enter the file path of the csv file you want to import " +
-                "(for example C://dev1//isa//STOCK_DATA.csv):");
+                "(for example STOCK_DATA.csv):");
         return scanner.nextLine();
     }
 
     public String readExportName () {
         System.out.println("Please enter the file path where you would like to save the created csv file " +
-                "(for example C://dev1//isa//STOCK_DATA_export.csv):");
+                "(for example STOCK_DATA_export.csv):");
         return scanner.nextLine();
     }
 
