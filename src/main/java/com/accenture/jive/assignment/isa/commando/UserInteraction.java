@@ -75,4 +75,7 @@ public class UserInteraction {
         }
     }
 
+    public void goodbye() {
+        System.out.println("Thanks and Goodbye!");
+    }
 }

@@ -2,9 +2,15 @@ package com.accenture.jive.assignment.isa.commando;
 
 public class ExitCommando implements Commando {
 
+    private final UserInteraction userInteraction;
+
+    public ExitCommando(UserInteraction userInteraction) {
+        this.userInteraction = userInteraction;
+    }
+
     @Override
     public boolean execute() {
-        System.out.println("Thanks and Goodbye!");
+        userInteraction.goodbye();
         return false;
     }
 

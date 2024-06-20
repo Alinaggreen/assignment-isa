@@ -42,7 +42,7 @@ public class CommandoFactory {
         Commando updateCommando = new UpdateCommando(scanner, stockService, industryService, userInteraction);
         Commando listCommando = new ListCommando(industryService);
         Commando exportCommando = new ExportCommando(stockmarketService, dateService);
-        Commando exitCommando = new ExitCommando();
+        Commando exitCommando = new ExitCommando(userInteraction);
 
         commandos.add(importCommando);
         commandos.add(deleteCommando);
