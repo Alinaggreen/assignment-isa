@@ -5,7 +5,6 @@ import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
 import java.sql.SQLException;
 
-//TODO: Exception
 public class DeleteCommando implements Commando {
 
     private final StockService stockService;
@@ -13,7 +12,8 @@ public class DeleteCommando implements Commando {
     private final StockmarketService stockmarketService;
     private final UserInteraction userInteraction;
 
-    public DeleteCommando(StockService stockService, IndustryService industryService, StockmarketService stockmarketService, UserInteraction userInteraction) {
+    public DeleteCommando(StockService stockService, IndustryService industryService,
+                          StockmarketService stockmarketService, UserInteraction userInteraction) {
         this.stockService = stockService;
         this.industryService = industryService;
         this.stockmarketService = stockmarketService;

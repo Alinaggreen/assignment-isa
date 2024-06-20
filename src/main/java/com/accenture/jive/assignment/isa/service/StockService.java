@@ -36,12 +36,7 @@ public class StockService {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, stockId);
         ResultSet resultSet = preparedStatement.executeQuery();
-
-        if (resultSet.next()) {
-            return true;
-        } else {
-            return false;
-        }
+        return resultSet.next();
     }
 
     //TODO: Exception

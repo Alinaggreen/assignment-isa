@@ -4,21 +4,17 @@ import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
-
-import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Scanner;
 
-//TODO: Exception
 public class ShowCommando implements Commando {
 
     private final StockService stockService;
     private final StockmarketService stockmarketService;
     private final UserInteraction userInteraction;
 
-    public ShowCommando(StockService stockService, StockmarketService stockmarketService, UserInteraction userInteraction) {
+    public ShowCommando(StockService stockService, StockmarketService stockmarketService,
+                        UserInteraction userInteraction) {
         this.stockService = stockService;
         this.stockmarketService = stockmarketService;
         this.userInteraction = userInteraction;
@@ -27,7 +23,6 @@ public class ShowCommando implements Commando {
     @Override
     public boolean execute() throws CommandoException {
         String searchId = userInteraction.knowCompany();
-
         if ("no".equalsIgnoreCase(searchId)) {
             try {
                 boolean shouldRun;
@@ -50,7 +45,6 @@ public class ShowCommando implements Commando {
                 userInteraction.printPrice(stockmarkets);
             } else {
                 userInteraction.missingStock();
-                execute();
             }
         } catch (SQLException e) {
             throw new CommandoException(userInteraction.failedCommandoSQL(), e);

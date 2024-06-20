@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: Exception
 public class ExportCommando implements Commando {
 
     private final StockmarketService stockmarketService;
@@ -37,17 +36,14 @@ public class ExportCommando implements Commando {
             }
 
             String filePath = userInteraction.readExportName();
-            try (CSVWriter writer = new CSVWriter(new FileWriter(filePath),
-                    ';',
-                    CSVWriter.NO_QUOTE_CHARACTER,
-                    CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-                    CSVWriter.RFC4180_LINE_END)) {
+            try (CSVWriter writer = new CSVWriter(new FileWriter(filePath), ';',
+                    CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.RFC4180_LINE_END)) {
 
                 writer.writeAll(csvData);
-                userInteraction.successfulCommando();
             } catch (IOException e) {
                 throw new CommandoException(userInteraction.failedCommandoIO(), e);
             }
+            userInteraction.successfulCommando();
         } catch (SQLException e) {
             throw new CommandoException(userInteraction.failedCommandoSQL(), e);
         }

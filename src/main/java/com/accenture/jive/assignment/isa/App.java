@@ -12,15 +12,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-
-    //TODO: Exception
     public void run(Connection connection) throws CommandoException {
+        //TODO: extract method
         Scanner scanner = new Scanner(System.in);
         StockService stockService = new StockService(connection);
         IndustryService industryService = new IndustryService(connection);
         StockmarketService stockmarketService = new StockmarketService(connection);
         UserInteraction userInteraction = new UserInteraction(scanner);
-        CommandoFactory commandoFactory = new CommandoFactory(stockService, industryService, stockmarketService, userInteraction);
+        CommandoFactory commandoFactory = new CommandoFactory(stockService, industryService,
+                stockmarketService, userInteraction);
         List<Commando> commandos = commandoFactory.createCommando();
 
         System.out.println("Hello there!");
@@ -42,7 +42,6 @@ public class App {
         }
     }
 
-    //TODO: Exception
     public static void main(String[] args) {
         Connector connector = new Connector();
         try (Connection connection = connector.getConnection()) {

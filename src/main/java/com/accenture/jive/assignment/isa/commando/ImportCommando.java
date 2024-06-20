@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-//TODO: Exception
 public class ImportCommando implements Commando{
 
     private final StockService stockService;
@@ -30,7 +29,6 @@ public class ImportCommando implements Commando{
     @Override
     public boolean execute() throws CommandoException {
         String filePath = userInteraction.readImportName();
-
         try (Scanner scanner = new Scanner(new File(filePath))) {
             scanner.useDelimiter(";");
             scanner.nextLine();
@@ -40,19 +38,17 @@ public class ImportCommando implements Commando{
 
                 String price = fields[1].replace(",", ".").substring(1);
                 BigDecimal priceParsed = new BigDecimal(price);
-
                 LocalDate date = LocalDate.parse(fields[2], DateTimeFormatter.ofPattern("dd.MM.yy"));
-
                 String name = fields[0];
                 String industry = fields[3];
                 if ("n/a".equals(industry)) {
                     industry = "Unknown";
                 }
+
                 industryService.addIndustry(industry);
                 int industryId = industryService.searchIndustryId(industry);
                 stockService.addStock(name, industryId);
                 int stockId = stockService.searchStockId(name);
-
                 stockmarketService.addStockmarket(stockId, priceParsed, date);
             }
             userInteraction.successfulCommando();

@@ -1,6 +1,5 @@
 package com.accenture.jive.assignment.isa.commando;
 
-//TODO: Exception
 public class ExitCommando implements Commando {
 
     private final UserInteraction userInteraction;

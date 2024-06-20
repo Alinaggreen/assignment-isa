@@ -8,14 +8,14 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
-//TODO: Exception
 public class GapCommando implements Commando {
 
     private final StockService stockService;
     private final StockmarketService stockmarketService;
     private final UserInteraction userInteraction;
 
-    public GapCommando(StockService stockService, StockmarketService stockmarketService, UserInteraction userInteraction) {
+    public GapCommando(StockService stockService, StockmarketService stockmarketService,
+                       UserInteraction userInteraction) {
         this.stockService = stockService;
         this.stockmarketService = stockmarketService;
         this.userInteraction = userInteraction;
@@ -24,7 +24,6 @@ public class GapCommando implements Commando {
     @Override
     public boolean execute() throws CommandoException {
         String searchId = userInteraction.knowCompany();
-
         if ("no".equalsIgnoreCase(searchId)) {
             try {
                 boolean shouldRun;
@@ -41,7 +40,6 @@ public class GapCommando implements Commando {
 
         try {
             int stockId = userInteraction.readCompanyId();
-
             boolean existStock = stockService.existStock(stockId);
             if (existStock) {
                 Stockmarket stockmarketMax = stockmarketService.showMax(stockId);
@@ -55,9 +53,7 @@ public class GapCommando implements Commando {
                 userInteraction.gapPrice(gapPrice);
             } else {
                 userInteraction.missingStock();
-                execute();
             }
-
         } catch (SQLException e) {
             throw new CommandoException(userInteraction.failedCommandoSQL(), e);
         }

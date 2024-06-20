@@ -14,17 +14,16 @@ public class AddCommando implements Commando {
     private final StockmarketService stockmarketService;
     private final UserInteraction userInteraction;
 
-    public AddCommando(StockService stockService, StockmarketService stockmarketService, UserInteraction userInteraction) {
+    public AddCommando(StockService stockService, StockmarketService stockmarketService,
+                       UserInteraction userInteraction) {
         this.stockService = stockService;
         this.stockmarketService = stockmarketService;
         this.userInteraction = userInteraction;
     }
 
-    //TODO: Exception
     @Override
     public boolean execute() throws CommandoException {
         String searchId = userInteraction.knowCompany();
-
         if ("no".equalsIgnoreCase(searchId)) {
             try {
                 boolean shouldRun;
@@ -39,7 +38,6 @@ public class AddCommando implements Commando {
             }
         }
 
-        //TODO: Exception Stock with id not yet in database
         try {
             int stockId = userInteraction.readCompanyId();
             boolean existStock = stockService.existStock(stockId);
@@ -50,7 +48,6 @@ public class AddCommando implements Commando {
                 userInteraction.successfulCommando();
             } else {
                 userInteraction.missingStock();
-                execute();
             }
         } catch (SQLException e) {
             throw new CommandoException(userInteraction.failedCommandoSQL(), e);

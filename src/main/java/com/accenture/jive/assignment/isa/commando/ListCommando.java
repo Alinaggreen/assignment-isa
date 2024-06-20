@@ -5,7 +5,6 @@ import com.accenture.jive.assignment.isa.service.IndustryService;
 import java.sql.SQLException;
 import java.util.List;
 
-//TODO: Exception
 public class ListCommando implements Commando {
 
     private final IndustryService industryService;
@@ -18,7 +17,6 @@ public class ListCommando implements Commando {
 
     @Override
     public boolean execute() throws CommandoException {
-
         try {
             List<Industry> industries = industryService.listIndustry();
             userInteraction.printIndustry(industries);

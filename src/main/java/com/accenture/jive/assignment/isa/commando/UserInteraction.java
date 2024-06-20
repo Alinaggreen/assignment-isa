@@ -126,7 +126,7 @@ public class UserInteraction {
     }
 
     public String readSearchCompany () {
-        System.out.println("What company id do you want to search for? Please enter the first characters:");
+        System.out.println("What company do you want to search for? Please enter the first characters:");
         return scanner.nextLine();
     }
 
@@ -225,6 +225,6 @@ public class UserInteraction {
     }
 
     public void goodbye() {
-        System.out.println("Thanks and Goodbye!");
+        System.out.println("Thank you very much and Goodbye!");
     }
 }
