@@ -48,11 +48,7 @@ public class MinCommando implements Commando {
             boolean existStock = stockService.existStock(stockId);
             if (existStock) {
                 Stockmarket stockmarket = stockmarketService.showMin(stockId);
-                if (stockmarket.getStockId() != null) {
-                    userInteraction.minPrice(stockmarket);
-                } else {
-                    userInteraction.noEntries();
-                }
+                userInteraction.minPrice(stockmarket);
             } else {
                 userInteraction.missingStock();
                 execute();

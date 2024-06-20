@@ -189,13 +189,21 @@ public class UserInteraction {
     }
 
     public void maxPrice (Stockmarket stockmarket) {
-        System.out.println("The highest price was " + stockmarket.getMarketPrice() + "€ on "
-                + stockmarket.getMarketDate() + ".");
+        if (stockmarket.getStockId() != null) {
+            System.out.println("The highest price was " + stockmarket.getMarketPrice() + "€ on "
+                    + stockmarket.getMarketDate() + ".");
+        } else {
+            noEntries();
+        }
     }
 
     public void minPrice (Stockmarket stockmarket) {
-        System.out.println("The lowest price was " + stockmarket.getMarketPrice() + "€ on "
-                + stockmarket.getMarketDate() + ".");
+        if (stockmarket.getStockId() != null) {
+            System.out.println("The lowest price was " + stockmarket.getMarketPrice() + "€ on "
+                    + stockmarket.getMarketDate() + ".");
+        } else {
+            noEntries();
+        }
     }
 
     public void gapPrice (BigDecimal gapPrice) {

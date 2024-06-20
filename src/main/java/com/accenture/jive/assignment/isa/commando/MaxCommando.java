@@ -47,11 +47,7 @@ public class MaxCommando implements Commando {
             boolean existStock = stockService.existStock(stockId);
             if (existStock) {
                 Stockmarket stockmarket = stockmarketService.showMax(stockId);
-                if (stockmarket.getStockId() != null) {
-                    userInteraction.maxPrice(stockmarket);
-                } else {
-                    userInteraction.noEntries();
-                }
+                userInteraction.maxPrice(stockmarket);
             } else {
                 userInteraction.missingStock();
                 execute();
