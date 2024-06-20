@@ -29,6 +29,7 @@ public class ImportCommando implements Commando{
     @Override
     public boolean execute() throws CommandoException {
 
+        //TODO: User types in fileName
         //String filePath = "C://dev1//isa//STOCK_DATA.csv";
         String filePath = "C://dev1//isa//test.csv";
 

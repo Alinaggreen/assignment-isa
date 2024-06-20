@@ -8,9 +8,11 @@ import java.util.List;
 public class ListCommando implements Commando {
 
     private final IndustryService industryService;
+    private final UserInteraction userInteraction;
 
-    public ListCommando(IndustryService industryService) {
+    public ListCommando(IndustryService industryService, UserInteraction userInteraction) {
         this.industryService = industryService;
+        this.userInteraction = userInteraction;
     }
 
     @Override
@@ -18,11 +20,7 @@ public class ListCommando implements Commando {
 
         try {
             List<Industry> industries = industryService.listIndustry();
-
-            for (Industry industry : industries) {
-                System.out.println("ID: " + industry.getId() + " - " + industry.getName()
-                        + " - currently " + industry.getStockCount() + " stocks assigned");
-            }
+            userInteraction.printIndustry(industries);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

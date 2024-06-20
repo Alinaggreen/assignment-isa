@@ -37,7 +37,7 @@ public class ExportCommando implements Commando {
                 csvData.add(record);
             }
 
-            //TODO: User types in fileName.
+            //TODO: User types in fileName
             try (CSVWriter writer = new CSVWriter(new FileWriter("C://dev1//isa//STOCK_DATA_export.csv"),
                     ';',
                     CSVWriter.NO_QUOTE_CHARACTER,

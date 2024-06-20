@@ -48,7 +48,7 @@ public class MinCommando implements Commando {
                 BigDecimal minPrice = stockmarket.getMarketPrice();
                 userInteraction.minPrice(minPrice);
             } else {
-                System.out.println("There are currently no stock market entries for this company.");
+                userInteraction.noEntries();
             }
         } catch (SQLException e) {
             System.out.println("SQLException");
@@ -62,5 +62,4 @@ public class MinCommando implements Commando {
     public boolean shouldExecute(String line) {
         return "min".equalsIgnoreCase(line);
     }
-
 }
