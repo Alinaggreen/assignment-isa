@@ -27,7 +27,7 @@ public class App {
 
         boolean shouldRun = true;
         while (shouldRun) {
-            System.out.println("What do you want to do?");
+            System.out.println("What do you want to do? Type 'help' for a list of all Commandos.");
             String userCommando = scanner.nextLine();
 
             for (Commando commando : commandos) {

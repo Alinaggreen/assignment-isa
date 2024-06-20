@@ -3,10 +3,7 @@ package com.accenture.jive.assignment.isa.commando;
 import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
-
-import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 //TODO: Exception

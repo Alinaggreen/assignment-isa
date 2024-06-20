@@ -26,6 +26,7 @@ public class CommandoFactory {
     public List<Commando> createCommando() {
 
         List<Commando> commandos = new ArrayList<>();
+        Commando helpCommando = new HelpCommando(userInteraction);
         Commando importCommando = new ImportCommando(stockService, industryService, stockmarketService, userInteraction);
         Commando deleteCommando = new DeleteCommando(stockService, industryService, stockmarketService, userInteraction);
         Commando searchCommando = new SearchCommando(stockService, userInteraction);
@@ -39,6 +40,7 @@ public class CommandoFactory {
         Commando exportCommando = new ExportCommando(stockmarketService, userInteraction);
         Commando exitCommando = new ExitCommando(userInteraction);
 
+        commandos.add(helpCommando);
         commandos.add(importCommando);
         commandos.add(deleteCommando);
         commandos.add(searchCommando);

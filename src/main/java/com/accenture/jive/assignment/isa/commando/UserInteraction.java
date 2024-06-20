@@ -19,6 +19,21 @@ public class UserInteraction {
         this.scanner = scanner;
     }
 
+    public void listCommandos () {
+        System.out.println("The following commands can be executed:");
+        System.out.println("import - imports a csv file to the database");
+        System.out.println("delete - deletes all data from the database");
+        System.out.println("search - searches the id of a stock by typing the first characters of the company name");
+        System.out.println("show - shows the the last ten prices for a specific stock");
+        System.out.println("add - adds a new price for a specific stock and date");
+        System.out.println("max - shows the highest price ever had for a stock when");
+        System.out.println("min - shows the lowest price ever had for a stock and when");
+        System.out.println("gap - shows the difference between highest and lowest price ever had for a stock");
+        System.out.println("update - updates a stock's industry");
+        System.out.println("list - lists all industries with Id and number of stocks assigned");
+        System.out.println("export - exports all data to a csv file");
+    }
+
     public void successImport () {
         System.out.println("You successfully imported the data to the database!");
     }
