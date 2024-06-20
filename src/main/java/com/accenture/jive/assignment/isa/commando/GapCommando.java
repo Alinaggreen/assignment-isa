@@ -4,21 +4,17 @@ import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
-
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Scanner;
 
 public class GapCommando implements Commando {
 
-    private final Scanner scanner;
     private final StockService stockService;
     private final StockmarketService stockmarketService;
     private final UserInteraction userInteraction;
 
-    public GapCommando(Scanner scanner, StockService stockService, StockmarketService stockmarketService, UserInteraction userInteraction) {
-        this.scanner = scanner;
+    public GapCommando(StockService stockService, StockmarketService stockmarketService, UserInteraction userInteraction) {
         this.stockService = stockService;
         this.stockmarketService = stockmarketService;
         this.userInteraction = userInteraction;
@@ -47,14 +43,16 @@ public class GapCommando implements Commando {
         try {
             int stockId = userInteraction.readCompanyId();
             Stockmarket stockmarketMax = stockmarketService.showMax(stockId);
-            BigDecimal priceMax = stockmarketMax.getMarketPrice();
+            BigDecimal maxPrice = stockmarketMax.getMarketPrice();
             Stockmarket stockmarketMin = stockmarketService.showMin(stockId);
-            BigDecimal priceMin = stockmarketMin.getMarketPrice();
+            BigDecimal minPrice = stockmarketMin.getMarketPrice();
 
             // TODO: max == min -> only 1 entry
-            BigDecimal gap = priceMax.subtract(priceMin);
-            System.out.println("The highest price was " + priceMax + "€ - the lowest price was " + priceMin + "€.");
-            System.out.println("The difference between highest and lowest price there is " + gap + "€.");
+            // TODO : case no entry
+            BigDecimal gapPrice = maxPrice.subtract(minPrice);
+            userInteraction.maxPrice(maxPrice);
+            userInteraction.minPrice(minPrice);
+            userInteraction.gapPrice(gapPrice);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

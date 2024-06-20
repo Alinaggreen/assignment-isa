@@ -83,6 +83,10 @@ public class UserInteraction {
         System.out.println("The lowest price was " + minPrice + "€.");
     }
 
+    public void gapPrice (BigDecimal gapPrice) {
+        System.out.println("The difference between highest and lowest price is " + gapPrice + "€.");
+    }
+
     public void noEntries () {
         System.out.println("There are currently no stock market entries for this company.");
     }
