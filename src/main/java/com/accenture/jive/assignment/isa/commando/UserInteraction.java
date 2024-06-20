@@ -2,6 +2,7 @@ package com.accenture.jive.assignment.isa.commando;
 
 import com.accenture.jive.assignment.isa.persistence.Industry;
 import com.accenture.jive.assignment.isa.persistence.Stock;
+import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 import com.accenture.jive.assignment.isa.service.DateService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -67,9 +68,17 @@ public class UserInteraction {
     }
 
     public void printIndustry (List<Industry> industries) {
+        System.out.println("These are all the industries with the number of stocks assigned:");
         for (Industry industry : industries) {
             System.out.println("ID: " + industry.getId() + " - " + industry.getName()
                     + " - currently " + industry.getStockCount() + " stocks assigned");
+        }
+    }
+
+    public void printPrice (List<Stockmarket> stockmarkets) {
+        System.out.println("These are the last ten prices for your desired company:");
+        for (Stockmarket stockmarket : stockmarkets) {
+            System.out.println(stockmarket.getMarketPrice() + " € on " + stockmarket.getMarketDate());
         }
     }
 

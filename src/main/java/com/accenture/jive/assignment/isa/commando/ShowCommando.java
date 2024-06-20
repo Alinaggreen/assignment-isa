@@ -10,13 +10,11 @@ import java.util.Scanner;
 
 public class ShowCommando implements Commando {
 
-    private final Scanner scanner;
     private final StockService stockService;
     private final StockmarketService stockmarketService;
     private final UserInteraction userInteraction;
 
-    public ShowCommando(Scanner scanner, StockService stockService, StockmarketService stockmarketService, UserInteraction userInteraction) {
-        this.scanner = scanner;
+    public ShowCommando(StockService stockService, StockmarketService stockmarketService, UserInteraction userInteraction) {
         this.stockService = stockService;
         this.stockmarketService = stockmarketService;
         this.userInteraction = userInteraction;
@@ -24,10 +22,8 @@ public class ShowCommando implements Commando {
 
     @Override
     public boolean execute() throws CommandoException {
-        System.out.println("Please enter the company id you want to see the last ten prices of.");
-
-        System.out.println("Do you know the company id you want to see?");
-        String searchId = scanner.nextLine();
+        userInteraction.startCommando();
+        String searchId = userInteraction.knowCompany();
 
         if ("no".equalsIgnoreCase(searchId)) {
             try {
@@ -44,16 +40,10 @@ public class ShowCommando implements Commando {
             }
         }
 
-        System.out.println("Please enter the company id:");
-        String id = scanner.nextLine();
-        int stockId = Integer.parseInt(id);
-
         try {
+            int stockId = userInteraction.readCompanyId();
             List<Stockmarket> stockmarkets = stockmarketService.showStockmarket(stockId);
-            System.out.println("These are the last ten prices for your desired company:");
-            for (Stockmarket stockmarket : stockmarkets) {
-                System.out.println(stockmarket.getMarketPrice() + " € on " + stockmarket.getMarketDate());
-            }
+            userInteraction.printPrice(stockmarkets);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
