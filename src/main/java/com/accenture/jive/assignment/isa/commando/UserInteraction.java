@@ -3,11 +3,10 @@ package com.accenture.jive.assignment.isa.commando;
 import com.accenture.jive.assignment.isa.persistence.Industry;
 import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
-import com.accenture.jive.assignment.isa.service.DateService;
-import com.accenture.jive.assignment.isa.service.IndustryService;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
@@ -15,17 +14,17 @@ import java.util.Scanner;
 public class UserInteraction {
 
     private final Scanner scanner;
-    private final DateService dateService;
-    private final IndustryService industryService;
 
-    public UserInteraction(Scanner scanner, DateService dateService, IndustryService industryService) {
+    public UserInteraction(Scanner scanner) {
         this.scanner = scanner;
-        this.dateService = dateService;
-        this.industryService = industryService;
     }
 
     public void startCommando () {
         System.out.println("Please enter the relevant data:");
+    }
+
+    public void succes() {
+        System.out.println("You successfully " + "the database!");
     }
 
     public void successImport () {
@@ -80,12 +79,11 @@ public class UserInteraction {
         return null;
     }
 
-    //TODO: Tell user, that year only has 2 digits, not 4.
     public LocalDate readDate () {
-        System.out.println("Please enter the date in dd.mm.yy Format:");
+        System.out.println("Please enter the date in dd.mm.yy Format (for example 01.01.01 for 01.01.2001):");
         String date = scanner.nextLine();
         try {
-            return dateService.importDate(date);
+            return LocalDate.parse(date, DateTimeFormatter.ofPattern("dd.MM.yy"));
         } catch (DateTimeParseException cause) {
             System.out.println("Please enter a date!");
             readDate();
@@ -151,6 +149,7 @@ public class UserInteraction {
         }
     }
 
+    //TODO: Boolean okay oder String ausgeben?
     public boolean foundCompany () {
         System.out.println("Did you find the desired company id?");
         String foundCompany = scanner.nextLine();

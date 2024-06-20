@@ -1,12 +1,12 @@
 package com.accenture.jive.assignment.isa.commando;
 
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
-import com.accenture.jive.assignment.isa.service.DateService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
 import com.opencsv.CSVWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,12 +14,10 @@ import java.util.List;
 public class ExportCommando implements Commando {
 
     private final StockmarketService stockmarketService;
-    private final DateService dateService;
     private final UserInteraction userInteraction;
 
-    public ExportCommando(StockmarketService stockmarketService, DateService dateService, UserInteraction userInteraction) {
+    public ExportCommando(StockmarketService stockmarketService, UserInteraction userInteraction) {
         this.stockmarketService = stockmarketService;
-        this.dateService = dateService;
         this.userInteraction = userInteraction;
     }
 
@@ -32,9 +30,9 @@ public class ExportCommando implements Commando {
         try {
             List<Stockmarket> stockmarkets = stockmarketService.exportStockmarket();
             for (Stockmarket stockmarket : stockmarkets) {
+                String date = DateTimeFormatter.ofPattern("dd.MM.yy").format(stockmarket.getMarketDate());
                 String[] record = {stockmarket.getStockName(), "€" + stockmarket.getMarketPrice(),
-                        dateService.exportDate(stockmarket.getMarketDate()), stockmarket.getIndustryName()};
-
+                        date, stockmarket.getIndustryName()};
                 csvData.add(record);
             }
 

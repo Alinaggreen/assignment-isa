@@ -1,6 +1,5 @@
 package com.accenture.jive.assignment.isa.commando;
 
-import com.accenture.jive.assignment.isa.service.DateService;
 import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
@@ -9,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.Locale;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 //TODO: Exception
@@ -18,14 +17,13 @@ public class ImportCommando implements Commando{
     private final StockService stockService;
     private final IndustryService industryService;
     private final StockmarketService stockmarketService;
-    private final DateService dateService;
     private final UserInteraction userInteraction;
 
-    public ImportCommando(StockService stockService, IndustryService industryService, StockmarketService stockmarketService, DateService dateService, UserInteraction userInteraction) {
+    public ImportCommando(StockService stockService, IndustryService industryService,
+                          StockmarketService stockmarketService, UserInteraction userInteraction) {
         this.stockService = stockService;
         this.industryService = industryService;
         this.stockmarketService = stockmarketService;
-        this.dateService = dateService;
         this.userInteraction = userInteraction;
     }
 
@@ -44,7 +42,7 @@ public class ImportCommando implements Commando{
                 String price = fields[1].replace(",", ".").substring(1);
                 BigDecimal priceParsed = new BigDecimal(price);
 
-                LocalDate date = dateService.importDate(fields[2]);
+                LocalDate date = LocalDate.parse(fields[2], DateTimeFormatter.ofPattern("dd.MM.yy"));
 
                 String name = fields[0];
                 String industry = fields[3];

@@ -51,7 +51,7 @@ public class UpdateCommando implements Commando {
             userInteraction.successUpdate(updatedRows);
         } catch (SQLException e) {
             System.out.println("SQLException");
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 
         return true;
