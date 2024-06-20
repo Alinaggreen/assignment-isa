@@ -105,6 +105,11 @@ public class UserInteraction {
         return scanner.nextLine();
     }
 
+    public String knowIndustry () {
+        System.out.println("Do you know the name of the new industry?");
+        return scanner.nextLine();
+    }
+
     public String shouldDelete() {
         System.out.println("Are you sure you want to delete everything from the database?");
         return scanner.nextLine();
@@ -115,6 +120,12 @@ public class UserInteraction {
         return scanner.nextLine();
     }
 
+    public String readSearchIndustry () {
+        System.out.println("What industry do you want to search for? Please enter the first characters:");
+        return scanner.nextLine();
+    }
+
+    //TODO: rename printCompanyPlaceholder
     public void printCompany (List<Stock> stocks, String userCommando) {
         if (stocks.isEmpty()) {
             System.out.println("There is currently no company starting with " + userCommando + " in the database.");
@@ -122,6 +133,17 @@ public class UserInteraction {
             System.out.println("The following companies start with " + userCommando + ":");
             for (Stock stock : stocks) {
                 System.out.println("ID: " + stock.getId() + " - " + stock.getName());
+            }
+        }
+    }
+
+    public void printIndustryPlaceholder (List<Industry> industries, String userCommando) {
+        if (industries.isEmpty()) {
+            System.out.println("There is currently no industry starting with " + userCommando + " in the database.");
+        } else {
+            System.out.println("The following industries start with " + userCommando + ":");
+            for (Industry industry : industries) {
+                System.out.println(industry.getName());
             }
         }
     }
@@ -156,6 +178,12 @@ public class UserInteraction {
     //TODO: Boolean okay oder String ausgeben?
     public boolean foundCompany () {
         System.out.println("Did you find the desired company id?");
+        String foundCompany = scanner.nextLine();
+        return !"yes".equalsIgnoreCase(foundCompany);
+    }
+
+    public boolean foundIndustry () {
+        System.out.println("Did you find the desired industry?");
         String foundCompany = scanner.nextLine();
         return !"yes".equalsIgnoreCase(foundCompany);
     }

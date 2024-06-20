@@ -1,5 +1,6 @@
 package com.accenture.jive.assignment.isa.commando;
 
+import com.accenture.jive.assignment.isa.persistence.Industry;
 import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.service.IndustryService;
 import com.accenture.jive.assignment.isa.service.StockService;
@@ -21,9 +22,9 @@ public class UpdateCommando implements Commando {
 
     @Override
     public boolean execute() throws CommandoException {
-        String searchId = userInteraction.knowCompany();
+        String searchIdCompany = userInteraction.knowCompany();
 
-        if ("no".equalsIgnoreCase(searchId)) {
+        if ("no".equalsIgnoreCase(searchIdCompany)) {
             try {
                 boolean shouldRun;
                 do {
@@ -42,11 +43,27 @@ public class UpdateCommando implements Commando {
             int stockId = userInteraction.readCompanyId();
             boolean existStock = stockService.existStock(stockId);
             if (existStock) {
-                String industry = stockService.showStockIndustry(stockId);
-                userInteraction.showIndustry(industry);
+                String currentIndustry = stockService.showStockIndustry(stockId);
+                userInteraction.showIndustry(currentIndustry);
 
-                //TODO: user must know industry name
-                industry = userInteraction.readIndustry();
+               String searchIdIndustry = userInteraction.knowIndustry();
+                if ("no".equalsIgnoreCase(searchIdIndustry)) {
+                    try {
+                        boolean shouldRun;
+                        do {
+                            String userCommando = userInteraction.readSearchIndustry();
+                            List<Industry> industries = industryService.searchIndustryIdPlaceholder(userCommando);
+                            userInteraction.printIndustryPlaceholder(industries, userCommando);
+                            shouldRun = userInteraction.foundIndustry();
+                        } while(shouldRun);
+                    } catch (SQLException e) {
+                        userInteraction.failedCommandoSQL();
+                        e.printStackTrace();
+                    }
+                }
+
+                String industry = userInteraction.readIndustry();
+
                 int industryId = industryService.searchIndustryId(industry);
                 stockService.updateStock(stockId, industryId);
                 userInteraction.successfulCommando();

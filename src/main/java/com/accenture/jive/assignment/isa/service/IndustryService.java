@@ -1,6 +1,8 @@
 package com.accenture.jive.assignment.isa.service;
 
 import com.accenture.jive.assignment.isa.persistence.Industry;
+import com.accenture.jive.assignment.isa.persistence.Stock;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,6 +45,24 @@ public class IndustryService {
         } else {
             return 0;
         }
+    }
+
+    //TODO: Exception
+    public List<Industry> searchIndustryIdPlaceholder(String userCommando) throws SQLException {
+        String sql = "SELECT * FROM industry WHERE industry_name LIKE ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, userCommando + "%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        List<Industry> industries = new ArrayList<>();
+        while (resultSet.next()) {
+            Industry industry = new Industry();
+            industry.setId(resultSet.getInt("industry_id"));
+            industry.setName(resultSet.getString("industry_name"));
+
+            industries.add(industry);
+        }
+        return industries;
     }
 
     //TODO: Exception
