@@ -4,7 +4,6 @@ import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -41,7 +40,6 @@ public class MinCommando implements Commando {
             }
         }
 
-        // TODO: Also output latest date on which the price was reached?
         try {
             int stockId = userInteraction.readCompanyId();
             Stockmarket stockmarket = stockmarketService.showMin(stockId);
