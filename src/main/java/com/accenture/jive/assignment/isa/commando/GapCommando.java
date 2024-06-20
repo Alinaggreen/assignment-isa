@@ -26,11 +26,8 @@ public class GapCommando implements Commando {
 
     @Override
     public boolean execute() throws CommandoException {
-
-        System.out.println("Please enter the company id you want to see the highest price of.");
-
-        System.out.println("Do you know the company id you want to see?");
-        String searchId = scanner.nextLine();
+        userInteraction.startCommando();
+        String searchId = userInteraction.knowCompany();
 
         if ("no".equalsIgnoreCase(searchId)) {
             try {
@@ -47,11 +44,8 @@ public class GapCommando implements Commando {
             }
         }
 
-        System.out.println("Please enter the company id:");
-        String id = scanner.nextLine();
-        int stockId = Integer.parseInt(id);
-
         try {
+            int stockId = userInteraction.readCompanyId();
             Stockmarket stockmarketMax = stockmarketService.showMax(stockId);
             BigDecimal priceMax = stockmarketMax.getMarketPrice();
             Stockmarket stockmarketMin = stockmarketService.showMin(stockId);

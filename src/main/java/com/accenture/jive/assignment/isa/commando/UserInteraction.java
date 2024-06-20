@@ -75,6 +75,14 @@ public class UserInteraction {
         }
     }
 
+    public void maxPrice (BigDecimal maxPrice) {
+        System.out.println("The highest price was " + maxPrice + "€.");
+    }
+
+    public void noEntries () {
+        System.out.println("There are currently no stock market entries for this company.");
+    }
+
     public void goodbye() {
         System.out.println("Thanks and Goodbye!");
     }

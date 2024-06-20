@@ -36,7 +36,7 @@ public class CommandoFactory {
         Commando searchCommando = new SearchCommando(stockService, userInteraction);
         Commando addCommando = new AddCommando(stockService, stockmarketService, userInteraction);
         Commando showCommando = new ShowCommando(scanner, stockService, stockmarketService, userInteraction);
-        Commando maxCommando = new MaxCommando(scanner, stockService, stockmarketService, userInteraction);
+        Commando maxCommando = new MaxCommando(stockService, stockmarketService, userInteraction);
         Commando minCommando = new MinCommando(scanner, stockService, stockmarketService, userInteraction);
         Commando gapCommando = new GapCommando(scanner, stockService, stockmarketService, userInteraction);
         Commando updateCommando = new UpdateCommando(scanner, stockService, industryService, userInteraction);
