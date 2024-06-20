@@ -23,8 +23,7 @@ public class ListCommando implements Commando {
             List<Industry> industries = industryService.listIndustry();
             userInteraction.printIndustry(industries);
         } catch (SQLException e) {
-            userInteraction.failedCommandoSQL();
-            throw new RuntimeException(e);
+            throw new CommandoException(userInteraction.failedCommandoSQL(), e);
         }
         return true;
     }

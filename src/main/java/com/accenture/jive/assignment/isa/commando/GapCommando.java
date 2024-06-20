@@ -35,8 +35,7 @@ public class GapCommando implements Commando {
                     shouldRun = userInteraction.foundCompany();
                 } while(shouldRun);
             } catch (SQLException e) {
-                userInteraction.failedCommandoSQL();
-                e.printStackTrace();
+                throw new CommandoException(userInteraction.failedCommandoSQL(), e);
             }
         }
 
@@ -60,10 +59,8 @@ public class GapCommando implements Commando {
             }
 
         } catch (SQLException e) {
-            userInteraction.failedCommandoSQL();
-            throw new RuntimeException(e);
+            throw new CommandoException(userInteraction.failedCommandoSQL(), e);
         }
-
         return true;
     }
 

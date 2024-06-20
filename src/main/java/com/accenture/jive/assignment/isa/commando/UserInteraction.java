@@ -38,19 +38,19 @@ public class UserInteraction {
         System.out.println("The requested commando was successfully executed.");
     }
 
-    public void failedCommandoSQL () {
-        System.out.println("The requested commando could not be executed due to issues with the database. " +
-                "Please try again.");
+    public String failedCommandoSQL () {
+        return "The requested commando could not be executed due to issues with the database. " +
+                "Please try again.";
     }
 
-    public void failedCommandoIO () {
-        System.out.println("The requested commando could not be executed due to issues with the output operation. " +
-                "Please try again.");
+    public String failedCommandoIO () {
+        return "The requested commando could not be executed due to issues with the output operation. " +
+                "Please try again.";
     }
 
-    public void failedCommandoFile () {
-        System.out.println("The requested commando could not be executed because the file could not be found. " +
-                "Please try again.");
+    public String failedCommandoFile () {
+        return "The requested commando could not be executed because the file could not be found. " +
+                "Please try again.";
     }
 
     public void missingStock () {

@@ -21,7 +21,7 @@ public class DeleteCommando implements Commando {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute() throws CommandoException {
         String userCommando = userInteraction.shouldDelete();
         if ("yes".equalsIgnoreCase(userCommando)) {
             try {
@@ -30,8 +30,7 @@ public class DeleteCommando implements Commando {
                 industryService.deleteIndustry();
                 userInteraction.successfulCommando();
             } catch (SQLException e) {
-                userInteraction.failedCommandoSQL();
-                e.printStackTrace();
+                throw new CommandoException(userInteraction.failedCommandoSQL(), e);
             }
         }
         return true;

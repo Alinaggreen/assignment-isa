@@ -37,8 +37,7 @@ public class MinCommando implements Commando {
                     shouldRun = userInteraction.foundCompany();
                 } while(shouldRun);
             } catch (SQLException e) {
-                userInteraction.failedCommandoSQL();
-                e.printStackTrace();
+                throw new CommandoException(userInteraction.failedCommandoSQL(), e);
             }
         }
 
@@ -54,8 +53,7 @@ public class MinCommando implements Commando {
                 execute();
             }
         } catch (SQLException e) {
-            userInteraction.failedCommandoSQL();
-            e.printStackTrace();
+            throw new CommandoException(userInteraction.failedCommandoSQL(), e);
         }
 
         return true;

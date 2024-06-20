@@ -57,10 +57,9 @@ public class ImportCommando implements Commando{
             }
             userInteraction.successfulCommando();
         } catch (FileNotFoundException e) {
-            userInteraction.failedCommandoFile();
+            throw new CommandoException(userInteraction.failedCommandoFile(), e);
         } catch (SQLException e) {
-            userInteraction.failedCommandoSQL();
-            e.printStackTrace();
+            throw new CommandoException(userInteraction.failedCommandoSQL(), e);
         }
         return true;
     }

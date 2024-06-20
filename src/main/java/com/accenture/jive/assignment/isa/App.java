@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class App {
 
     //TODO: Exception
-    public void run(Connection connection) {
+    public void run(Connection connection) throws CommandoException {
         Scanner scanner = new Scanner(System.in);
         StockService stockService = new StockService(connection);
         IndustryService industryService = new IndustryService(connection);
@@ -34,8 +34,8 @@ public class App {
                 if (commando.shouldExecute(userCommando)) {
                     try {
                         shouldRun = commando.execute();
-                    } catch (CommandoException cause) {
-                        System.out.println("System stopped because of an Exception");
+                    } catch (CommandoException e) {
+                        throw new CommandoException("System stopped because of a Commando Exception", e);
                     }
                 }
             }
@@ -47,9 +47,9 @@ public class App {
         Connector connector = new Connector();
         try (Connection connection = connector.getConnection()) {
             new App().run(connection);
-        } catch (Exception cause) {
+        } catch (Exception e) {
             System.out.println("System stopped because of an Exception");
-            cause.printStackTrace();
+            e.getCause();
         }
     }
 }

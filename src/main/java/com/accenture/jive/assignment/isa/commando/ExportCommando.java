@@ -37,8 +37,6 @@ public class ExportCommando implements Commando {
             }
 
             String filePath = userInteraction.readExportName();
-
-            //TODO: Exception FileNotFoundException
             try (CSVWriter writer = new CSVWriter(new FileWriter(filePath),
                     ';',
                     CSVWriter.NO_QUOTE_CHARACTER,
@@ -48,11 +46,10 @@ public class ExportCommando implements Commando {
                 writer.writeAll(csvData);
                 userInteraction.successfulCommando();
             } catch (IOException e) {
-                userInteraction.failedCommandoIO();
+                throw new CommandoException(userInteraction.failedCommandoIO(), e);
             }
         } catch (SQLException e) {
-            userInteraction.failedCommandoSQL();
-            e.printStackTrace();
+            throw new CommandoException(userInteraction.failedCommandoSQL(), e);
         }
         return true;
     }
