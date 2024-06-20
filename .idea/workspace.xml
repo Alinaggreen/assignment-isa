@@ -5,7 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40569f04-4246-4fbd-aa21-ea60fcf98f94" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/Connector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/AddCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/AddCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/Commando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/Commando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/CommandoException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/CommandoException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/CommandoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/CommandoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/DeleteCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/DeleteCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/ExitCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/ExitCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/ExportCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/ExportCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/GapCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/GapCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/ImportCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/ImportCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/ListCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/ListCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/MaxCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/MaxCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/MinCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/MinCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/SearchCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/SearchCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/ShowCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/ShowCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/UpdateCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/UpdateCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/UserInteraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/UserInteraction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/service/DateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/service/DateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/service/IndustryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/service/IndustryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/service/StockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/service/StockService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/service/StockmarketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/service/StockmarketService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,16 +77,5 @@
       <updated>1718614957750</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/service/StockmarketService.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

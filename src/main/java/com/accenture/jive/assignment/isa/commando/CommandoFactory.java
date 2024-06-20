@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+//TODO: Exception
 public class CommandoFactory {
 
     private final StockService stockService;

@@ -20,6 +20,7 @@ public class AddCommando implements Commando {
         this.userInteraction = userInteraction;
     }
 
+    //TODO: Exception
     @Override
     public boolean execute() throws CommandoException {
         userInteraction.startCommando();
@@ -49,7 +50,6 @@ public class AddCommando implements Commando {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return true;
     }
 

@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 public class App {
 
+    //TODO: Exception
     public void run(Connection connection) {
         Scanner scanner = new Scanner(System.in);
         StockService stockService = new StockService(connection);
@@ -43,6 +44,7 @@ public class App {
         }
     }
 
+    //TODO: Exception
     public static void main(String[] args) {
         Connector connector = new Connector();
         try (Connection connection = connector.getConnection()) {

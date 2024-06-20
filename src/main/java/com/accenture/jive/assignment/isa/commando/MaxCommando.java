@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+//TODO: Exception
 public class MaxCommando implements Commando {
 
     private final StockService stockService;

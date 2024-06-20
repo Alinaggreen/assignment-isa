@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: Exception
 public class ExportCommando implements Commando {
 
     private final StockmarketService stockmarketService;

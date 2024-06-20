@@ -43,26 +43,28 @@ public class UserInteraction {
         System.out.println("You successfully deleted everything from the database!");
     }
 
+    //TODO: Exception
     public String readImportName () {
         System.out.println("Please enter the file path of the csv file you want to import " +
                 "(for example C://dev1//isa//STOCK_DATA.csv):");
         return scanner.nextLine();
     }
 
+    //TODO: Exception
     public String readExportName () {
         System.out.println("Please enter the file path where you would like to save the created csv file " +
                 "(for example C://dev1//isa//STOCK_DATA_export.csv):");
         return scanner.nextLine();
     }
 
-    //TODO: return String
+    //TODO: Exception
     public int readCompanyId () {
         System.out.println("Please enter the company id:");
         String id = scanner.nextLine();
         return Integer.parseInt(id);
     }
 
-    //TODO: return String
+    //TODO: Exception
     public BigDecimal readPrice () {
         System.out.println("Please enter the price in Euro:");
         String price = scanner.nextLine();
@@ -70,14 +72,14 @@ public class UserInteraction {
     }
 
     //TODO: Tell user, that year only has 2 digits, not 4.
-    //TODO: return String
+    //TODO: Exception
     public LocalDate readDate () {
         System.out.println("Please enter the date in dd.mm.yy Format:");
         String date = scanner.nextLine();
         return dateService.importDate(date);
     }
 
-    //TODO: return String
+    //TODO: Exception
     public int readIndustry () throws SQLException {
         System.out.println("Which industry should the company be assigned to instead?");
         String industry = scanner.nextLine();
@@ -99,6 +101,7 @@ public class UserInteraction {
         return scanner.nextLine();
     }
 
+    //TODO: Exception
     public void printCompany (List<Stock> stocks, String userCommando) {
         if (stocks.isEmpty()) {
             System.out.println("There is currently no company starting with " + userCommando + " in the database.");
@@ -110,6 +113,7 @@ public class UserInteraction {
         }
     }
 
+    //TODO: Exception
     public void printIndustry (List<Industry> industries) {
         System.out.println("These are all the industries with the number of stocks assigned:");
         for (Industry industry : industries) {
@@ -122,6 +126,7 @@ public class UserInteraction {
         System.out.println("The company is currently assigned to the following industry: " + industry);
     }
 
+    //TODO: Exception
     public void printPrice (List<Stockmarket> stockmarkets) {
         System.out.println("These are the last ten prices for your desired company:");
         for (Stockmarket stockmarket : stockmarkets) {

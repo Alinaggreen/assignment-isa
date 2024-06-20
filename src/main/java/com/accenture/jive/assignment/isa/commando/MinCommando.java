@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
+//TODO: Exception
 public class MinCommando implements Commando {
 
     private final StockService stockService;

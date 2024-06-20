@@ -5,6 +5,7 @@ import com.accenture.jive.assignment.isa.service.IndustryService;
 import java.sql.SQLException;
 import java.util.List;
 
+//TODO: Exception
 public class ListCommando implements Commando {
 
     private final IndustryService industryService;
