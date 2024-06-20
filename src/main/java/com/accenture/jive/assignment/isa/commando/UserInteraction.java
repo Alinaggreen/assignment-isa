@@ -35,13 +35,23 @@ public class UserInteraction {
         System.out.println("You successfully updated " + addedRows + " entry.");
     }
 
+    public void successExport () {
+        System.out.println("You successfully exported the database!");
+    }
+
     public void successDelete () {
         System.out.println("You successfully deleted everything from the database!");
     }
 
-    public String readImport () {
+    public String readImportName () {
         System.out.println("Please enter the file path of the csv file you want to import " +
                 "(for example C://dev1//isa//STOCK_DATA.csv):");
+        return scanner.nextLine();
+    }
+
+    public String readExportName () {
+        System.out.println("Please enter the file path where you would like to save the created csv file " +
+                "(for example C://dev1//isa//STOCK_DATA_export.csv):");
         return scanner.nextLine();
     }
 

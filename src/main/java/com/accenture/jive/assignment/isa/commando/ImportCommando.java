@@ -30,7 +30,7 @@ public class ImportCommando implements Commando{
 
     @Override
     public boolean execute() throws CommandoException {
-        String filePath = userInteraction.readImport();
+        String filePath = userInteraction.readImportName();
 
         try (Scanner scanner = new Scanner(new File(filePath))) {
             scanner.useDelimiter(";");

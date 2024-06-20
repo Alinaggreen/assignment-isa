@@ -41,7 +41,7 @@ public class CommandoFactory {
         Commando gapCommando = new GapCommando(stockService, stockmarketService, userInteraction);
         Commando updateCommando = new UpdateCommando(stockService, industryService, userInteraction);
         Commando listCommando = new ListCommando(industryService, userInteraction);
-        Commando exportCommando = new ExportCommando(stockmarketService, dateService);
+        Commando exportCommando = new ExportCommando(stockmarketService, dateService, userInteraction);
         Commando exitCommando = new ExitCommando(userInteraction);
 
         commandos.add(importCommando);

@@ -14,22 +14,22 @@ public class ExportCommando implements Commando {
 
     private final StockmarketService stockmarketService;
     private final DateService dateService;
+    private final UserInteraction userInteraction;
 
-    public ExportCommando(StockmarketService stockmarketService, DateService dateService) {
+    public ExportCommando(StockmarketService stockmarketService, DateService dateService, UserInteraction userInteraction) {
         this.stockmarketService = stockmarketService;
         this.dateService = dateService;
+        this.userInteraction = userInteraction;
     }
 
     @Override
     public boolean execute() throws CommandoException {
-
         List<String[]> csvData = new ArrayList<>();
         String[] header = {"stockname", "price", "price_date", "industry"};
         csvData.add(header);
 
         try {
             List<Stockmarket> stockmarkets = stockmarketService.exportStockmarket();
-
             for (Stockmarket stockmarket : stockmarkets) {
                 String[] record = {stockmarket.getStockName(), "€" + stockmarket.getMarketPrice(),
                         dateService.exportDate(stockmarket.getMarketDate()), stockmarket.getIndustryName()};
@@ -37,15 +37,15 @@ public class ExportCommando implements Commando {
                 csvData.add(record);
             }
 
-            //TODO: User types in fileName
-            try (CSVWriter writer = new CSVWriter(new FileWriter("C://dev1//isa//STOCK_DATA_export.csv"),
+            String filePath = userInteraction.readExportName();
+            try (CSVWriter writer = new CSVWriter(new FileWriter(filePath),
                     ';',
                     CSVWriter.NO_QUOTE_CHARACTER,
                     CSVWriter.DEFAULT_ESCAPE_CHARACTER,
                     CSVWriter.RFC4180_LINE_END)) {
 
                 writer.writeAll(csvData);
-                System.out.println("You successfully exported the database!");
+                userInteraction.successExport();
 
             } catch (IOException e) {
                 System.out.println("Exception");
@@ -56,7 +56,6 @@ public class ExportCommando implements Commando {
             System.out.println("SQLException");
             e.printStackTrace();
         }
-
         return true;
     }
 
