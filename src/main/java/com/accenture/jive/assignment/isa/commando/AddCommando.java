@@ -8,6 +8,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Adds a stockmarket entry to the database by its stock ID.
+ * Stock ID can be searched for using company name.
+ */
+
 public class AddCommando implements Commando {
 
     private final StockService stockService;

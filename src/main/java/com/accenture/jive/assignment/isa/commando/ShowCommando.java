@@ -7,6 +7,11 @@ import com.accenture.jive.assignment.isa.service.StockmarketService;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Shows last ten prices with date for a stock by its ID.
+ * Stock ID can be searched for using company name.
+ */
+
 public class ShowCommando implements Commando {
 
     private final StockService stockService;

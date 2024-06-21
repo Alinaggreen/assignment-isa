@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="40569f04-4246-4fbd-aa21-ea60fcf98f94" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/Commando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/Commando.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/persistence/Industry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/persistence/Industry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/persistence/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/persistence/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/persistence/Stockmarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/persistence/Stockmarket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/AddCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/AddCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/MaxCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/MaxCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/MinCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/MinCommando.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/ShowCommando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/accenture/jive/assignment/isa/commando/ShowCommando.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
