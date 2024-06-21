@@ -22,18 +22,18 @@ public class UpdateCommando implements Commando {
 
     @Override
     public boolean execute() throws CommandoException {
-        String searchIdCompany = userInteraction.knowCompany();
-        if ("no".equalsIgnoreCase(searchIdCompany)) {
+        String userCommando = userInteraction.knowCompany();
+        if ("no".equalsIgnoreCase(userCommando)) {
             try {
                 boolean shouldRun;
                 do {
-                    String userCommando = userInteraction.readSearchCompany();
-                    List<Stock> stocks = stockService.searchStockIdPlaceholder(userCommando);
-                    userInteraction.printCompanyPlaceholder(stocks, userCommando);
+                    String searchStock = userInteraction.readSearchCompany();
+                    List<Stock> stocks = stockService.searchStockIdPlaceholder(searchStock);
+                    userInteraction.printCompanyPlaceholder(stocks, searchStock);
                     shouldRun = userInteraction.foundCompany();
                 } while(shouldRun);
             } catch (SQLException e) {
-                throw new CommandoException(userInteraction.failedCommandoSQL(), e);
+                System.out.println(userInteraction.failedCommandoSQL());
             }
         }
 
@@ -48,13 +48,13 @@ public class UpdateCommando implements Commando {
                     try {
                         boolean shouldRun;
                         do {
-                            String userCommando = userInteraction.readSearchIndustry();
-                            List<Industry> industries = industryService.searchIndustryIdPlaceholder(userCommando);
-                            userInteraction.printIndustryPlaceholder(industries, userCommando);
+                            String searchIndustry = userInteraction.readSearchIndustry();
+                            List<Industry> industries = industryService.searchIndustryIdPlaceholder(searchIndustry);
+                            userInteraction.printIndustryPlaceholder(industries, searchIndustry);
                             shouldRun = userInteraction.foundIndustry();
                         } while(shouldRun);
                     } catch (SQLException e) {
-                        throw new CommandoException(userInteraction.failedCommandoSQL(), e);
+                        System.out.println(userInteraction.failedCommandoSQL());
                     }
                 }
                 String industry = userInteraction.readIndustry();

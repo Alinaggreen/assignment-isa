@@ -20,9 +20,9 @@ public class SearchCommando implements Commando {
         try {
             boolean shouldRun;
             do {
-                String userCommando = userInteraction.readSearchCompany();
-                List<Stock> stocks = stockService.searchStockIdPlaceholder(userCommando);
-                userInteraction.printCompanyPlaceholder(stocks, userCommando);
+                String searchStock = userInteraction.readSearchCompany();
+                List<Stock> stocks = stockService.searchStockIdPlaceholder(searchStock);
+                userInteraction.printCompanyPlaceholder(stocks, searchStock);
                 shouldRun = userInteraction.foundCompany();
             } while(shouldRun);
         } catch (SQLException e) {

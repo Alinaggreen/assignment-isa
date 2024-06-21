@@ -39,8 +39,7 @@ public class UserInteraction {
     }
 
     public String failedCommandoSQL () {
-        return "The requested commando could not be executed due to issues with the database. " +
-                "Please try again.";
+        return "The requested commando could not be executed due to issues with the database.";
     }
 
     public String failedCommandoIO () {
@@ -51,6 +50,16 @@ public class UserInteraction {
     public String failedCommandoFile () {
         return "The requested commando could not be executed because the file could not be found. " +
                 "Please try again.";
+    }
+
+    public String failedCommandoNumberFormat () {
+        return "The requested commando could not be executed because the prices do not correspond " +
+                "to the number format. Please try again.";
+    }
+
+    public String failedCommandoDateTime () {
+        return "The requested commando could not be executed because the dates do not correspond " +
+                "to the date format. Please try again.";
     }
 
     public void missingStock () {
@@ -74,7 +83,7 @@ public class UserInteraction {
         String inputId = scanner.nextLine();
         try {
             return Integer.parseInt(inputId);
-        } catch (NumberFormatException cause) {
+        } catch (NumberFormatException e) {
             System.out.println("Please enter a number!");
             readCompanyId();
         }
@@ -86,7 +95,7 @@ public class UserInteraction {
         String inputPrice = scanner.nextLine();
         try {
             return new BigDecimal(inputPrice);
-        } catch (NumberFormatException cause) {
+        } catch (NumberFormatException e) {
             System.out.println("Please enter a number!");
             readPrice();
         }
@@ -98,7 +107,7 @@ public class UserInteraction {
         String date = scanner.nextLine();
         try {
             return LocalDate.parse(date, DateTimeFormatter.ofPattern("dd.MM.yy"));
-        } catch (DateTimeParseException cause) {
+        } catch (DateTimeParseException e) {
             System.out.println("Please enter a date!");
             readDate();
         }

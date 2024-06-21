@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class ImportCommando implements Commando{
@@ -27,7 +28,7 @@ public class ImportCommando implements Commando{
     }
 
     @Override
-    public boolean execute() throws CommandoException {
+    public boolean execute() throws CommandoException, RuntimeException {
         String filePath = userInteraction.readImportName();
         try (Scanner scanner = new Scanner(new File(filePath))) {
             scanner.useDelimiter(";");
@@ -52,8 +53,12 @@ public class ImportCommando implements Commando{
                 stockmarketService.addStockmarket(stockId, priceParsed, date);
             }
             userInteraction.successfulCommando();
+        } catch (NumberFormatException e) {
+            System.out.println(userInteraction.failedCommandoNumberFormat());
+        } catch (DateTimeParseException e) {
+            System.out.println(userInteraction.failedCommandoDateTime());
         } catch (FileNotFoundException e) {
-            throw new CommandoException(userInteraction.failedCommandoFile(), e);
+            System.out.println(userInteraction.failedCommandoFile());
         } catch (SQLException e) {
             throw new CommandoException(userInteraction.failedCommandoSQL(), e);
         }

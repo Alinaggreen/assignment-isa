@@ -23,18 +23,18 @@ public class AddCommando implements Commando {
 
     @Override
     public boolean execute() throws CommandoException {
-        String searchId = userInteraction.knowCompany();
-        if ("no".equalsIgnoreCase(searchId)) {
+        String userCommando = userInteraction.knowCompany();
+        if ("no".equalsIgnoreCase(userCommando)) {
             try {
                 boolean shouldRun;
                 do {
-                    String userCommando = userInteraction.readSearchCompany();
-                    List<Stock> stocks = stockService.searchStockIdPlaceholder(userCommando);
-                    userInteraction.printCompanyPlaceholder(stocks, userCommando);
+                    String searchStock = userInteraction.readSearchCompany();
+                    List<Stock> stocks = stockService.searchStockIdPlaceholder(searchStock);
+                    userInteraction.printCompanyPlaceholder(stocks, searchStock);
                     shouldRun = userInteraction.foundCompany();
                 } while(shouldRun);
             } catch (SQLException e) {
-                throw new CommandoException(userInteraction.failedCommandoSQL(), e);
+                System.out.println(userInteraction.failedCommandoSQL());
             }
         }
 
