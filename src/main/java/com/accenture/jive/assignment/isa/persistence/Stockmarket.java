@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
- * Represents a stockmarket entry in the database
+ * Represents a stockmarket entry in the database.
  */
 
 public class Stockmarket {
