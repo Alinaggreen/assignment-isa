@@ -5,6 +5,10 @@ import com.accenture.jive.assignment.isa.service.IndustryService;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Shows all industries with ID, name and number of stocks assigned.
+ */
+
 public class ListCommando implements Commando {
 
     private final IndustryService industryService;

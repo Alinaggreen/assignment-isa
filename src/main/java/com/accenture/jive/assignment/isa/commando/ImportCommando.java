@@ -12,6 +12,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Imports all data from a CSV file to the database.
+ */
+
 public class ImportCommando implements Commando{
 
     private final StockService stockService;

@@ -10,6 +10,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Exports all data from the database to a CSV file.
+ */
+
 public class ExportCommando implements Commando {
 
     private final StockmarketService stockmarketService;

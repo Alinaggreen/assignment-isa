@@ -4,7 +4,6 @@ import com.accenture.jive.assignment.isa.persistence.Industry;
 import com.accenture.jive.assignment.isa.persistence.Stock;
 import com.accenture.jive.assignment.isa.persistence.Stockmarket;
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -21,7 +20,8 @@ public class UserInteraction {
 
     public void listCommandos () {
         System.out.println("The following commandos can be executed:");
-        System.out.println("import - imports a csv file to the database");
+        System.out.println("help - shows all commandos that can be called");
+        System.out.println("import - imports a CSV file to the database");
         System.out.println("delete - deletes all data from the database");
         System.out.println("search - searches the Id of a stock by typing the first characters of the company name");
         System.out.println("show - shows the the last ten prices for a specific stock");
@@ -31,7 +31,7 @@ public class UserInteraction {
         System.out.println("gap - shows the difference between highest and lowest price ever had for a stock");
         System.out.println("update - updates a stock's industry");
         System.out.println("list - lists all industries with Id and number of stocks assigned");
-        System.out.println("export - exports all data to a csv file");
+        System.out.println("export - exports all data to a CSV file");
     }
 
     public void successfulCommando () {
@@ -66,13 +66,13 @@ public class UserInteraction {
     }
 
     public String readImportName () {
-        System.out.println("Please enter the file path of the csv-file you want to import " +
+        System.out.println("Please enter the file path of the CSV file you want to import " +
                 "(for example STOCK_DATA.csv):");
         return scanner.nextLine();
     }
 
     public String readExportName () {
-        System.out.println("Please enter the file path where you would like to save the new csv-file " +
+        System.out.println("Please enter the file path where you would like to save the new CSV file " +
                 "(for example STOCK_DATA_export.csv):");
         return scanner.nextLine();
     }

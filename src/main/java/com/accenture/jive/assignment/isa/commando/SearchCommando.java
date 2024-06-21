@@ -5,6 +5,11 @@ import com.accenture.jive.assignment.isa.service.StockService;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Shows id for a stock by its name.
+ * Supports name placeholders.
+ */
+
 public class SearchCommando implements Commando {
 
     private final StockService stockService;
