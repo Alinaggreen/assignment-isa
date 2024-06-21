@@ -20,13 +20,13 @@ public class UserInteraction {
     }
 
     public void listCommandos () {
-        System.out.println("The following commands can be executed:");
+        System.out.println("The following commandos can be executed:");
         System.out.println("import - imports a csv file to the database");
         System.out.println("delete - deletes all data from the database");
-        System.out.println("search - searches the id of a stock by typing the first characters of the company name");
+        System.out.println("search - searches the Id of a stock by typing the first characters of the company name");
         System.out.println("show - shows the the last ten prices for a specific stock");
         System.out.println("add - adds a new price for a specific stock and date");
-        System.out.println("max - shows the highest price ever had for a stock when");
+        System.out.println("max - shows the highest price ever had for a stock and when");
         System.out.println("min - shows the lowest price ever had for a stock and when");
         System.out.println("gap - shows the difference between highest and lowest price ever had for a stock");
         System.out.println("update - updates a stock's industry");
@@ -43,8 +43,7 @@ public class UserInteraction {
     }
 
     public String failedCommandoIO () {
-        return "The requested commando could not be executed due to issues with the output operation. " +
-                "Please try again.";
+        return "The requested commando could not be executed due to issues with the output operation.";
     }
 
     public String failedCommandoFile () {
@@ -53,12 +52,12 @@ public class UserInteraction {
     }
 
     public String failedCommandoNumberFormat () {
-        return "The requested commando could not be executed because the prices do not correspond " +
+        return "The requested commando could not be executed because the prices do not conform " +
                 "to the number format. Please try again.";
     }
 
     public String failedCommandoDateTime () {
-        return "The requested commando could not be executed because the dates do not correspond " +
+        return "The requested commando could not be executed because the dates do not conform " +
                 "to the date format. Please try again.";
     }
 
@@ -67,19 +66,19 @@ public class UserInteraction {
     }
 
     public String readImportName () {
-        System.out.println("Please enter the file path of the csv file you want to import " +
+        System.out.println("Please enter the file path of the csv-file you want to import " +
                 "(for example STOCK_DATA.csv):");
         return scanner.nextLine();
     }
 
     public String readExportName () {
-        System.out.println("Please enter the file path where you would like to save the created csv file " +
+        System.out.println("Please enter the file path where you would like to save the new csv-file " +
                 "(for example STOCK_DATA_export.csv):");
         return scanner.nextLine();
     }
 
     public int readCompanyId () {
-        System.out.println("Please enter the company id:");
+        System.out.println("Please enter the company Id:");
         String inputId = scanner.nextLine();
         try {
             return Integer.parseInt(inputId);
@@ -103,7 +102,7 @@ public class UserInteraction {
     }
 
     public LocalDate readDate () {
-        System.out.println("Please enter the date in dd.mm.yy Format (for example 01.01.01 for 01.01.2001):");
+        System.out.println("Please enter the date in dd.mm.yy format:");
         String date = scanner.nextLine();
         try {
             return LocalDate.parse(date, DateTimeFormatter.ofPattern("dd.MM.yy"));
@@ -114,13 +113,13 @@ public class UserInteraction {
         return null;
     }
 
-    public String readIndustry () throws SQLException {
+    public String readIndustry () {
         System.out.println("Which industry should the company be assigned to instead?");
         return scanner.nextLine();
     }
 
     public String knowCompany () {
-        System.out.println("Do you know the id of the company?");
+        System.out.println("Do you know the Id of the company?");
         return scanner.nextLine();
     }
 
@@ -150,7 +149,7 @@ public class UserInteraction {
         } else {
             System.out.println("The following companies start with " + userCommando + ":");
             for (Stock stock : stocks) {
-                System.out.println("ID: " + stock.getId() + " - " + stock.getName());
+                System.out.println("Id: " + stock.getId() + " - " + stock.getName());
             }
         }
     }
@@ -172,7 +171,7 @@ public class UserInteraction {
         } else {
             System.out.println("These are all the industries with the number of stocks assigned:");
             for (Industry industry : industries) {
-                System.out.println("ID: " + industry.getId() + " - " + industry.getName()
+                System.out.println("Id: " + industry.getId() + " - " + industry.getName()
                         + " - currently " + industry.getStockCount() + " stocks assigned");
             }
         }
@@ -184,9 +183,9 @@ public class UserInteraction {
 
     public void printPrice (List<Stockmarket> stockmarkets) {
         if (stockmarkets.isEmpty()) {
-            System.out.println("There are currently no stockmarket entries for your desired stock.");
+            System.out.println("There are currently no stockmarket entries for this stock.");
         } else {
-            System.out.println("These are the last ten prices for your desired company:");
+            System.out.println("These are the last ten prices for this stock:");
             for (Stockmarket stockmarket : stockmarkets) {
                 System.out.println(stockmarket.getMarketPrice() + " € on " + stockmarket.getMarketDate());
             }
@@ -194,7 +193,7 @@ public class UserInteraction {
     }
 
     public boolean foundCompany () {
-        System.out.println("Did you find the desired company id?");
+        System.out.println("Did you find the desired company Id?");
         String foundCompany = scanner.nextLine();
         return !"yes".equalsIgnoreCase(foundCompany);
     }
@@ -207,7 +206,7 @@ public class UserInteraction {
 
     public void maxPrice (Stockmarket stockmarket) {
         if (stockmarket.getStockId() != null) {
-            System.out.println("The highest price was " + stockmarket.getMarketPrice() + "€ on "
+            System.out.println("The highest price for this stock was " + stockmarket.getMarketPrice() + "€ on "
                     + stockmarket.getMarketDate() + ".");
         } else {
             noEntries();
@@ -216,7 +215,7 @@ public class UserInteraction {
 
     public void minPrice (Stockmarket stockmarket) {
         if (stockmarket.getStockId() != null) {
-            System.out.println("The lowest price was " + stockmarket.getMarketPrice() + "€ on "
+            System.out.println("The lowest price for this stock was " + stockmarket.getMarketPrice() + "€ on "
                     + stockmarket.getMarketDate() + ".");
         } else {
             noEntries();
