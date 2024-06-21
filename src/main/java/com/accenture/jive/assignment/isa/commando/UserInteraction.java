@@ -10,6 +10,10 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Interactions with user (Input & Output), that are called in the commandos.
+ */
+
 public class UserInteraction {
 
     private final Scanner scanner;
@@ -23,14 +27,14 @@ public class UserInteraction {
         System.out.println("help - shows all commandos that can be called");
         System.out.println("import - imports a CSV file to the database");
         System.out.println("delete - deletes all data from the database");
-        System.out.println("search - searches the Id of a stock by typing the first characters of the company name");
+        System.out.println("search - searches the ID of a stock by typing the first characters of the company name");
         System.out.println("show - shows the the last ten prices for a specific stock");
         System.out.println("add - adds a new price for a specific stock and date");
         System.out.println("max - shows the highest price ever had for a stock and when");
         System.out.println("min - shows the lowest price ever had for a stock and when");
         System.out.println("gap - shows the difference between highest and lowest price ever had for a stock");
         System.out.println("update - updates a stock's industry");
-        System.out.println("list - lists all industries with Id and number of stocks assigned");
+        System.out.println("list - lists all industries with ID and number of stocks assigned");
         System.out.println("export - exports all data to a CSV file");
     }
 
@@ -62,7 +66,7 @@ public class UserInteraction {
     }
 
     public void missingStock () {
-        System.out.println("There is no stock with this Id in the database. Please try again.");
+        System.out.println("There is no stock with this ID in the database. Please try again.");
     }
 
     public String readImportName () {
@@ -78,7 +82,7 @@ public class UserInteraction {
     }
 
     public int readCompanyId () {
-        System.out.println("Please enter the company Id:");
+        System.out.println("Please enter the company ID:");
         String inputId = scanner.nextLine();
         try {
             return Integer.parseInt(inputId);
@@ -119,7 +123,7 @@ public class UserInteraction {
     }
 
     public String knowCompany () {
-        System.out.println("Do you know the Id of the company?");
+        System.out.println("Do you know the ID of the company?");
         return scanner.nextLine();
     }
 
@@ -149,7 +153,7 @@ public class UserInteraction {
         } else {
             System.out.println("The following companies start with " + userCommando + ":");
             for (Stock stock : stocks) {
-                System.out.println("Id: " + stock.getId() + " - " + stock.getName());
+                System.out.println("ID: " + stock.getId() + " - " + stock.getName());
             }
         }
     }
@@ -171,7 +175,7 @@ public class UserInteraction {
         } else {
             System.out.println("These are all the industries with the number of stocks assigned:");
             for (Industry industry : industries) {
-                System.out.println("Id: " + industry.getId() + " - " + industry.getName()
+                System.out.println("ID: " + industry.getId() + " - " + industry.getName()
                         + " - currently " + industry.getStockCount() + " stocks assigned");
             }
         }
@@ -193,7 +197,7 @@ public class UserInteraction {
     }
 
     public boolean foundCompany () {
-        System.out.println("Did you find the desired company Id?");
+        System.out.println("Did you find the desired company ID?");
         String foundCompany = scanner.nextLine();
         return !"yes".equalsIgnoreCase(foundCompany);
     }

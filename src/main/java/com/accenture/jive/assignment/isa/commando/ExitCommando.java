@@ -1,7 +1,7 @@
 package com.accenture.jive.assignment.isa.commando;
 
 /**
- * Exits the program.
+ * Stops the application.
  */
 
 public class ExitCommando implements Commando {

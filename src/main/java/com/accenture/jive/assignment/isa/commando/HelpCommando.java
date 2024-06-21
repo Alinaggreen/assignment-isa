@@ -1,7 +1,7 @@
 package com.accenture.jive.assignment.isa.commando;
 
 /**
- * Shows all callable commandos.
+ * Shows all callable commandos with a short description.
  */
 
 public class HelpCommando implements Commando {

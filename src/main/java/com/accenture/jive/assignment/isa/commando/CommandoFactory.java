@@ -6,6 +6,10 @@ import com.accenture.jive.assignment.isa.service.StockmarketService;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * List of all executable commandos available for the application.
+ */
+
 public class CommandoFactory {
 
     private final StockService stockService;

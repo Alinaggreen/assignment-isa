@@ -7,6 +7,12 @@ import com.accenture.jive.assignment.isa.service.StockService;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Updates a stock's industry in the database by its ID.
+ * Stock ID can be searched for using company name.
+ * Industry name can be searched for.
+ */
+
 public class UpdateCommando implements Commando {
 
     private final StockService stockService;
