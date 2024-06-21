@@ -8,6 +8,11 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Shows difference between highest and lowest price ever recorded for a stock by its ID.
+ * Stock ID can be searched for using company name.
+ */
+
 public class GapCommando implements Commando {
 
     private final StockService stockService;

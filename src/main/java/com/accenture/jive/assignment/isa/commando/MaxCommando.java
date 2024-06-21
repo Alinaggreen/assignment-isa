@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Shows date and amount of highest price ever had for a stock by its ID.
+ * Shows date and amount of highest price ever recorded for a stock by its ID.
  * Stock ID can be searched for using company name.
  */
 

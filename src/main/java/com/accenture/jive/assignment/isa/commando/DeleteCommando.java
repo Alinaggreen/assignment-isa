@@ -5,6 +5,10 @@ import com.accenture.jive.assignment.isa.service.StockService;
 import com.accenture.jive.assignment.isa.service.StockmarketService;
 import java.sql.SQLException;
 
+/**
+ * Deletes all data from the database.
+ */
+
 public class DeleteCommando implements Commando {
 
     private final StockService stockService;
