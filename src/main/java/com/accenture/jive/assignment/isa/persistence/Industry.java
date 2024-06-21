@@ -1,11 +1,18 @@
 package com.accenture.jive.assignment.isa.persistence;
 
-public class Industry {
+/**
+ * Represents an industry in the database
+ */
 
+public class Industry {
+    /** primary key */
     private Integer id;
     private String name;
     private Integer stockCount;
 
+    /**
+     * @return the primary key
+     */
     public Integer getId() {
         return id;
     }

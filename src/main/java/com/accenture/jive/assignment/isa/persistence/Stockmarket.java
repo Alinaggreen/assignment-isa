@@ -3,14 +3,21 @@ package com.accenture.jive.assignment.isa.persistence;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Stockmarket {
+/**
+ * Represents a stockmarket entry in the database
+ */
 
+public class Stockmarket {
+    /** primary key */
     private Integer stockId;
     private String stockName;
     private BigDecimal marketPrice;
     private LocalDate marketDate;
     private String industryName;
 
+    /**
+     * @return the primary key
+     */
     public Integer getStockId() {
         return stockId;
     }
