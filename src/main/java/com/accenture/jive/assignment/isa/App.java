@@ -11,6 +11,11 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Starter class for the application.
+ * Contains main method and executes commandos based on the user's input.
+ */
+
 public class App {
     public void run(Connection connection) throws CommandoException {
         //TODO: extract method
