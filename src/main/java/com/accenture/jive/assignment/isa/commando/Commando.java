@@ -1,7 +1,7 @@
 package com.accenture.jive.assignment.isa.commando;
 
 /**
- * A commando can be executed and runs various tasks based on its implementation.
+ * Commando runs various tasks based on its implementation.
  */
 
 public interface Commando {

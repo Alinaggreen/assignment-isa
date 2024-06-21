@@ -1,7 +1,7 @@
 package com.accenture.jive.assignment.isa.persistence;
 
 /**
- * Represents a stock in the database.
+ * Represents a stock entry in the database.
  */
 
 public class Stock {

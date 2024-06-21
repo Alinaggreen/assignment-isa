@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * SQL-statements accessing the industry table of the database.
+ */
+
 public class IndustryService {
 
     private final Connection connection;

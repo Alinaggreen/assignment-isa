@@ -7,6 +7,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * SQL-statements accessing the stockmarket table of the database.
+ */
+
 public class StockmarketService {
 
     private final Connection connection;

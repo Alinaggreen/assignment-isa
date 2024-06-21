@@ -1,7 +1,7 @@
 package com.accenture.jive.assignment.isa.persistence;
 
 /**
- * Represents an industry in the database.
+ * Represents an industry entry in the database.
  */
 
 public class Industry {
