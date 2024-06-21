@@ -15,9 +15,6 @@ public class Stockmarket {
     private LocalDate marketDate;
     private String industryName;
 
-    /**
-     * @return the primary key
-     */
     public Integer getStockId() {
         return stockId;
     }

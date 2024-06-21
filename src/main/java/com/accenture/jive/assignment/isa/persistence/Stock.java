@@ -9,9 +9,6 @@ public class Stock {
     private Integer id;
     private String name;
 
-    /**
-     * @return the primary key
-     */
     public Integer getId() {
         return id;
     }

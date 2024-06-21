@@ -10,9 +10,6 @@ public class Industry {
     private String name;
     private Integer stockCount;
 
-    /**
-     * @return the primary key
-     */
     public Integer getId() {
         return id;
     }
