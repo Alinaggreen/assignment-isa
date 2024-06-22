@@ -30,18 +30,22 @@ public class UserInteraction {
 
     public void listCommandos () {
         System.out.println(CYAN + "The following commandos can be executed:" + RESET);
-        System.out.println("help - shows all commandos that can be called");
-        System.out.println("import - imports a CSV file to the database");
-        System.out.println("delete - deletes all data from the database");
-        System.out.println("search - searches the ID of a stock by typing the first characters of the company's name");
-        System.out.println("show - shows the last ten prices for a specific stock");
-        System.out.println("add - adds a new price for a specific stock and date");
-        System.out.println("max - shows date and amount of highest price ever recorded for a stock");
-        System.out.println("min - shows date and amount of lowest price ever recorded for a stock");
-        System.out.println("gap - shows the difference between highest and lowest price ever recorded for a stock");
-        System.out.println("update - updates a stock's industry");
-        System.out.println("list - lists all industries with ID and number of stocks assigned");
-        System.out.println("export - exports all data to a CSV file");
+        System.out.println(YELLOW + "help" + RESET + " - shows all commandos that can be called");
+        System.out.println(YELLOW + "import" + RESET + " - imports a CSV file to the database");
+        System.out.println(YELLOW + "delete" + RESET + " - deletes all data from the database");
+        System.out.println(YELLOW + "search" + RESET + " - searches the ID of a stock " +
+                "by typing the first characters of the company's name");
+        System.out.println(YELLOW + "show" + RESET + " - shows the last ten prices for a specific stock");
+        System.out.println(YELLOW + "add" + RESET + " - adds a new price for a specific stock and date");
+        System.out.println(YELLOW + "max" + RESET + " - shows date and amount " +
+                "of highest price ever recorded for a stock");
+        System.out.println(YELLOW + "min" + RESET + " - shows date and amount " +
+                "of lowest price ever recorded for a stock");
+        System.out.println(YELLOW + "gap" + RESET + " - shows the difference between " +
+                "highest and lowest price ever recorded for a stock");
+        System.out.println(YELLOW + "update" + RESET + " - updates a stock's industry");
+        System.out.println(YELLOW + "list" + RESET + " - lists all industries with ID and number of stocks assigned");
+        System.out.println(YELLOW + "export" + RESET + " - exports all data to a CSV file");
     }
 
     public void successfulCommando () {
