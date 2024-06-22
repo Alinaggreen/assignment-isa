@@ -132,9 +132,15 @@ public class UserInteraction {
         }
     }
 
-    public String readIndustry () {
-        System.out.println("Which industry should the company be assigned to instead?");
-        return scanner.nextLine();
+    public int readIndustry () {
+        System.out.println("Please enter the new industry ID:");
+        String inputId = scanner.nextLine();
+        try {
+            return Integer.parseInt(inputId);
+        } catch (NumberFormatException e) {
+            System.out.println(RED + "Please enter a number!" + RESET);
+            return readCompanyId();
+        }
     }
 
     public String knowCompany () {
@@ -143,7 +149,7 @@ public class UserInteraction {
     }
 
     public String knowIndustry () {
-        System.out.println("Do you know the name of the new industry?"  + YELLOW + " yes / no" + RESET);
+        System.out.println("Do you know the ID of the new industry?"  + YELLOW + " yes / no" + RESET);
         return scanner.nextLine();
     }
 
@@ -208,7 +214,7 @@ public class UserInteraction {
             System.out.println(CYAN + "The following industries start with " + RESET
                     + "'" + userCommando + "'" + CYAN + ":" + RESET);
             for (Industry industry : industries) {
-                System.out.println(industry.getName());
+                System.out.println("ID: " + industry.getId() + " - " + industry.getName());
             }
         }
     }
@@ -247,14 +253,14 @@ public class UserInteraction {
     }
 
     public boolean foundIndustry () {
-        System.out.println("Did you find the desired industry?" + YELLOW + " yes / no" + RESET);
+        System.out.println("Did you find the desired industry ID?" + YELLOW + " yes / no" + RESET);
         String foundCompany = scanner.nextLine();
         return !"yes".equalsIgnoreCase(foundCompany);
     }
 
     public void maxPrice (Stockmarket stockmarket) {
         if (stockmarket.getStockId() != null) {
-            System.out.println("The highest price for this stock was " + CYAN
+            System.out.println("The " + CYAN + "highest " + RESET + "price for this stock was " + CYAN
                     + stockmarket.getMarketPrice() + "€" + RESET + " on " + CYAN
                     + stockmarket.getMarketDate() + RESET + ".");
         } else {
@@ -264,7 +270,7 @@ public class UserInteraction {
 
     public void minPrice (Stockmarket stockmarket) {
         if (stockmarket.getStockId() != null) {
-            System.out.println("The lowest price for this stock was " + CYAN
+            System.out.println("The " + CYAN + "lowest " + RESET + "price for this stock was " + CYAN
                     + stockmarket.getMarketPrice() + "€" + RESET + " on " + CYAN
                     + stockmarket.getMarketDate() + RESET + ".");
         } else {
@@ -280,7 +286,7 @@ public class UserInteraction {
         } else {
             maxPrice(stockmarketMax);
             minPrice(stockmarketMin);
-            System.out.println("The difference between highest and lowest price is " + CYAN
+            System.out.println("The " + CYAN + "difference " + RESET + "between highest and lowest price is " + CYAN
                     + stockmarketMax.getMarketPrice().subtract(stockmarketMin.getMarketPrice()) +
                     "€" + RESET + ".");
         }

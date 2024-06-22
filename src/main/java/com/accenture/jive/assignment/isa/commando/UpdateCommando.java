@@ -63,8 +63,7 @@ public class UpdateCommando implements Commando {
                         System.out.println(userInteraction.failedCommandoSQL());
                     }
                 }
-                String industry = userInteraction.readIndustry();
-                int industryId = industryService.searchIndustryId(industry);
+                int industryId = userInteraction.readIndustry();
                 userCommando = userInteraction.shouldUpdate();
                 if ("yes".equalsIgnoreCase(userCommando)) {
                     stockService.updateStock(stockId, industryId);
