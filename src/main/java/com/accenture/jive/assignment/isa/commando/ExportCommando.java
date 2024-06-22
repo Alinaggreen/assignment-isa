@@ -42,8 +42,13 @@ public class ExportCommando implements Commando {
                 csvData.add(record);
             }
 
-            writer.writeAll(csvData);
-            userInteraction.successfulCommando();
+            String userCommando = userInteraction.shouldExport();
+            if ("yes".equalsIgnoreCase(userCommando)) {
+                writer.writeAll(csvData);
+                userInteraction.successfulCommando();
+            } else {
+                userInteraction.successTermination();
+            }
         } catch (SQLException e) {
             throw new CommandoException(userInteraction.failedCommandoSQL(), e);
         } catch (IOException e) {

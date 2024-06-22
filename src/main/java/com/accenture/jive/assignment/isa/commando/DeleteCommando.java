@@ -36,6 +36,8 @@ public class DeleteCommando implements Commando {
             } catch (SQLException e) {
                 throw new CommandoException(userInteraction.failedCommandoSQL(), e);
             }
+        } else {
+            userInteraction.successTermination();
         }
         return true;
     }

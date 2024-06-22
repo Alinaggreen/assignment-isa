@@ -49,8 +49,8 @@ public class UpdateCommando implements Commando {
             if (existStock) {
                 String currentIndustry = stockService.showStockIndustry(stockId);
                 userInteraction.showIndustry(currentIndustry);
-                String searchIdIndustry = userInteraction.knowIndustry();
-                if ("no".equalsIgnoreCase(searchIdIndustry)) {
+                userCommando = userInteraction.knowIndustry();
+                if ("no".equalsIgnoreCase(userCommando)) {
                     try {
                         boolean shouldRun;
                         do {
@@ -65,8 +65,13 @@ public class UpdateCommando implements Commando {
                 }
                 String industry = userInteraction.readIndustry();
                 int industryId = industryService.searchIndustryId(industry);
-                stockService.updateStock(stockId, industryId);
-                userInteraction.successfulCommando();
+                userCommando = userInteraction.shouldUpdate();
+                if ("yes".equalsIgnoreCase(userCommando)) {
+                    stockService.updateStock(stockId, industryId);
+                    userInteraction.successfulCommando();
+                } else {
+                    userInteraction.successTermination();
+                }
             } else {
                 userInteraction.missingStock();
             }

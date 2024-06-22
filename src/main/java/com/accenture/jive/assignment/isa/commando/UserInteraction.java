@@ -42,6 +42,10 @@ public class UserInteraction {
         System.out.println("The requested commando was successfully executed.");
     }
 
+    public void successTermination () {
+        System.out.println("The requested commando has been canceled.");
+    }
+
     public String failedCommandoSQL () {
         return "The requested commando could not be executed due to issues with the database.";
     }
@@ -132,8 +136,28 @@ public class UserInteraction {
         return scanner.nextLine();
     }
 
+    public String shouldAdd () {
+        System.out.println("Are you sure you want to add this stockmarket entry?");
+        return scanner.nextLine();
+    }
+
     public String shouldDelete() {
         System.out.println("Are you sure you want to delete everything from the database?");
+        return scanner.nextLine();
+    }
+
+    public String shouldExport () {
+        System.out.println("Are you sure you want to export the data from the database?");
+        return scanner.nextLine();
+    }
+
+    public String shouldImport () {
+        System.out.println("Are you sure you want to import the data to the database?");
+        return scanner.nextLine();
+    }
+
+    public String shouldUpdate() {
+        System.out.println("Are you sure you want to update this stock's industry?");
         return scanner.nextLine();
     }
 
