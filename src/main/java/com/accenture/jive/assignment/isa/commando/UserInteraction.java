@@ -79,6 +79,10 @@ public class UserInteraction {
         System.out.println(MAGENTA + "There is no stock with this ID in the database. Please try again." + RESET);
     }
 
+    public void missingExtension () {
+        System.out.println(MAGENTA + "Please use the file extension .csv" + RESET);
+    }
+
     public String readImportName () {
         System.out.println("Please enter the file path of the CSV file you want to import "
                 + YELLOW + "(for example STOCK_DATA.csv)" + RESET + ":");

@@ -34,31 +34,39 @@ public class ImportCommando implements Commando{
     @Override
     public boolean execute() throws CommandoException, RuntimeException {
         String filePath = userInteraction.readImportName();
-        String userCommando = userInteraction.shouldImport();
-        if ("yes".equalsIgnoreCase(userCommando)) {
+        String fileExtension = filePath.substring(filePath.lastIndexOf(".")+1);
+        if (!"csv".equals(fileExtension)) {
+            userInteraction.missingExtension();
+            execute();
+        } else {
             try (Scanner scanner = new Scanner(new File(filePath))) {
                 scanner.useDelimiter(";");
                 scanner.nextLine();
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    String[] fields = line.split(";");
+                String userCommando = userInteraction.shouldImport();
+                if ("yes".equalsIgnoreCase(userCommando)) {
+                    while (scanner.hasNextLine()) {
+                        String line = scanner.nextLine();
+                        String[] fields = line.split(";");
 
-                    String price = fields[1].replace(",", ".").substring(1);
-                    BigDecimal priceParsed = new BigDecimal(price);
-                    LocalDate date = LocalDate.parse(fields[2], DateTimeFormatter.ofPattern("dd.MM.yy"));
-                    String name = fields[0];
-                    String industry = fields[3];
-                    if ("n/a".equals(industry)) {
-                        industry = "Unknown";
+                        String price = fields[1].replace(",", ".").substring(1);
+                        BigDecimal priceParsed = new BigDecimal(price);
+                        LocalDate date = LocalDate.parse(fields[2], DateTimeFormatter.ofPattern("dd.MM.yy"));
+                        String name = fields[0];
+                        String industry = fields[3];
+                        if ("n/a".equals(industry)) {
+                            industry = "Unknown";
+                        }
+
+                        industryService.addIndustry(industry);
+                        int industryId = industryService.searchIndustryId(industry);
+                        stockService.addStock(name, industryId);
+                        int stockId = stockService.searchStockId(name);
+                        stockmarketService.addStockmarket(stockId, priceParsed, date);
                     }
-
-                    industryService.addIndustry(industry);
-                    int industryId = industryService.searchIndustryId(industry);
-                    stockService.addStock(name, industryId);
-                    int stockId = stockService.searchStockId(name);
-                    stockmarketService.addStockmarket(stockId, priceParsed, date);
+                    userInteraction.successfulCommando();
+                } else {
+                    userInteraction.successTermination();
                 }
-                userInteraction.successfulCommando();
             } catch (NumberFormatException e) {
                 System.out.println(userInteraction.failedCommandoNumberFormat());
             } catch (DateTimeParseException e) {
@@ -68,8 +76,6 @@ public class ImportCommando implements Commando{
             } catch (SQLException e) {
                 throw new CommandoException(userInteraction.failedCommandoSQL(), e);
             }
-        } else {
-            userInteraction.successTermination();
         }
         return true;
     }

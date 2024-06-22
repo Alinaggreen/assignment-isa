@@ -31,28 +31,34 @@ public class ExportCommando implements Commando {
         csvData.add(header);
 
         String filePath = userInteraction.readExportName();
-        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath), ';',
-                CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.RFC4180_LINE_END)) {
+        String fileExtension = filePath.substring(filePath.lastIndexOf(".")+1);
+        if (!"csv".equals(fileExtension)) {
+            userInteraction.missingExtension();
+            execute();
+        } else {
+            try (CSVWriter writer = new CSVWriter(new FileWriter(filePath), ';',
+                    CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.RFC4180_LINE_END)) {
 
-            List<Stockmarket> stockmarkets = stockmarketService.exportStockmarket();
-            for (Stockmarket stockmarket : stockmarkets) {
-                String date = DateTimeFormatter.ofPattern("dd.MM.yy").format(stockmarket.getMarketDate());
-                String[] record = {stockmarket.getStockName(), "€" + stockmarket.getMarketPrice(),
-                        date, stockmarket.getIndustryName()};
-                csvData.add(record);
-            }
+                List<Stockmarket> stockmarkets = stockmarketService.exportStockmarket();
+                for (Stockmarket stockmarket : stockmarkets) {
+                    String date = DateTimeFormatter.ofPattern("dd.MM.yy").format(stockmarket.getMarketDate());
+                    String[] record = {stockmarket.getStockName(), "€" + stockmarket.getMarketPrice(),
+                            date, stockmarket.getIndustryName()};
+                    csvData.add(record);
+                }
 
-            String userCommando = userInteraction.shouldExport();
-            if ("yes".equalsIgnoreCase(userCommando)) {
-                writer.writeAll(csvData);
-                userInteraction.successfulCommando();
-            } else {
-                userInteraction.successTermination();
+                String userCommando = userInteraction.shouldExport();
+                if ("yes".equalsIgnoreCase(userCommando)) {
+                    writer.writeAll(csvData);
+                    userInteraction.successfulCommando();
+                } else {
+                    userInteraction.successTermination();
+                }
+            } catch (SQLException e) {
+                throw new CommandoException(userInteraction.failedCommandoSQL(), e);
+            } catch (IOException e) {
+                throw new CommandoException(userInteraction.failedCommandoIO(), e);
             }
-        } catch (SQLException e) {
-            throw new CommandoException(userInteraction.failedCommandoSQL(), e);
-        } catch (IOException e) {
-            throw new CommandoException(userInteraction.failedCommandoIO(), e);
         }
         return true;
     }
