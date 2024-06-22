@@ -25,7 +25,7 @@ public class CommandoFactory {
         this.userInteraction = userInteraction;
     }
 
-    public List<Commando> createCommando() {
+    public List<Commando> createCommando () {
 
         List<Commando> commandos = new ArrayList<>();
         Commando helpCommando = new HelpCommando(userInteraction);

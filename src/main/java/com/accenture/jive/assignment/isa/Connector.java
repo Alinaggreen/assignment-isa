@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class Connector {
 
-    public Connection getConnection() throws SQLException {
+    public Connection getConnection () throws SQLException {
         Connection conn;
         Properties connectionProps = new Properties();
         connectionProps.put("user", "root");

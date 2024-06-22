@@ -27,12 +27,12 @@ public class UserInteraction {
         System.out.println("help - shows all commandos that can be called");
         System.out.println("import - imports a CSV file to the database");
         System.out.println("delete - deletes all data from the database");
-        System.out.println("search - searches the ID of a stock by typing the first characters of the company name");
-        System.out.println("show - shows the the last ten prices for a specific stock");
+        System.out.println("search - searches the ID of a stock by typing the first characters of the company's name");
+        System.out.println("show - shows the last ten prices for a specific stock");
         System.out.println("add - adds a new price for a specific stock and date");
-        System.out.println("max - shows the highest price ever had for a stock and when");
-        System.out.println("min - shows the lowest price ever had for a stock and when");
-        System.out.println("gap - shows the difference between highest and lowest price ever had for a stock");
+        System.out.println("max - shows date and amount of highest price ever recorded for a stock");
+        System.out.println("min - shows date and amount of lowest price ever recorded for a stock");
+        System.out.println("gap - shows the difference between highest and lowest price ever recorded for a stock");
         System.out.println("update - updates a stock's industry");
         System.out.println("list - lists all industries with ID and number of stocks assigned");
         System.out.println("export - exports all data to a CSV file");
@@ -226,8 +226,16 @@ public class UserInteraction {
         }
     }
 
-    public void gapPrice (BigDecimal gapPrice) {
-        System.out.println("The difference between highest and lowest price is " + gapPrice + "€.");
+    public void gapPrice (Stockmarket stockmarketMax, Stockmarket stockmarketMin) {
+        if (stockmarketMax.getMarketPrice().equals(stockmarketMin.getMarketPrice())) {
+            System.out.println("There is currently only one stockmarket entry for this stock: "
+                    + stockmarketMax.getMarketPrice() + "€ on " + stockmarketMax.getMarketDate());
+        } else {
+            maxPrice(stockmarketMax);
+            minPrice(stockmarketMin);
+            System.out.println("The difference between highest and lowest price is "
+                    + stockmarketMax.getMarketPrice().subtract(stockmarketMin.getMarketPrice()) + "€.");
+        }
     }
 
     public void noEntries () {

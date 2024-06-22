@@ -12,7 +12,7 @@ public interface Commando {
      * @return true, when the application should continue to run, false otherwise
      * @throws CommandoException when an issue happens
      */
-    boolean execute() throws CommandoException;
+    boolean execute () throws CommandoException;
 
     /**
      * Determines if the commando should be executed based on the users input.
@@ -20,5 +20,5 @@ public interface Commando {
      * @param userCommando the users input
      * @return true, if the commando should run
      */
-    boolean shouldExecute(String userCommando);
+    boolean shouldExecute (String userCommando);
 }

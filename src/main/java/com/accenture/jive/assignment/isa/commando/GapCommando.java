@@ -49,13 +49,7 @@ public class GapCommando implements Commando {
             if (existStock) {
                 Stockmarket stockmarketMax = stockmarketService.showMax(stockId);
                 Stockmarket stockmarketMin = stockmarketService.showMin(stockId);
-
-                // TODO: max == min -> only 1 entry
-                // TODO : case no entry
-                BigDecimal gapPrice = stockmarketMax.getMarketPrice().subtract(stockmarketMin.getMarketPrice());
-                userInteraction.maxPrice(stockmarketMax);
-                userInteraction.minPrice(stockmarketMin);
-                userInteraction.gapPrice(gapPrice);
+                userInteraction.gapPrice(stockmarketMax, stockmarketMin);
             } else {
                 userInteraction.missingStock();
             }

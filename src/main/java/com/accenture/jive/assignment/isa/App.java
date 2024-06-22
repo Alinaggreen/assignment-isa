@@ -17,16 +17,9 @@ import java.util.Scanner;
  */
 
 public class App {
-    public void run(Connection connection) throws CommandoException {
-        //TODO: extract method
+    public void run (Connection connection) throws CommandoException {
         Scanner scanner = new Scanner(System.in);
-        StockService stockService = new StockService(connection);
-        IndustryService industryService = new IndustryService(connection);
-        StockmarketService stockmarketService = new StockmarketService(connection);
-        UserInteraction userInteraction = new UserInteraction(scanner);
-        CommandoFactory commandoFactory = new CommandoFactory(stockService, industryService,
-                stockmarketService, userInteraction);
-        List<Commando> commandos = commandoFactory.createCommando();
+        List<Commando> commandos = getCommandos(connection, scanner);
 
         System.out.println("Hello there!");
 
@@ -47,7 +40,17 @@ public class App {
         }
     }
 
-    public static void main(String[] args) {
+    public List<Commando> getCommandos (Connection connection, Scanner scanner) {
+        StockService stockService = new StockService(connection);
+        IndustryService industryService = new IndustryService(connection);
+        StockmarketService stockmarketService = new StockmarketService(connection);
+        UserInteraction userInteraction = new UserInteraction(scanner);
+        CommandoFactory commandoFactory = new CommandoFactory(stockService, industryService,
+                stockmarketService, userInteraction);
+        return commandoFactory.createCommando();
+    }
+
+    public static void main (String[] args) {
         Connector connector = new Connector();
         try (Connection connection = connector.getConnection()) {
             new App().run(connection);
